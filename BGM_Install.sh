@@ -30,7 +30,7 @@ if [[ $currentuser == "root" ]]; then
 fi
 
 ##### Download the files needed and install the script + utilities
-git clone -b OGST-Beta https://github.com/madmodder123/retropie_music_overlay.git
+git clone -b OGST-Beta https://github.com/ALLRiPPED/retropie_music_overlay.git
 cd ~/retropie_music_overlay
 if [[ $currentuser == "pi" ]]; then #Use pngview if using Raspberry Pi
 	sudo chmod +x pngview
