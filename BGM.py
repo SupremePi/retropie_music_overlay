@@ -16,7 +16,7 @@ musicdirbttf = '/home/pi/RetroPie/roms/music/bttf'
 musicdircustom = '/home/pi/RetroPie/roms/music/custom'
 musicdirst = '/home/pi/RetroPie/roms/music/st'
 
-musicdir = musicdiracst
+musicdir = musicdirac
 
 maxvolume = 0.50
 volumefadespeed = 0.02
@@ -41,10 +41,10 @@ else:
 print "Resolution - " + resolution + " - " + screen_width + "x" + screen_height
 
 ###Overlay Config###
-overlay_pngview_location = '/usr/bin/pngview'
+overlay_pngview_location = '/usr/local/bin/pngview'
 overlay_background_color = 'black'
 overlay_text_color = 'white'
-overlay_text_font = 'FreeSans'
+overlay_text_font = 'Pixel'
 overlay_tmp_file = '/dev/shm/song_title.png'
 
 # The code below adjusts the size/location of the overlay depending upon the screen resolution
