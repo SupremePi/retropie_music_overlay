@@ -60,7 +60,6 @@ sudo mkdir -p /usr/share/fonts/opentype
 sudo cp Pixel.otf /usr/share/fonts/opentype/
 
 ##### Add menu option to toggle BGM
-cp BGM.png ~/RetroPie/retropiemenu/icons/
 cp backgroundmusic.png ~/RetroPie/retropiemenu/icons/
 sudo chmod +x backgroundmusic.sh
 sudo chmod +x custombgmoptions.sh
