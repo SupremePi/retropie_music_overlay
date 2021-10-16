@@ -50,75 +50,89 @@ function disable_music() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
-echo -e "\n\n\n                               Background Music Already Disabled!\n\n\n"
+dialog --infobox "Background Music Already Disabled!" 3 38 ; sleep 2
 else
 touch /home/pi/RetroPie/roms/music/DisableMusic
 sudo pkill -f BGM.py
 sudo pkill -f pngview
-echo -e "\n\n\n                               Background Music Disabled!\n\n\n"
-sleep 3
+dialog --infobox "Background Music Disabled!" 3 30 ; sleep 2
+fi
 }
-
 function enable_music() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
-sudo rm /home/pi/RetroPie/roms/music/DisableMusic
-else
-echo -e "\n\n\n                               Background Music Already Enabled!\n\n\n"
-fi
+sudo rm -f /home/pi/RetroPie/roms/music/DisableMusic
 if grep -q 'maxvolume = 0.50' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	echo ""
+	sed -i -E 's/maxvolume = 0.50/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
+	python /home/pi/RetroPie/roms/music/BGM.py &
+	dialog --infobox "Background Music Enabled!" 3 29 ; sleep 2
 elif grep -q 'maxvolume = 0.75' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 0.75/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
+	python /home/pi/RetroPie/roms/music/BGM.py &
+	dialog --infobox "Background Music Enabled!" 3 29 ; sleep 2
 elif grep -q 'maxvolume = 1.00' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 1.00/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
+	python /home/pi/RetroPie/roms/music/BGM.py &
+	dialog --infobox "Background Music Enabled!" 3 29 ; sleep 2
 elif grep -q 'maxvolume = 0.25' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 0.25/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
+	python /home/pi/RetroPie/roms/music/BGM.py &
+	dialog --infobox "Background Music Enabled!" 3 29 ; sleep 2
 fi
-python /home/pi/RetroPie/roms/music/BGM.py &
-echo -e "\n\n\n                               Background Music Enabled!\n\n\n"
-sleep 3
+else
+dialog --infobox "Background Music Already Enabled!" 3 37 ; sleep 2
+fi
 }
 
 function volume100() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
-sudo pkill -f BGM.py
-sudo pkill -f pngview
 if grep -q 'maxvolume = 1.00' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	echo "Volume Already 100% Confirmed"
+	dialog --infobox "Volume Already 100%" 3 23 ; sleep 2
 elif grep -q 'maxvolume = 0.75' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 0.75/maxvolume = 1.00/g' /home/pi/RetroPie/roms/music/BGM.py
-	echo "Volume Set to 100% Confirmed"
+	dialog --infobox "Volume Set to 100%" 3 22 ; sleep 2
 elif grep -q 'maxvolume = 0.50' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 0.50/maxvolume = 1.00/g' /home/pi/RetroPie/roms/music/BGM.py
-	echo "Volume Set to 100% Confirmed"
+	dialog --infobox "Volume Set to 100%" 3 22 ; sleep 2
 elif grep -q 'maxvolume = 0.25' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 0.25/maxvolume = 1.00/g' /home/pi/RetroPie/roms/music/BGM.py
-	echo "Volume Set to 100% Confirmed"
+	dialog --infobox "Volume Set to 100%" 3 22 ; sleep 2
 fi
-python /home/pi/RetroPie/roms/music/BGM.py &
-sleep 3
+if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
+then
+	dialog --infobox "Background Music Disabled!" 3 30 ; sleep 2
+else
+	sudo pkill -f BGM.py
+	sudo pkill -f pngview
+	python /home/pi/RetroPie/roms/music/BGM.py &
+	sleep 2
+fi
 }
 
 function volume75() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
-sudo pkill -f BGM.py
-sudo pkill -f pngview
 if grep -q 'maxvolume = 0.75' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	echo "Volume Already 75% Confirmed"
+	dialog --infobox "Volume Already 75%" 3 22 ; sleep 2
 elif grep -q 'maxvolume = 1.00' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 1.00/maxvolume = 0.75/g' /home/pi/RetroPie/roms/music/BGM.py
-	echo "Volume Set to 75% Confirmed"
+	dialog --infobox "Volume Set to 75%" 3 21 ; sleep 2
 elif grep -q 'maxvolume = 0.50' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 0.50/maxvolume = 0.75/g' /home/pi/RetroPie/roms/music/BGM.py
-	echo "Volume Set to 75% Confirmed"
+	dialog --infobox "Volume Set to 75%" 3 21 ; sleep 2
 elif grep -q 'maxvolume = 0.25' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 0.25/maxvolume = 0.75/g' /home/pi/RetroPie/roms/music/BGM.py
-	echo "Volume Set to 75% Confirmed"
+	dialog --infobox "Volume Set to 75%" 3 21 ; sleep 2
 fi
-python /home/pi/RetroPie/roms/music/BGM.py &
-sleep 3
+if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
+then
+	dialog --infobox "Background Music Disabled!" 3 30 ; sleep 2
+else
+	sudo pkill -f BGM.py
+	sudo pkill -f pngview
+	python /home/pi/RetroPie/roms/music/BGM.py &
+	sleep 2
+fi
 }
 
 function volume50() {
@@ -126,19 +140,26 @@ dialog --infobox "...processing..." 3 20 ; sleep 2
 sudo pkill -f BGM.py
 sudo pkill -f pngview
 if grep -q 'maxvolume = 0.50' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	echo "Volume Already 50% Confirmed"
+	dialog --infobox "Volume Already 50%" 3 22 ; sleep 2
 elif grep -q 'maxvolume = 0.75' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 0.75/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
-	echo "Volume Set to 50% Confirmed"
+	dialog --infobox "Volume Set to 50%" 3 21 ; sleep 2
 elif grep -q 'maxvolume = 1.00' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 1.00/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
-	echo "Volume Set to 50% Confirmed"
+	dialog --infobox "Volume Set to 50%" 3 21 ; sleep 2
 elif grep -q 'maxvolume = 0.25' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 0.25/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
-	echo "Volume Set to 50% Confirmed"
+	dialog --infobox "Volume Set to 50%" 3 21 ; sleep 2
 fi
-python /home/pi/RetroPie/roms/music/BGM.py &
-sleep 3
+if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
+then
+	dialog --infobox "Background Music Disabled!" 3 30 ; sleep 2
+else
+	sudo pkill -f BGM.py
+	sudo pkill -f pngview
+	python /home/pi/RetroPie/roms/music/BGM.py &
+	sleep 2
+fi
 }
 
 function volume25() {
@@ -146,19 +167,26 @@ dialog --infobox "...processing..." 3 20 ; sleep 2
 sudo pkill -f BGM.py
 sudo pkill -f pngview
 if grep -q 'maxvolume = 0.25' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	echo "Volume Already 25% Confirmed"
+	dialog --infobox "Volume Already 25%" 3 22 ; sleep 2
 elif grep -q 'maxvolume = 0.75' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 0.75/maxvolume = 0.25/g' /home/pi/RetroPie/roms/music/BGM.py
-	echo "Volume Set to 25% Confirmed"
+	dialog --infobox "Volume Set to 25%" 3 21 ; sleep 2
 elif grep -q 'maxvolume = 0.50' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 0.50/maxvolume = 0.25/g' /home/pi/RetroPie/roms/music/BGM.py
-	echo "Volume Set to 25% Confirmed"
+	dialog --infobox "Volume Set to 25%" 3 21 ; sleep 2
 elif grep -q 'maxvolume = 1.00' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 1.00/maxvolume = 0.25/g' /home/pi/RetroPie/roms/music/BGM.py
-	echo "Volume Set to 25% Confirmed"
+	dialog --infobox "Volume Set to 25%" 3 21 ; sleep 2
 fi
-python /home/pi/RetroPie/roms/music/BGM.py &
-sleep 3
+if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
+then
+	dialog --infobox "Background Music Disabled!" 3 30 ; sleep 2
+else
+	sudo pkill -f BGM.py
+	sudo pkill -f pngview
+	python /home/pi/RetroPie/roms/music/BGM.py &
+	sleep 2
+fi
 }
 
 main_menu

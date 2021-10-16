@@ -15,8 +15,9 @@ musicdirac = '/home/pi/RetroPie/roms/music/arcade'
 musicdirbttf = '/home/pi/RetroPie/roms/music/bttf'
 musicdircustom = '/home/pi/RetroPie/roms/music/custom'
 musicdirst = '/home/pi/RetroPie/roms/music/st'
+musicdiroff = '/home/pi/RetroPie/roms/music'
 
-musicdir = musicdirac
+musicdir = musicdir
 
 maxvolume = 0.50
 volumefadespeed = 0.02
@@ -41,10 +42,10 @@ else:
 print "Resolution - " + resolution + " - " + screen_width + "x" + screen_height
 
 ###Overlay Config###
-overlay_pngview_location = '/usr/local/bin/pngview'
+overlay_pngview_location = '/usr/bin/pngview'
 overlay_background_color = 'black'
 overlay_text_color = 'white'
-overlay_text_font = 'Pixel'
+overlay_text_font = 'FreeSans'
 overlay_tmp_file = '/dev/shm/song_title.png'
 
 # The code below adjusts the size/location of the overlay depending upon the screen resolution
@@ -127,11 +128,11 @@ while True:
 				continue
 				
 	#Check to see if the DisableMusic file exists; if it does, stop doing everything!
-	if os.path.exists('/home/pi/PyScripts/DisableMusic'):
+	if os.path.exists('/home/pi/RetroPie/roms/music/DisableMusic'):
 		print "DisableMusic found!"
 		if mixer.music.get_busy():
 			mixer.music.stop();
-		while (os.path.exists('/home/pi/PyScripts/DisableMusic')):
+		while (os.path.exists('/home/pi/RetroPie/roms/music/DisableMusic')):
 			time.sleep(15)
 		print "DisableMusic gone!"
 
