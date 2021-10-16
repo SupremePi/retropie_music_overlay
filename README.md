@@ -13,7 +13,7 @@ Download stuff needed (make sure u have the dependencies above, if you have ODRO
 
 Move pngview to the correct directory.
 
-Create the /home/pi/BGM folder for music.
+Create the /home/pi/RetroPie/roms/music folder for music.
 
 Add a menu item in the retropie section to enable/disable the music.
 
@@ -23,7 +23,7 @@ Pictures here: https://imgur.com/a/J9iek
 Run "sudo nano /etc/rc.local"
 Near the bottom, on the line above "exit 0", put the following code
 
-     su pi -c 'python ~/BGM.py &'
+     su pi -c 'python /home/pi/RetroPie/roms/music/BGM.py &'
 
 Press Control+X, Y, and Enter to save changes.
 Reboot and enjoy!</b>
@@ -38,9 +38,9 @@ Edit these to adjust the script to your needs:
 
 startdelay = 0 # Value (in seconds) to delay audio start.  If you have a splash screen with audio and the script is playing music over the top of it, increase this value to delay the script from starting.
 
-musicdir = '~/BGM'
+musicdir = '/home/pi/RetroPie/roms/music'
 
-maxvolume = 0.75
+maxvolume = 0.50
 
 volumefadespeed = 0.02
 
@@ -51,12 +51,6 @@ startsong = "" # if this is not blank, this is the EXACT, CaSeSeNsAtIvE filename
 <br>
 ###Overlay Config###
 
-overlay_enable = True # Enable or disable the overlay
-
-overlay_fade_out = True # Change to "False" to have the overlay remain on the screen until an emulator/application is launched
-
-overlay_fade_out_time = 5 # Hide the overlay after X seconds
-
 overlay_pngview_location = '/usr/local/bin/pngview'
 
 overlay_background_color = 'black'
@@ -66,14 +60,6 @@ overlay_text_color = 'white'
 overlay_text_font = 'FreeSans'
 
 overlay_tmp_file = '/dev/shm/song_title.png
-
-overlay_rounded_corners = False #Set to "True" round the corners of the overlay
-
-overlay_size = '600x32'
-
-overlay_x_offset = '0'
-
-overlay_y_offset = '0'
 
 <br><br>
 
