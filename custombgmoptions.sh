@@ -71,11 +71,12 @@ elif grep -q 'musicdir = musicdirst' "/home/pi/RetroPie/roms/music/BGM.py"; then
 fi
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
 dialog --infobox "Background Music Disabled!" 3 30 ; sleep 2
 else
+sudo pkill -f BGM.py
+sudo pkill -f pngview
 python /home/pi/RetroPie/roms/music/BGM.py &
+sleep 2
 fi
 }
 
@@ -95,11 +96,10 @@ elif grep -q 'musicdir = musicdirac' "/home/pi/RetroPie/roms/music/BGM.py"; then
 fi
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
 dialog --infobox "Background Music Disabled!" 3 30 ; sleep 2
 else
-python /home/pi/RetroPie/roms/music/BGM.py &
+sudo pkill -f BGM.py
+sudo pkill -f pngview
 fi
 }
 
@@ -111,7 +111,7 @@ if grep -q 'musicdir = musicdirbttf' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	dialog --infobox "BTTF Music Already Enabled" 3 30 ; sleep 2
 elif grep -q 'musicdir = musicdiroff' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdiroff/musicdir = musicdirbttf/g' /home/pi/RetroPie/roms/music/BGM.py
-	dialog --infobox "BTTF Music Enabled" 3 20 ; sleep 2
+	dialog --infobox "BTTF Music Enabled" 3 22	qw ; sleep 2
 elif grep -q 'musicdir = musicdirac' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdirac/musicdir = musicdirbttf/g' /home/pi/RetroPie/roms/music/BGM.py
 	dialog --infobox "Music Switch from Arcade to BTTF" 3 36 ; sleep 2
@@ -124,34 +124,34 @@ elif grep -q 'musicdir = musicdirst' "/home/pi/RetroPie/roms/music/BGM.py"; then
 fi
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
 dialog --infobox "Background Music Disabled!" 3 30 ; sleep 2
 else
+sudo pkill -f BGM.py
+sudo pkill -f pngview
 python /home/pi/RetroPie/roms/music/BGM.py &
+sleep 2
 fi
 }
 
 function disable_bttf() {
 if grep -q 'musicdir = musicdiroff' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	dialog --infobox "BTTF Music Already Disabled" 3 30 ; sleep 2
+	dialog --infobox "BTTF Music Already Disabled" 3 31 ; sleep 2
 elif grep -q 'musicdir = musicdirac' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	dialog --infobox "BTTF Music Already Disabled" 3 30 ; sleep 2
+	dialog --infobox "BTTF Music Already Disabled" 3 31 ; sleep 2
 elif grep -q 'musicdir = musicdircustom' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	dialog --infobox "BTTF Music Already Disabled" 3 30 ; sleep 2
+	dialog --infobox "BTTF Music Already Disabled" 3 31 ; sleep 2
 elif grep -q 'musicdir = musicdirst' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	dialog --infobox "BTTF Music Already Disabled" 3 30 ; sleep 2
+	dialog --infobox "BTTF Music Already Disabled" 3 31 ; sleep 2
 elif grep -q 'musicdir = musicdirbttf' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdirbttf/musicdir = musicdiroff/g' /home/pi/RetroPie/roms/music/BGM.py
-	dialog --infobox "BTTF Music Disabled" 3 30 ; sleep 2
+	dialog --infobox "BTTF Music Disabled" 3 23 ; sleep 2
 fi
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
 dialog --infobox "Background Music Disabled!" 3 30 ; sleep 2
 else
-python /home/pi/RetroPie/roms/music/BGM.py &
+sudo pkill -f BGM.py
+sudo pkill -f pngview
 fi
 }
 
@@ -160,10 +160,10 @@ dialog --infobox "...processing..." 3 20 ; sleep 2
 sudo pkill -f BGM.py
 sudo pkill -f pngview
 if grep -q 'musicdir = musicdircustom' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	dialog --infobox "Custom Music Already Enabled" 3 32 ; sleep 2
+	dialog --infobox "Custom Music Already Enabled" 3 34 ; sleep 2
 elif grep -q 'musicdir = musicdiroff' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdiroff/musicdir = musicdircustom/g' /home/pi/RetroPie/roms/music/BGM.py
-	dialog --infobox "Custom Music Enabled" 3 30 ; sleep 2
+	dialog --infobox "Custom Music Enabled" 3 24 ; sleep 2
 elif grep -q 'musicdir = musicdirac' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdirac/musicdir = musicdircustom/g' /home/pi/RetroPie/roms/music/BGM.py
 	dialog --infobox "Music Switch from Arcade to Custom" 3 38 ; sleep 2
@@ -172,38 +172,38 @@ elif grep -q 'musicdir = musicdirbttf' "/home/pi/RetroPie/roms/music/BGM.py"; th
 	dialog --infobox "Music Switch from BTTF to Custom" 3 36 ; sleep 2
 elif grep -q 'musicdir = musicdirst' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdirst/musicdir = musicdircustom/g' /home/pi/RetroPie/roms/music/BGM.py
-	dialog --infobox "Music Switch from ST to Custom" 3 30 ; sleep 2
+	dialog --infobox "Music Switch from ST to Custom" 3 34 ; sleep 2
 fi
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
 dialog --infobox "Background Music Disabled!" 3 30 ; sleep 2
 else
+sudo pkill -f BGM.py
+sudo pkill -f pngview
 python /home/pi/RetroPie/roms/music/BGM.py &
+sleep 2
 fi
 }
 
 function disable_custom() {
 if grep -q 'musicdir = musicdiroff' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	dialog --infobox "Music Already Disabled" 3 30 ; sleep 2
+	dialog --infobox "Custom Music Already Disabled" 3 33 ; sleep 2
 elif grep -q 'musicdir = musicdirac' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	dialog --infobox "Music Already Disabled" 3 30 ; sleep 2
+	dialog --infobox "Custom Music Already Disabled" 3 33 ; sleep 2
 elif grep -q 'musicdir = musicdirbttf' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	dialog --infobox "Music Already Disabled" 3 30 ; sleep 2
+	dialog --infobox "Custom Music Already Disabled" 3 33 ; sleep 2
 elif grep -q 'musicdir = musicdirst' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	dialog --infobox "Music Already Disabled" 3 30 ; sleep 2
+	dialog --infobox "Custom Music Already Disabled" 3 33 ; sleep 2
 elif grep -q 'musicdir = musicdircustom' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdircustom/musicdir = musicdiroff/g' /home/pi/RetroPie/roms/music/BGM.py
-	dialog --infobox "Music Disabled" 3 30 ; sleep 2
+	dialog --infobox "Custom Music Disabled" 3 25 ; sleep 2
 fi
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
 dialog --infobox "Background Music Disabled!" 3 30 ; sleep 2
 else
-python /home/pi/RetroPie/roms/music/BGM.py &
+sudo pkill -f BGM.py
+sudo pkill -f pngview
 fi
 }
 function enable_st() {
@@ -211,10 +211,10 @@ dialog --infobox "...processing..." 3 20 ; sleep 2
 sudo pkill -f BGM.py
 sudo pkill -f pngview
 if grep -q 'musicdir = musicdirst' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	dialog --infobox "ST Music Already Enabled" 3 50 ; sleep 2
+	dialog --infobox "ST Music Already Enabled" 3 24 ; sleep 2
 elif grep -q 'musicdir = musicdiroff' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdiroff/musicdir = musicdirst/g' /home/pi/RetroPie/roms/music/BGM.py
-	dialog --infobox "ST Music Enabled" 3 30 ; sleep 2
+	dialog --infobox "ST Music Enabled" 3 20 ; sleep 2
 elif grep -q 'musicdir = musicdirac' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdirac/musicdir = musicdirst/g' /home/pi/RetroPie/roms/music/BGM.py
 	dialog --infobox "Music Switch from Arcade to ST" 3 34 ; sleep 2
@@ -223,38 +223,38 @@ elif grep -q 'musicdir = musicdirbttf' "/home/pi/RetroPie/roms/music/BGM.py"; th
 	dialog --infobox "Music Switch from BTTF to ST" 3 33 ; sleep 2
 elif grep -q 'musicdir = musicdircustom' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdircustom/musicdir = musicdirst/g' /home/pi/RetroPie/roms/music/BGM.py
-	dialog --infobox "Music Switch from Custom to ST" 3 30 ; sleep 2
+	dialog --infobox "Music Switch from Custom to ST" 3 34 ; sleep 2
 fi
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
 dialog --infobox "Background Music Disabled!" 3 30 ; sleep 2
 else
+sudo pkill -f BGM.py
+sudo pkill -f pngview
 python /home/pi/RetroPie/roms/music/BGM.py &
+sleep 2
 fi
 }
 
 function disable_st() {
 if grep -q 'musicdir = musicdiroff' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	dialog --infobox "ST Music Already Disabled" 3 30 ; sleep 2
+	dialog --infobox "ST Music Already Disabled" 3 29 ; sleep 2
 elif grep -q 'musicdir = musicdirac' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	dialog --infobox "ST Music Already Disabled" 3 30 ; sleep 2
+	dialog --infobox "ST Music Already Disabled" 3 29 ; sleep 2
 elif grep -q 'musicdir = musicdirbttf' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	dialog --infobox "ST Music Already Disabled" 3 30 ; sleep 2
+	dialog --infobox "ST Music Already Disabled" 3 29 ; sleep 2
 elif grep -q 'musicdir = musicdircustom' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	dialog --infobox "ST Music Already Disabled" 3 30 ; sleep 2
+	dialog --infobox "ST Music Already Disabled" 3 29 ; sleep 2
 elif grep -q 'musicdir = musicdirst' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdirst/musicdir = musicdiroff/g' /home/pi/RetroPie/roms/music/BGM.py
-	dialog --infobox "ST Music Disabled" 3 25 ; sleep 2
+	dialog --infobox "ST Music Disabled" 3 21 ; sleep 2
 fi
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
 dialog --infobox "Background Music Disabled!" 3 30 ; sleep 2
 else
-python /home/pi/RetroPie/roms/music/BGM.py &
+sudo pkill -f BGM.py
+sudo pkill -f pngview
 fi
 }
 
