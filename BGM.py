@@ -17,7 +17,7 @@ musicdircustom = '/home/pi/RetroPie/roms/music/custom'
 musicdirst = '/home/pi/RetroPie/roms/music/st'
 musicdiroff = '/home/pi/RetroPie/roms/music'
 
-musicdir = musicdir
+musicdir = musicdiroff
 
 maxvolume = 0.50
 volumefadespeed = 0.02
