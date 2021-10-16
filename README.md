@@ -15,9 +15,14 @@ Move pngview to the correct directory.
 
 Create the /home/pi/RetroPie/roms/music folder for music.
 
-Add a menu item in the retropie section to enable/disable the music.
+Add a menu items in the retropie section to enable/disable the music and set volume, plus setup for custom and other music.
 
 Pictures here: https://imgur.com/a/J9iek
+
+## To install
+```
+wget -qO- https://raw.githubusercontent.com/ALLRiPPED/retropie_music_overlay/master/BGM_Install.sh | bash
+```
 
 <b>You will still have to set up the script to run automatically when the Pi boots!:
 Run "sudo nano /etc/rc.local"
