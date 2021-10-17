@@ -60,7 +60,7 @@ else:
 ###Overlay Config###
 overlay_enable = True # Enable or disable the overlay
 overlay_fade_out = True # Change to "False" to have the overlay remain on the screen until an emulator/application is launched
-overlay_fade_out_time = 8 # Hide the overlay after X seconds
+overlay_fade_out_time = 10 # Hide the overlay after X seconds
 overlay_pngview_location = '/usr/local/bin/pngview'
 overlay_background_color = 'DarkBlue' #White is default
 overlay_text_color = 'DimGray' #DimGray is default
