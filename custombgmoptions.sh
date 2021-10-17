@@ -26,30 +26,30 @@ function main_menu() {
         choice=$(dialog --backtitle "$BACKTITLE" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "What action would you like to perform?" 25 75 20 \
-            1 "Enable Arcade background music" \
-            2 "Disable Arcade background music" \
-            3 "Enable BTTF background music" \
-            4 "Disable BTTF background music" \
-            5 "Enable Custom background music" \
-            6 "Disable Custom background music" \
-            7 "Enable Supreme Team background music" \
-            8 "Disable Supreme Team background music" \
-            9 "Enable Ultimate Vs Fighter background music" \
+            01 "Enable Arcade background music" \
+            02 "Disable Arcade background music" \
+            03 "Enable BTTF background music" \
+            04 "Disable BTTF background music" \
+            05 "Enable Custom background music" \
+            06 "Disable Custom background music" \
+            07 "Enable Supreme Team background music" \
+            08 "Disable Supreme Team background music" \
+            09 "Enable Ultimate Vs Fighter background music" \
             10 "Disable Ultimate Vs Fighter background music" \
             11 "Enable Venom background music" \
             12 "Disable Venom background music" \
             2>&1 > /dev/tty)
 
         case "$choice" in
-            1) enable_arcade  ;;
-            2) disable_arcade  ;;
-            3) enable_bttf  ;;
-            4) disable_bttf  ;;
-            5) enable_custom  ;;
-            6) disable_custom  ;;
-            7) enable_st  ;;
-            8) disable_st  ;;
-            9) enable_uvf  ;;
+            01) enable_arcade  ;;
+            02) disable_arcade  ;;
+            03) enable_bttf  ;;
+            04) disable_bttf  ;;
+            005) enable_custom  ;;
+            06) disable_custom  ;;
+            07) enable_st  ;;
+            08) disable_st  ;;
+            09) enable_uvf  ;;
             10) disable_uvf  ;;
             11) enable_venom  ;;
             12) disable_venom  ;;

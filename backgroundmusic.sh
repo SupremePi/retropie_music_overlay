@@ -26,21 +26,21 @@ function main_menu() {
         choice=$(dialog --backtitle "$BACKTITLE" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "What action would you like to perform?" 25 75 20 \
-            1 "Disable background music" \
-            2 "Enable background music (Volume default 50%)" \
-            3 "Volume background music: 100%" \
-            4 "Volume background music: 75%" \
-            5 "Volume background music: 50%" \
-            6 "Volume background music: 25%" \
+            01 "Disable background music" \
+            02 "Enable background music (Volume default 50%)" \
+            03 "Volume background music: 100%" \
+            04 "Volume background music: 75%" \
+            05 "Volume background music: 50%" \
+            06 "Volume background music: 25%" \
             2>&1 > /dev/tty)
 
         case "$choice" in
-            1) disable_music  ;;
-            2) enable_music  ;;
-            3) volume100  ;;
-            4) volume75  ;;
-            5) volume50  ;;
-            6) volume25  ;;
+            01) disable_music  ;;
+            02) enable_music  ;;
+            03) volume100  ;;
+            04) volume75  ;;
+            05) volume50  ;;
+            06) volume25  ;;
             *)  break ;;
         esac
     done
