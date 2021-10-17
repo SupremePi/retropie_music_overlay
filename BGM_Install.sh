@@ -125,7 +125,7 @@ else
 	cat ~/temp > ~/RetroPie/retropiemenu/gamelist.xml
 	rm -f ~/temp
 fi
-CONTENT3="<game>\n<path>./audiotools/custombgmoptions.sh</path>\n<name>Background Music Options</name>\n<desc>A background music script to set and play MP3/OGG files during menu navigation in both Emulation Station and Attract Mode. A Few special new folders have been created in the /roms directory called "music", and subfolders from there named "arcade", "bttf", "st", &amp; this last one "custom" is for placing your MP3 files into. Once you place your music files into this folder and enable it, the music will automatically begin playing.</desc>\n<image>./icons/backgroundmusic.png</image>\n</game>"
+CONTENT3="<game>\n<path>./audiotools/custombgmoptions.sh</path>\n<name>Background Music Options</name>\n<desc>A background music script to set and play MP3/OGG files during menu navigation in both Emulation Station and Attract Mode. A Few special new folders have been created in the /roms directory called "music", and subfolders from there named "arcade", "bttf", "st", and this last one "custom" is for placing your MP3 files into. Once you place your music files into this folder and enable it, the music will automatically begin playing.</desc>\n<image>./icons/backgroundmusic.png</image>\n</game>"
 C3=$(echo $CONTENT3 | sed 's/\//\\\//g')
 if grep -q custombgmoptions.sh "/home/$currentuser/RetroPie/retropiemenu/gamelist.xml"; then # Check if menu entry is already there or not
 	echo "gamelist.xml entry confirmed"
