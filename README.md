@@ -21,7 +21,7 @@ Pictures here: https://imgur.com/a/J9iek
 
 ## To install
 ```
-wget -qO- git.io/JKum9 | bash
+wget -qO-  https://git.io/JKum9 | bash
 ```
 
 <b>You will still have to set up the script to run automatically when the Pi boots!:
