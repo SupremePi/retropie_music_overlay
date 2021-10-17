@@ -45,7 +45,7 @@ function main_menu() {
             02) disable_arcade  ;;
             03) enable_bttf  ;;
             04) disable_bttf  ;;
-            005) enable_custom  ;;
+            05) enable_custom  ;;
             06) disable_custom  ;;
             07) enable_st  ;;
             08) disable_st  ;;
