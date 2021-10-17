@@ -62,17 +62,17 @@ overlay_enable = True # Enable or disable the overlay
 overlay_fade_out = True # Change to "False" to have the overlay remain on the screen until an emulator/application is launched
 overlay_fade_out_time = 10 # Hide the overlay after X seconds
 overlay_pngview_location = '/usr/local/bin/pngview'
-overlay_background_color = 'DarkBlue' #White is default
-overlay_text_color = 'DimGray' #DimGray is default
-overlay_text_font = '/usr/share/fonts/opentype/Pixel.otf' # Pixel font included by default
-# overlay_text_font = 'FreeSans' # Default system font
-overlay_rounded_corners = False #Set to "True" round the corners of the overlay
+overlay_background_color = 'DimGray' #White is default
+overlay_text_color = 'Black' #DimGray is default
+#overlay_text_font = '/usr/share/fonts/opentype/Pixel.otf' # Pixel font included by default
+overlay_text_font = 'FreeSans' # Default system font
+overlay_rounded_corners = True #Set to "True" round the corners of the overlay
 overlay_replace_newline = True # Set to "True" to turn all " - " symbols in song title to new line characters. (Mostly for OGST Display)
 
 # The code below adjusts the size/location of the overlay depending upon the screen resolution
 # Adjust these to your needs
 if resolution == "1080p":
-	overlay_size = '600x32'
+	overlay_size = '600x64'
 	overlay_x_offset = '0'
 	overlay_y_offset = '0'
 elif resolution == "720p":
