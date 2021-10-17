@@ -15,6 +15,8 @@ musicdirac = '/home/pi/RetroPie/roms/music/arcade'
 musicdirbttf = '/home/pi/RetroPie/roms/music/bttf'
 musicdircustom = '/home/pi/RetroPie/roms/music/custom'
 musicdirst = '/home/pi/RetroPie/roms/music/st'
+musicdiruvf = '/home/pi/RetroPie/roms/music/uvf'
+musicdirvenom = '/home/pi/RetroPie/roms/music/venom'
 musicdiroff = '/home/pi/RetroPie/roms/music'
 
 musicdir = musicdiroff
@@ -43,8 +45,8 @@ print "Resolution - " + resolution + " - " + screen_width + "x" + screen_height
 
 ###Overlay Config###
 overlay_pngview_location = '/usr/bin/pngview'
-overlay_background_color = 'black'
-overlay_text_color = 'white'
+overlay_background_color = 'DarkBlue'
+overlay_text_color = 'DimGray'
 overlay_text_font = 'FreeSans'
 overlay_tmp_file = '/dev/shm/song_title.png'
 
@@ -74,7 +76,7 @@ random.seed()
 volume = maxvolume # Store this for later use to handle fading out.
 
 #TODO: Fill in all of the current RetroPie Emulator process names in this list.
-emulatornames = ["retroarch","ags","uae4all2","uae4arm","capricerpi","linapple","hatari","stella","atari800","xroar","vice","daphne","reicast","pifba","osmose","gpsp","jzintv","basiliskll","mame","advmame","dgen","openmsx","mupen64plus","gngeo","dosbox","ppsspp","simcoupe","scummvm","snes9x","pisnes","frotz","fbzx","fuse","gemrb","cgenesis","zdoom","eduke32","lincity","love","kodi","alephone","micropolis","openbor","openttd","opentyrian","cannonball","tyrquake","ioquake3","residualvm","xrick","sdlpop","uqm","stratagus","wolf4sdl","solarus","drastic","coolcv","PPSSPPSDL","moonlight","Xorg","smw"]
+emulatornames = ["retroarch","ags","uae4all2","uae4arm","capricerpi","linapple","hatari","stella","atari800","xroar","vice","daphne","reicast","pifba","osmose","gpsp","jzintv","basiliskll","mame","advmame","dgen","openmsx","mupen64plus","gngeo","dosbox","ppsspp","simcoupe","scummvm","snes9x","pisnes","frotz","fbzx","fuse","gemrb","cgenesis","zdoom","eduke32","lincity","love","kodi","alephone","micropolis","openbor","openttd","opentyrian","cannonball","tyrquake","ioquake3","residualvm","xrick","sdlpop","uqm","stratagus","wolf4sdl","solarus","drastic","coolcv","PPSSPPSDL","moonlight","Xorg","smw","omxplayer.bin","wolf4sdl-3dr-v14","wolf4sdl-gt-v14","wolf4sdl-spear","wolf4sdl-sw-v14","xvic","xvic cart","xplus4","xpet","x128","x64sc","x64","prince","fba2x","steamlink","pcsx-rearmed","limelight","sdltrs","ti99sm","dosbox-sdl2","minivmac","quasi88","xm7","yabause","abuse","cdogs-sdl","cgenius","digger","gemrb","hcl","love","love-0.10.2","openblok","openfodder","srb2","yquake2","amiberry","zesarux","dxx-rebirth","wine","zesarux"]
 
 #test: Ran into some issues with script crashing on a cold boot, so we're camping for emulationstation (if ES can start, so can we!)
 esStarted = False
