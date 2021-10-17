@@ -344,9 +344,6 @@ fi
 function disable_uvf() {
 if grep -q 'musicdir = musicdiroff' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	dialog --infobox "UFV Music Already Disabled" 3 30 ; sleep 2
-elif grep -q 'musicdir = musicdiruvf' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	sed -i -E 's/musicdir = musicdiruvf/musicdir = musicdiroff/g' /home/pi/RetroPie/roms/music/BGM.py
-	dialog --infobox "UVF Music Disabled" 3 22 ; sleep 2
 elif grep -q 'musicdir = musicdirac' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	dialog --infobox "UVF Music Already Disabled" 3 30 ; sleep 2
 elif grep -q 'musicdir = musicdirbttf' "/home/pi/RetroPie/roms/music/BGM.py"; then
@@ -357,6 +354,9 @@ elif grep -q 'musicdir = musicdirst' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	dialog --infobox "UVF Music Already Disabled" 3 30 ; sleep 2
 elif grep -q 'musicdir = musicdirvenom' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	dialog --infobox "UVF Music Already Disabled" 3 30 ; sleep 2
+elif grep -q 'musicdir = musicdiruvf' "/home/pi/RetroPie/roms/music/BGM.py"; then
+	sed -i -E 's/musicdir = musicdiruvf/musicdir = musicdiroff/g' /home/pi/RetroPie/roms/music/BGM.py
+	dialog --infobox "UVF Music Disabled" 3 22 ; sleep 2
 fi
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
@@ -406,9 +406,6 @@ fi
 function disable_venom() {
 if grep -q 'musicdir = musicdiroff' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	dialog --infobox "Venom Music Already Disabled" 3 32 ; sleep 2
-elif grep -q 'musicdir = musicdirvenom' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	sed -i -E 's/musicdir = musicdirvenom/musicdir = musicdiroff/g' /home/pi/RetroPie/roms/music/BGM.py
-	dialog --infobox "Venom Music Disabled" 3 24 ; sleep 2
 elif grep -q 'musicdir = musicdirac' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	dialog --infobox "Venom Music Already Disabled" 3 32 ; sleep 2
 elif grep -q 'musicdir = musicdirbttf' "/home/pi/RetroPie/roms/music/BGM.py"; then
@@ -419,6 +416,9 @@ elif grep -q 'musicdir = musicdirst' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	dialog --infobox "Venom Music Already Disabled" 3 32 ; sleep 2
 elif grep -q 'musicdir = musicdirvenom' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	dialog --infobox "Venom Music Already Disabled" 3 32 ; sleep 2
+elif grep -q 'musicdir = musicdirvenom' "/home/pi/RetroPie/roms/music/BGM.py"; then
+	sed -i -E 's/musicdir = musicdirvenom/musicdir = musicdiroff/g' /home/pi/RetroPie/roms/music/BGM.py
+	dialog --infobox "Venom Music Disabled" 3 24 ; sleep 2
 fi
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
