@@ -109,20 +109,20 @@ fi
 
 CONTENT1="<game>\n<path>./audiotools</path>\n<name>Audio Tools</name>\n<desc>Audio Tools and More Options.</desc>\n<image>./icons/audiosettings.png</image>\n</game>\n<game>\n<path>./audiotools/backgroundmusic.sh</path>\n<name>Background Music</name>\n<desc>Toggles background music options such as music ON/OFF and volume control.</desc>\n<image>./icons/backgroundmusic.png</image>\n</game>"
 C1=$(echo $CONTENT1 | sed 's/\//\\\//g')
-if grep -q backgroundmusic.sh "/home/pi/RetroPie/retropiemenu/gamelist.xml"; then # Check if menu entry is already there or not
+if grep -q backgroundmusic.sh "/home/$currentuser/RetroPie/retropiemenu/gamelist.xml"; then # Check if menu entry is already there or not
 	echo "gamelist.xml entry confirmed"
 else
-	sed "/<\/gameList>/ s/.*/${C1}\n&/" /home/pi/RetroPie/retropiemenu/gamelist.xml > ~/temp
-	cat ~/temp > /home/pi/RetroPie/retropiemenu/gamelist.xml
+	sed "/<\/gameList>/ s/.*/${C1}\n&/" ~/RetroPie/retropiemenu/gamelist.xml > ~/temp
+	cat ~/temp > ~/RetroPie/retropiemenu/gamelist.xml
 	rm -f ~/temp
 fi
 CONTENT2="<game>\n<path>./audiotools/custombgmoptions.sh</path>\n<name>Background Music Options</name>\n<desc>A background music script to set and play MP3/OGG files during menu navigation in both Emulation Station and Attract Mode. A Few special new folders have been created in the /roms directory called "music", and subfolders from there named "arcade", "bttf", "st", and this last one "custom" is for placing your MP3 files into. Once you place your music files into this folder and enable it, the music will automatically begin playing.</desc>\n<image>./icons/backgroundmusic.png</image>\n</game>"
 C2=$(echo $CONTENT2 | sed 's/\//\\\//g')
-if grep -q custombgmoptions.sh "/home/pi/RetroPie/retropiemenu/gamelist.xml"; then # Check if menu entry is already there or not
+if grep -q custombgmoptions.sh "/home/$currentuser/RetroPie/retropiemenu/gamelist.xml"; then # Check if menu entry is already there or not
 	echo "gamelist.xml entry confirmed"
 else
-	sed "/<\/gameList>/ s/.*/${C2}\n&/" /home/pi/RetroPie/retropiemenu/gamelist.xml > ~/temp
-	cat ~/temp > /home/pi/RetroPie/retropiemenu/gamelist.xml
+	sed "/<\/gameList>/ s/.*/${C2}\n&/" ~/RetroPie/retropiemenu/gamelist.xml > ~/temp
+	cat ~/temp > ~/RetroPie/retropiemenu/gamelist.xml
 	rm -f ~/temp
 fi
 cd ~/
