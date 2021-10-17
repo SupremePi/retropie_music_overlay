@@ -56,6 +56,12 @@ startsong = "" # if this is not blank, this is the EXACT, CaSeSeNsAtIvE filename
 <br>
 ###Overlay Config###
 
+overlay_enable = True # Enable or disable the overlay
+
+overlay_fade_out = True # Change to "False" to have the overlay remain on the screen until an emulator/application is launched
+
+overlay_fade_out_time = 5 # Hide the overlay after X seconds
+
 overlay_pngview_location = '/usr/local/bin/pngview'
 
 overlay_background_color = 'black'
@@ -65,6 +71,14 @@ overlay_text_color = 'white'
 overlay_text_font = 'FreeSans'
 
 overlay_tmp_file = '/dev/shm/song_title.png
+
+overlay_rounded_corners = False #Set to "True" round the corners of the overlay
+
+overlay_size = '600x32'
+
+overlay_x_offset = '0'
+
+overlay_y_offset = '0'
 
 <br><br>
 
