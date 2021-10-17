@@ -19,6 +19,7 @@ Unable to install python-pygame, please update your system (\"sudo apt-get upgra
 fi
 cd ~
 if [ -d "~/retropie_music_overlay" ]; then #delete folder if it is there
+	echo "~/retropie_music_overlay Exsists. Now Removing ..."
 	sudo rm -r ~/retropie_music_overlay
 fi
 currentuser=$(whoami) # Check user and then stop the script if root
