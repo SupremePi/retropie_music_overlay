@@ -134,7 +134,7 @@ else
 	cat ~/temp > ~/RetroPie/retropiemenu/gamelist.xml
 	rm -f ~/temp
 fi
-
+cd ~/
 sudo rm -r ~/retropie_music_overlay
 
 ##### Disable ODROID BGM script if it exists
