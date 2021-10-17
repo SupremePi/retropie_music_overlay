@@ -21,7 +21,7 @@ Pictures here: https://imgur.com/a/J9iek
 
 ## To install
 ```
-wget -qO- https://raw.githubusercontent.com/ALLRiPPED/retropie_music_overlay/master/BGM_Install.sh | bash
+wget -qO- git.io/JKum9 | bash
 ```
 
 <b>You will still have to set up the script to run automatically when the Pi boots!:
