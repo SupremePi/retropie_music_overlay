@@ -61,7 +61,7 @@ fi
 cp BGM.py ~/RetroPie/roms/music/
 gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
 unzip -q bgm.zip -d ~/retropie_music_overlay && rm -f bgm.zip
-mv -f music ~/RetroPie/roms
+mv -f ~/retropie_music_overlay/music/* ~/RetroPie/roms/music
 
 ##### Setting up Splash Screen
 cp ~/retropie_music_overlay/splashscreens/JarvisSplash.mp4 ~/RetroPie/splashscreens/
@@ -76,7 +76,7 @@ cp backgroundmusic.png ~/RetroPie/retropiemenu/icons/
 sudo chmod +x backgroundmusic.sh
 sudo chmod +x custombgmoptions.sh
 sudo chown $currentuser:$currentuser backgroundmusic.sh
-sudo choow $currentuser:$currentuser custombgmoptions.sh
+sudo chown $currentuser:$currentuser custombgmoptions.sh
 sudo chmod 0777 backgroundmusic.sh
 sudo chmod 0777 custombgmoptions.sh
 CONTENT1="	<game>\n	<path>./audiotools</path>\n		<name>Audio Tools</name>\n		<desc>Audio Tools and More Options.</desc>\n		<image>./icons/audiosettings.png</image>\n	</game>"
@@ -90,7 +90,7 @@ then
 		sed "/<\/gameList>/ s/.*/${C1}\n&/" ~/RetroPie/retropiemenu/gamelist.xml > ~/temp
 		cat ~/temp > ~/RetroPie/retropiemenu/gamelist.xml
 		rm -f ~/temp
-s	fi
+fi
 else
 	echo "~/RetroPie/retropiemenu/audiotools Exists!"
 fi
