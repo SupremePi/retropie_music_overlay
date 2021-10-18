@@ -270,18 +270,18 @@ local choice
         choice=$(dialog --backtitle "$BACKTITLE" --title " MAIN MENU " \
             --ok-label OK --cancel-label Back \
             --menu "What action would you like to perform?" 25 75 20 \
-            01 "Enable Arcade background music" \
-            02 "Disable Arcade background music" \
-            03 "Enable BTTF background music" \
-            04 "Disable BTTF background music" \
-            05 "Enable Custom background music" \
-            06 "Disable Custom background music" \
-            07 "Enable Supreme Team background music" \
-            08 "Disable Supreme Team background music" \
-            09 "Enable Ultimate Vs Fighter background music" \
-            10 "Disable Ultimate Vs Fighter background music" \
-            11 "Enable Venom background music" \
-            12 "Disable Venom background music" \
+            01 "Enable Arcade music" \
+            02 "Disable Arcade music" \
+            03 "Enable BTTF music" \
+            04 "Disable BTTF music" \
+            05 "Enable Custom music" \
+            06 "Disable Custom music" \
+            07 "Enable Supreme Team music" \
+            08 "Disable Supreme Team music" \
+            09 "Enable Ultimate Vs Fighter music" \
+            10 "Disable Ultimate Vs Fighter music" \
+            11 "Enable Venom music" \
+            12 "Disable Venom music" \
             2>&1 > /dev/tty)
 
         case "$choice" in
