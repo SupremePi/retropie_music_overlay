@@ -52,9 +52,9 @@ sudo chmod 0777 backgroundmusic.sh
 sudo chmod 0777 custombgmoptions.sh
 if [ ! -d  "~/RetroPie/roms/music/" ];
 then
-	echo "~/RetroPie/roms/music Exists!"
+	mkdir /home/pi/RetroPie/roms/music/
 else
-	mkdir ~/RetroPie/roms/music/
+	echo "~/RetroPie/roms/music Exists!"
 fi	
 if [ -f "~/BGM.py" ]; then #Remove old version if it is there
 	rm -f ~/BGM.py
@@ -73,9 +73,9 @@ sudo cp Pixel.otf /usr/share/fonts/opentype/
 cp backgroundmusic.png ~/RetroPie/retropiemenu/icons/
 if [ ! -d  "~/RetroPie/retropiemenu/audiotools/" ];
 then
-	echo "~/RetroPie/retropiemenu/audiotools Exists!"
+	mkdir /home/pi/RetroPie/retropiemenu/audiotools/
 else
-	mkdir ~/RetroPie/retropiemenu/audiotools/
+	echo "~/RetroPie/retropiemenu/audiotools Exists!"
 fi
 if [ -f "~/RetroPie/retropiemenu/audiotools/backgroundmusic.sh" ]; # Remove old version if it is there
 then
