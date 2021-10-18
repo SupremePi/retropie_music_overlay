@@ -44,7 +44,7 @@ stats_check
             07 "Enable/Disable Overlay $ovs" \
             08 "Enable/Disable Overlay Fadeout $ovf" \
             09 "Enable/Disable Overlay Rounded Corners $ocr" \
-            10 "Enable/Disable Overlay Newline Separator$ons" \
+            10 "Enable/Disable Overlay Line Separator $ons" \
             11 "Music Selection $ms" \
             2>&1 > /dev/tty)
 
