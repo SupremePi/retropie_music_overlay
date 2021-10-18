@@ -270,26 +270,26 @@ else
 fi
 }
 function music_select() {
-infobox= ""
-infobox="${infobox}_______________________________________________________\n\n"
-infobox="${infobox}\n"
-infobox="${infobox}RetroPie Background Music Selection Script\n\n"
-infobox="${infobox}The background music pythons script has already been configured for selecting music in different folders.\n"
-infobox="${infobox}\n"
-infobox="${infobox}This script will play MP3 and OGG files during menu navigation in either Emulation Station or Attract mode.\n"
-infobox="${infobox}\n"
-infobox="${infobox}A Few special new folders have been created in the /home/pi/RetroPie/roms/music directory called \"arcade\",\n"
-infobox="${infobox}\"bttf\", \"st\", \"uvf\", \"venom\", and this last one \"custom\" is for placing your own MP3 files into.\n"
-infobox="${infobox}\n"
-infobox="${infobox}Once you place your music files into this folder and enable it, the music will automatically begin playing.\n"
-infobox="${infobox}\n"
-infobox="${infobox}When you launch a game, however, the music will stop.\n"
-infobox="${infobox}Upon exiting out of the game the music will begin playing again.\n"
-infobox="${infobox}\n\n"
+infobox2= ""
+infobox2="${infobox2}_______________________________________________________\n\n"
+infobox2="${infobox2}\n"
+infobox2="${infobox2}RetroPie Background Music Selection Script\n\n"
+infobox2="${infobox2}The background music pythons script has already been configured for selecting music in different folders.\n"
+infobox2="${infobox2}\n"
+infobox2="${infobox2}This script will play MP3 and OGG files during menu navigation in either Emulation Station or Attract mode.\n"
+infobox2="${infobox2}\n"
+infobox2="${infobox2}A Few special new folders have been created in the /home/pi/RetroPie/roms/music directory called \"arcade\",\n"
+infobox2="${infobox2}\"bttf\", \"st\", \"uvf\", \"venom\", and this last one \"custom\" is for placing your own MP3 files into.\n"
+infobox2="${infobox2}\n"
+infobox2="${infobox2}Once you place your music files into this folder and enable it, the music will automatically begin playing.\n"
+infobox2="${infobox2}\n"
+infobox2="${infobox2}When you launch a game, however, the music will stop.\n"
+infobox2="${infobox2}Upon exiting out of the game the music will begin playing again.\n"
+infobox2="${infobox2}\n\n"
 
 dialog --backtitle "RetroPie Background Music Selection" \
 --title "RetroPie Background Music Selection" \
---msgbox "${infobox}" 35 110
+--msgbox "${infobox2}" 35 110
 
 local choice
 
