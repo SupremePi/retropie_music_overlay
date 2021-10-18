@@ -65,7 +65,7 @@ cp BGM.py ~/RetroPie/roms/music/
 gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
 unzip -q bgm.zip -d ~/RetroPie && rm -f bgm.zip
 ##### Setting up Splash Screen
-sudo sed -i -E "s/.*/\/home\/pi\/RetroPie\/splashscreens\/Jarvis.mp4/" /etc/splashscreen.list
+sudo sed -i -E "s/.*/\/home\/pi\/RetroPie\/splashscreens\/JarvisSplash.mp4/" /etc/splashscreen.list
 ##### Add pixel font
 sudo mkdir -p /usr/share/fonts/opentype
 sudo cp Pixel.otf /usr/share/fonts/opentype/
