@@ -28,23 +28,24 @@ dialog --backtitle "RetroPie Background Music Control" \
 --msgbox "${infobox}" 35 110
 
 function main_menu() {
+stats_check
     local choice
 
     while true; do
         choice=$(dialog --backtitle "$BACKTITLE" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "What action would you like to perform?" 25 75 20 \
-            01 "Disable background music" \
-            02 "Enable background music (Volume default 50%)" \
-            03 "Volume background music: 100%" \
-            04 "Volume background music: 75%" \
-            05 "Volume background music: 50%" \
-            06 "Volume background music: 25%" \
-            07 "Enable/Disable Overlay" \
-            08 "Enable/Disable Overlay Fadeout" \
-            09 "Enable/Disable Overlay Rounded Corners" \
-            10 "Enable/Disable Overlay Newline Separator" \
-            11 "Music Selection" \
+            01 "Disable background music $bgmsd" \
+            02 "Enable background music $bgmse" \
+            03 "Volume background music: 100% $v100" \
+            04 "Volume background music: 75% $v75" \
+            05 "Volume background music: 50% $v50" \
+            06 "Volume background music: 25% $v25" \
+            07 "Enable/Disable Overlay $ovs" \
+            08 "Enable/Disable Overlay Fadeout $ovf" \
+            09 "Enable/Disable Overlay Rounded Corners $ocr" \
+            10 "Enable/Disable Overlay Newline Separator$ons" \
+            11 "Music Selection $ms" \
             2>&1 > /dev/tty)
 
         case "$choice" in
@@ -64,6 +65,7 @@ function main_menu() {
     done
 }
 function disable_music() {
+bgmse=""
 dialog --infobox "...processing..." 3 20 ; sleep 2
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
@@ -74,8 +76,10 @@ sudo pkill -f BGM.py
 sudo pkill -f pngview
 dialog --infobox "Background Music Disabled!" 3 30 ; sleep 2
 fi
+stats_check
 }
 function enable_music() {
+bgmsd=""
 dialog --infobox "...processing..." 3 20 ; sleep 2
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
@@ -100,6 +104,7 @@ fi
 else
 dialog --infobox "Background Music Already Enabled!" 3 37 ; sleep 2
 fi
+stats_check
 }
 function volume100() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
@@ -124,6 +129,7 @@ else
 	python /home/pi/RetroPie/roms/music/BGM.py &
 	sleep 2
 fi
+stats_check
 }
 function volume75() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
@@ -148,6 +154,7 @@ else
 	python /home/pi/RetroPie/roms/music/BGM.py &
 	sleep 2
 fi
+stats_check
 }
 function volume50() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
@@ -174,6 +181,7 @@ else
 	python /home/pi/RetroPie/roms/music/BGM.py &
 	sleep 2
 fi
+stats_check
 }
 function volume25() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
@@ -200,6 +208,7 @@ else
 	python /home/pi/RetroPie/roms/music/BGM.py &
 	sleep 2
 fi
+stats_check
 }
 function overlay_enable() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
@@ -219,6 +228,7 @@ else
 	python /home/pi/RetroPie/roms/music/BGM.py &
 	sleep 2
 fi
+stats_check
 }
 function overlay_fade_out() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
@@ -238,6 +248,7 @@ else
 	python /home/pi/RetroPie/roms/music/BGM.py &
 	sleep 2
 fi
+stats_check
 }
 function overlay_rounded_corners() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
@@ -257,6 +268,7 @@ else
 	python /home/pi/RetroPie/roms/music/BGM.py &
 	sleep 2
 fi
+stats_check
 }
 function overlay_replace_newline() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
@@ -276,6 +288,7 @@ else
 	python /home/pi/RetroPie/roms/music/BGM.py &
 	sleep 2
 fi
+stats_check
 }
 function music_select() {
 local choice
@@ -314,6 +327,7 @@ local choice
             *)  break ;;
         esac
     done
+stats_check
 }
 function enable_arcade() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
@@ -347,6 +361,7 @@ sudo pkill -f pngview
 python /home/pi/RetroPie/roms/music/BGM.py &
 sleep 2
 fi
+stats_check
 }
 function disable_arcade() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
@@ -373,6 +388,7 @@ else
 sudo pkill -f BGM.py
 sudo pkill -f pngview
 fi
+stats_check
 }
 function enable_bttf() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
@@ -408,6 +424,7 @@ sudo pkill -f pngview
 python /home/pi/RetroPie/roms/music/BGM.py &
 sleep 2
 fi
+stats_check
 }
 function disable_bttf() {
 if grep -q 'musicdir = musicdiroff' "/home/pi/RetroPie/roms/music/BGM.py"; then
@@ -433,6 +450,7 @@ else
 sudo pkill -f BGM.py
 sudo pkill -f pngview
 fi
+stats_check
 }
 function enable_custom() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
@@ -468,6 +486,7 @@ sudo pkill -f pngview
 python /home/pi/RetroPie/roms/music/BGM.py &
 sleep 2
 fi
+stats_check
 }
 function disable_custom() {
 if grep -q 'musicdir = musicdiroff' "/home/pi/RetroPie/roms/music/BGM.py"; then
@@ -493,6 +512,7 @@ else
 sudo pkill -f BGM.py
 sudo pkill -f pngview
 fi
+stats_check
 }
 function enable_st() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
@@ -528,6 +548,7 @@ sudo pkill -f pngview
 python /home/pi/RetroPie/roms/music/BGM.py &
 sleep 2
 fi
+stats_check
 }
 function disable_st() {
 if grep -q 'musicdir = musicdiroff' "/home/pi/RetroPie/roms/music/BGM.py"; then
@@ -553,6 +574,7 @@ else
 sudo pkill -f BGM.py
 sudo pkill -f pngview
 fi
+stats_check
 }
 function enable_uvf() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
@@ -588,6 +610,7 @@ sudo pkill -f pngview
 python /home/pi/RetroPie/roms/music/BGM.py &
 sleep 2
 fi
+stats_check
 }
 function disable_uvf() {
 if grep -q 'musicdir = musicdiroff' "/home/pi/RetroPie/roms/music/BGM.py"; then
@@ -613,6 +636,7 @@ else
 sudo pkill -f BGM.py
 sudo pkill -f pngview
 fi
+stats_check
 }
 function enable_venom() {
 dialog --infobox "...processing..." 3 20 ; sleep 2
@@ -648,6 +672,7 @@ sudo pkill -f pngview
 python /home/pi/RetroPie/roms/music/BGM.py &
 sleep 2
 fi
+stats_check
 }
 function disable_venom() {
 if grep -q 'musicdir = musicdiroff' "/home/pi/RetroPie/roms/music/BGM.py"; then
@@ -673,5 +698,58 @@ else
 sudo pkill -f BGM.py
 sudo pkill -f pngview
 fi
+stats_check
 }
+function stats_check() {
+if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]; then
+	bgmsd="(Disabled)"
+else
+	bgmse="(Enabled)"
+fi
+if grep -q "overlay_enable = True" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	ovs="(Enabled)"
+else
+	ovs="(Disabled)"
+fi
+if grep -q "overlay_fade_out = True" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	ovf="(Enabled)"
+else
+	ovf="(Disabled)"
+fi
+if grep -q "overlay_rounded_corners = True" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	ocr="(Enabled)"
+else
+	ocr="(Disabled)"
+fi
+if grep -q "overlay_replace_newline = True" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	ons="(Enabled)"
+else
+	ons="(Disabled)"
+fi
+if grep -q "musicdir = musicdiroff" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	ms="(Disabled)"
+elif grep -q "musicdir = musicdirac" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	ms="(Arcade)"
+elif grep -q "musicdir = musicdirbttf" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	ms="(BTTF)"
+elif grep -q "musicdir = musicdircustom" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	ms="(Custom)"
+elif grep -q "musicdir = musicdirst" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	ms="(Supreme Team)"
+elif grep -q "musicdir = musicdiruvf" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	ms="(Ultimate Vs Fighter)"
+elif grep -q "musicdir = musicdirvenom" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	ms="(Venom)"
+fi
+if grep -q "maxvolume = 1.00" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	v100="(Enabled)"
+elif grep -q "maxvolume = 0.75" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	v75="(Enabled)"
+elif grep -q "maxvolume = 0.50" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	v50="(Enabled)"
+elif grep -q "maxvolume = 0.25" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	v25="(Enabled)"
+fi
+}
+
 main_menu
