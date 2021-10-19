@@ -116,14 +116,14 @@ if [ -a ~/scripts/bgm/start.sc ]; then
 fi
 ##### Explain stuff to the user
 printf "\n\n\n"
-echo "Place your music files in /home/$currentuser/RetroPie/roms/music/custom/"
-echo "Run /home/$currentuser/RetroPie/retropiemenu/bgmcustomoptions.sh or navigate to Retropie > Background Music Options"
+echo "Place your personal music files in /home/$currentuser/RetroPie/roms/music/custom/"
+echo "Run ~/RetroPie/retropiemenu/bgmcustomoptions.sh or navigate to Retropie > Background Music Options"
 echo "for more options!"
 echo "You will still have to set up the script to run automatically when the device boots!"
 echo "Run \"sudo nano /etc/rc.local\" Near the bottom, on the line above \"exit 0\", put the following code:
 
 "
-echo "su $currentuser -c 'python ~/RetroPie/roms/music/BGM.py &'
+echo "su $currentuser -c 'python /home/pi/RetroPie/roms/music/BGM.py &'
 
 Press Control+X, Y, and Enter to save changes. Reboot and enjoy!
 

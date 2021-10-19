@@ -32,11 +32,11 @@ stats_check
     local choice
 
     while true; do
-        choice=$(dialog --backtitle "$BACKTITLE" --title " MAIN MENU " \
+        choice=$(dialog --backtitle "RetroPie Background Music Control		BGM On Boot $bgmos		BGM Playing $bgms" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
-            --menu "Choose An Option Below BGM On-Start $bgmos" 25 85 20 \
+            --menu "Choose An Option Below" 25 85 20 \
             01 "Enable/Disable Background Music $bgms" \
-            02 "Enable/Disable BGM On-Start $bgmos" \
+            02 "Enable/Disable BGM On-Boot $bgmos" \
             03 "Volume Background Music: 100% $v100" \
             04 "Volume Background Music: 75% $v75" \
             05 "Volume Background Music: 50% $v50" \
@@ -94,18 +94,18 @@ function enable_musicos() {
 CONTENT1="su pi -c 'python /home/pi/RetroPie/roms/music/BGM.py \&'"
 C1=$(echo $CONTENT1 | sed 's/\//\\\//g')
 sudo chmod 0777 /etc/rc.local
-if grep -q "su pi -c 'python /home/pi/RetroPie/roms/music/BGM.py &'" "/etc/rc.local"; then
 if grep -q "#su pi -c 'python /home/pi/RetroPie/roms/music/BGM.py &'" "/etc/rc.local"; then
-	bgmos="(Enabled)"
+	#bgmos="(Enabled)"
 	sudo sed -i 's/\#su pi -c/su pi -c/g' /etc/rc.local
 elif grep -q "su pi -c 'python /home/pi/RetroPie/roms/music/BGM.py &'" "/etc/rc.local"; then
-	bgmos="(Disabled)"
+	#bgmos="(Disabled)"
 	sudo sed -i 's/su pi -c/\#su pi -c/g' /etc/rc.local
-fi
-else
-	sudo sed "/exit/ s/.*/${C1}\n&/" /etc/rc.local > /home/pi/temp
-	sudo cat /home/pi/temp > /etc/rc.local
-	sudo rm -f /home/pi/temp
+elif ! grep -q "su pi -c 'python /home/pi/RetroPie/roms/music/BGM.py &'" "/etc/rc.local" || ! grep -q "#su pi -c 'python /home/pi/RetroPie/roms/music/BGM.py &'" "/etc/rc.local"; then
+	mkdir /home/pi/temp
+	sudo sed "/exit 0/ s/.*/${C1}\n&/" /etc/rc.local > /home/pi/temp/temp1
+	sudo tac /home/pi/temp/temp1 > /home/pi/temp/temp2; cat -n /home/pi/temp/temp2 | sort -uk2 | sort -nk1 | cut -f2- > /home/pi/temp/temp3; tac /home/pi/temp/temp3 > /home/pi/temp/temp4; cat /home/pi/temp/temp4 > /etc/rc.local
+	sudo rm -rf /home/pi/temp/*
+	sudo rmdir --ignore-fail-on-non-empty /home/pi/temp
 fi
 sudo chmod 0755 /etc/rc.local
 sleep 2
@@ -271,7 +271,7 @@ stats_check
 local choice
 
     while true; do
-        choice=$(dialog --backtitle "$BACKTITLE" --title " MAIN MENU " \
+        choice=$(dialog --backtitle "Select Your Music Choice Below		BGM On Boot $bgmos		BGM Playing $bgms" --title " MAIN MENU " \
             --ok-label OK --cancel-label Back \
             --menu "What action would you like to perform? Background Music $bgms" 25 85 20 \
             01 "Enable/Disable Arcade Music $msa" \
@@ -477,8 +477,10 @@ else
 fi
 if grep -q  "#su pi -c 'python /home/pi/RetroPie/roms/music/BGM.py &'" "/etc/rc.local"; then
 	bgmos="(Disabled)"
-else
+elif grep -q  "su pi -c 'python /home/pi/RetroPie/roms/music/BGM.py &'" "/etc/rc.local"; then
 	bgmos="(Enabled)"
+else
+	bgmos="(Disabled)"
 fi
 if grep -q "overlay_enable = True" "/home/pi/RetroPie/roms/music/BGM.py"; then
 	ovs="(Enabled)"
