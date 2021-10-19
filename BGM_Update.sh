@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# BGM_Install.sh
+# BGM_Update.sh
 #
 # Updated script by thepitster https://github.com/ALLRiPPED/ 
 #############################################
-# Install background music + overlay
+# Update background music + overlay
 #############################################
 ##### Install needed packages
 sudo apt-get install imagemagick fbi python-pip python3-pip # to generate overlays
@@ -29,7 +29,6 @@ if [[ $currentuser == "root" ]]; then
 	echo "DON'T RUN THIS SCRIPT AS ROOT! USE './BGM_Install.sh' !"
 	exit
 fi
-##### Download the files needed and install the script + utilities
 git clone https://github.com/ALLRiPPED/retropie_music_overlay.git
 cd ~/retropie_music_overlay
 if [[ $currentuser == "pi" ]]; then #Use pngview if using Raspberry Pi
@@ -61,10 +60,6 @@ elif [ -f "~/RetroPie/roms/music/BGM.py" ]; then #Remove old version if it is th
 	rm -f ~/RetroPie/roms/music/BGM.py
 fi
 cp BGM.py ~/RetroPie/roms/music/
-gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
-unzip -q bgm.zip -d ~/RetroPie && rm -f bgm.zip
-##### Setting up Splash Screen
-sudo sed -i -E "s/.*/\/home\/pi\/RetroPie\/splashscreens\/JarvisSplash.mp4/" /etc/splashscreen.list
 ##### Add pixel font
 sudo mkdir -p /usr/share/fonts/opentype
 sudo cp Pixel.otf /usr/share/fonts/opentype/
@@ -75,23 +70,6 @@ then
 	sudo rm -f ~/RetroPie/retropiemenu/bgmcustomoptions.sh
 fi
 cp bgmcustomoptions.sh ~/RetroPie/retropiemenu/
-if [ ! -s ~/RetroPie/retropiemenu/gamelist.xml ] # Remove gamelist.xml if file size is 0
-then
-	sudo rm -f ~/RetroPie/retropiemenu/gamelist.xml
-fi
-if [ ! -f "~/RetroPie/retropiemenu/gamelist.xml" ]; # If file doesn't exist, copy gamelist.xml to folder
-then
-	cp /opt/retropie/configs/all/emulationstation/gamelists/retropie/gamelist.xml ~/RetroPie/retropiemenu/gamelist.xml
-fi
-CONTENT1="<game>\n<path>./bgmcustomoptions.sh</path>\n<name>Background Music Options</name>\n<desc>Toggles background music options such as music ON/OFF and volume control. Set and play MP3/OGG files during menu navigation in both Emulation Station and Attract Mode. A Few special new folders have been created in the /music directory called "arcade", "bttf", "st", "uvf", "venom", and this last one "custom" is for placing your own MP3/OGG files into. Once you place your music files into this folder and enable it, the music will automatically begin playing.</desc>\n<image>./icons/backgroundmusic.png</image>\n</game>"
-C1=$(echo $CONTENT1 | sed 's/\//\\\//g')
-if grep -q bgmcustomoptions.sh "/home/$currentuser/RetroPie/retropiemenu/gamelist.xml"; then # Check if menu entry is already there or not
-	echo "gamelist.xml entry confirmed"
-else
-	sed "/<\/gameList>/ s/.*/${C1}\n&/" ~/RetroPie/retropiemenu/gamelist.xml > ~/temp
-	cat ~/temp > ~/RetroPie/retropiemenu/gamelist.xml
-	rm -f ~/temp
-fi
 cd ~/
 sudo rm -r ~/retropie_music_overlay
 ##### Disable ODROID BGM script if it exists
