@@ -80,7 +80,8 @@ fi
 ##### Explain stuff to the user
 printf "\n\n\n"
 echo "Place your music files in /home/$currentuser/RetroPie/roms/music/custom/"
-echo "Edit /home/$currentuser/RetroPie/roms/music/BGM.py for more options!"
+echo "Run /home/$currentuser/RetroPie/retropiemenu/bgmcustomoptions.sh or navigate to Retropie > Background Music Options"
+echo "for more options!"
 echo "You will still have to set up the script to run automatically when the device boots!"
 echo "Run \"sudo nano /etc/rc.local\" Near the bottom, on the line above \"exit 0\", put the following code:
 

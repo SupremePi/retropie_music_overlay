@@ -61,8 +61,23 @@ elif [ -f "~/RetroPie/roms/music/BGM.py" ]; then #Remove old version if it is th
 	rm -f ~/RetroPie/roms/music/BGM.py
 fi
 cp BGM.py ~/RetroPie/roms/music/
-gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
-unzip -q bgm.zip -d ~/RetroPie && rm -f bgm.zip
+read -r -p "Would You Like To Also Install My Very Own Custom Music? [Y/n] " input
+case $input in
+	[yY][eE][sS]|[yY])
+	gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
+	gdown https://drive.google.com/uc?id=1-BHwb4oT6GiwpRv7l3VLHuJLsRxScGNV
+	unzip -q bgm.zip -d ~/RetroPie && rm -f bgm.zip
+	unzip -q custombgm.zip -d ~/RetroPie && rm -f custombgm.zip
+	mv -f ~/RetroPie/roms/music/custom/'No Music in Folder.mp3' ~/RetroPie/roms/music/
+	;;
+    [nN][oO]|[nN])
+	gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
+	unzip -q bgm.zip -d ~/RetroPie && rm -f bgm.zip
+	;;
+	*)
+	echo "Invalid input..."
+	;;
+esac
 ##### Setting up Splash Screen
 sudo sed -i -E "s/.*/\/home\/pi\/RetroPie\/splashscreens\/JarvisSplash.mp4/" /etc/splashscreen.list
 ##### Add pixel font
@@ -102,7 +117,8 @@ fi
 ##### Explain stuff to the user
 printf "\n\n\n"
 echo "Place your music files in /home/$currentuser/RetroPie/roms/music/custom/"
-echo "Edit /home/$currentuser/RetroPie/roms/music/BGM.py for more options!"
+echo "Run /home/$currentuser/RetroPie/retropiemenu/bgmcustomoptions.sh or navigate to Retropie > Background Music Options"
+echo "for more options!"
 echo "You will still have to set up the script to run automatically when the device boots!"
 echo "Run \"sudo nano /etc/rc.local\" Near the bottom, on the line above \"exit 0\", put the following code:
 

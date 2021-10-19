@@ -34,30 +34,32 @@ stats_check
     while true; do
         choice=$(dialog --backtitle "$BACKTITLE" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
-            --menu "What action would you like to perform?" 25 85 20 \
-            01 "Enable/Disable background Music $bgms" \
-            02 "Volume background Music: 100% $v100" \
-            03 "Volume background Music: 75% $v75" \
-            04 "Volume background Music: 50% $v50" \
-            05 "Volume background Music: 25% $v25" \
-            06 "Enable/Disable Overlay $ovs" \
-            07 "Enable/Disable Overlay Fadeout $ovf" \
-            08 "Enable/Disable Overlay Rounded Corners $ocr" \
-            09 "Enable/Disable Overlay Line Separator $ons" \
-            10 "Music Selection $ms" \
+            --menu "Choose An Option Below BGM On-Start $bgmos" 25 85 20 \
+            01 "Enable/Disable Background Music $bgms" \
+            02 "Enable/Disable BGM On-Start $bgmos" \
+            03 "Volume Background Music: 100% $v100" \
+            04 "Volume Background Music: 75% $v75" \
+            05 "Volume Background Music: 50% $v50" \
+            06 "Volume Background Music: 25% $v25" \
+            07 "Enable/Disable Overlay $ovs" \
+            08 "Enable/Disable Overlay Fadeout $ovf" \
+            09 "Enable/Disable Overlay Rounded Corners $ocr" \
+            10 "Enable/Disable Overlay Line Separator $ons" \
+            11 "Music Selection $ms" \
             2>&1 > /dev/tty)
 
         case "$choice" in
             01) enable_music  ;;
-            02) volume100  ;;
-            03) volume75  ;;
-            04) volume50  ;;
-            05) volume25  ;;
-            06) overlay_enable  ;;
-            07) overlay_fade_out  ;;
-            08) overlay_rounded_corners  ;;
-            09) overlay_replace_newline  ;;
-            10) music_select  ;;
+            02) enable_musicos  ;;
+            03) volume100  ;;
+            04) volume75  ;;
+            05) volume50  ;;
+            06) volume25  ;;
+            07) overlay_enable  ;;
+            08) overlay_fade_out  ;;
+            09) overlay_rounded_corners  ;;
+            10) overlay_replace_newline  ;;
+            11) music_select  ;;
             *)  break ;;
         esac
     done
@@ -87,6 +89,29 @@ fi
 sleep 2
 stats_check
 }
+
+function enable_musicos() {
+CONTENT1="su pi -c 'python /home/pi/RetroPie/roms/music/BGM.py \&'"
+C1=$(echo $CONTENT1 | sed 's/\//\\\//g')
+sudo chmod 0777 /etc/rc.local
+if grep -q "su pi -c 'python /home/pi/RetroPie/roms/music/BGM.py &'" "/etc/rc.local"; then
+if grep -q "#su pi -c 'python /home/pi/RetroPie/roms/music/BGM.py &'" "/etc/rc.local"; then
+	bgmos="(Enabled)"
+	sudo sed -i 's/\#su pi -c/su pi -c/g' /etc/rc.local
+elif grep -q "su pi -c 'python /home/pi/RetroPie/roms/music/BGM.py &'" "/etc/rc.local"; then
+	bgmos="(Disabled)"
+	sudo sed -i 's/su pi -c/\#su pi -c/g' /etc/rc.local
+fi
+else
+	sudo sed "/exit/ s/.*/${C1}\n&/" /etc/rc.local > /home/pi/temp
+	sudo cat /home/pi/temp > /etc/rc.local
+	sudo rm -f /home/pi/temp
+fi
+sudo chmod 0755 /etc/rc.local
+sleep 2
+stats_check
+}
+
 function volume100() {
 if grep -q 'maxvolume = 1.00' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	echo "Volume Already 100%" 3 23
@@ -449,6 +474,11 @@ if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]; then
 	bgms="(Disabled)"
 else
 	bgms="(Enabled)"
+fi
+if grep -q  "#su pi -c 'python /home/pi/RetroPie/roms/music/BGM.py &'" "/etc/rc.local"; then
+	bgmos="(Disabled)"
+else
+	bgmos="(Enabled)"
 fi
 if grep -q "overlay_enable = True" "/home/pi/RetroPie/roms/music/BGM.py"; then
 	ovs="(Enabled)"
