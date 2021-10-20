@@ -70,16 +70,16 @@ then
 sudo rm -f /home/pi/RetroPie/roms/music/DisableMusic
 if grep -q 'maxvolume = 0.50' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 0.50/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
-	python /home/pi/RetroPie/roms/music/BGM.py &
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 elif grep -q 'maxvolume = 0.75' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 0.75/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
-	python /home/pi/RetroPie/roms/music/BGM.py &
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 elif grep -q 'maxvolume = 1.00' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 1.00/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
-	python /home/pi/RetroPie/roms/music/BGM.py &
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 elif grep -q 'maxvolume = 0.25' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/maxvolume = 0.25/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
-	python /home/pi/RetroPie/roms/music/BGM.py &
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 else
 touch /home/pi/RetroPie/roms/music/DisableMusic
@@ -91,12 +91,12 @@ stats_check
 }
 
 function enable_musicos() {
-if grep -q '#(sleep 25; python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
+if grep -q '#(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
 	#bgmos="(Enabled)"
-	sudo sed -i 's/\#(sleep 25; python/(sleep 25; python/g' /opt/retropie/configs/all/autostart.sh
-elif grep -q '(sleep 25; python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
+	sudo sed -i 's/\#(python/(python/g' /opt/retropie/configs/all/autostart.sh
+elif grep -q '(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
 	#bgmos="(Disabled)"
-	sudo sed -i 's/(sleep 25; python/\#(sleep 25; python/g' /opt/retropie/configs/all/autostart.sh
+	sudo sed -i 's/(python/\#(python/g' /opt/retropie/configs/all/autostart.sh
 fi
 sleep 2
 stats_check
@@ -118,7 +118,7 @@ then
 else
 	sudo pkill -f BGM.py
 	sudo pkill -f pngview
-	python /home/pi/RetroPie/roms/music/BGM.py &
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -139,7 +139,7 @@ then
 else
 	sudo pkill -f BGM.py
 	sudo pkill -f pngview
-	python /home/pi/RetroPie/roms/music/BGM.py &
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -160,7 +160,7 @@ then
 else
 	sudo pkill -f BGM.py
 	sudo pkill -f pngview
-	python /home/pi/RetroPie/roms/music/BGM.py &
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -183,7 +183,7 @@ then
 else
 	sudo pkill -f BGM.py
 	sudo pkill -f pngview
-	python /home/pi/RetroPie/roms/music/BGM.py &
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -200,7 +200,7 @@ then
 else
 	sudo pkill -f BGM.py
 	sudo pkill -f pngview
-	python /home/pi/RetroPie/roms/music/BGM.py &
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -217,7 +217,7 @@ then
 else
 	sudo pkill -f BGM.py
 	sudo pkill -f pngview
-	python /home/pi/RetroPie/roms/music/BGM.py &
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -234,7 +234,7 @@ then
 else
 	sudo pkill -f BGM.py
 	sudo pkill -f pngview
-	python /home/pi/RetroPie/roms/music/BGM.py &
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -251,7 +251,7 @@ then
 else
 	sudo pkill -f BGM.py
 	sudo pkill -f pngview
-	python /home/pi/RetroPie/roms/music/BGM.py &
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -307,7 +307,7 @@ then
 else
 	sudo pkill -f BGM.py
 	sudo pkill -f pngview
-	python /home/pi/RetroPie/roms/music/BGM.py &
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -337,7 +337,7 @@ then
 else
 	sudo pkill -f BGM.py
 	sudo pkill -f pngview
-	python /home/pi/RetroPie/roms/music/BGM.py &
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -366,7 +366,7 @@ then
 else
 	sudo pkill -f BGM.py
 	sudo pkill -f pngview
-	python /home/pi/RetroPie/roms/music/BGM.py &
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -396,7 +396,7 @@ then
 else
 	sudo pkill -f BGM.py
 	sudo pkill -f pngview
-	python /home/pi/RetroPie/roms/music/BGM.py &
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -425,7 +425,7 @@ then
 else
 	sudo pkill -f BGM.py
 	sudo pkill -f pngview
-	python /home/pi/RetroPie/roms/music/BGM.py &
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -454,7 +454,7 @@ then
 else
 	sudo pkill -f BGM.py
 	sudo pkill -f pngview
-	python /home/pi/RetroPie/roms/music/BGM.py &
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -465,9 +465,9 @@ if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]; then
 else
 	bgms="(Enabled)"
 fi
-if grep -q  '#(sleep 25; python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
+if grep -q  '#(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
 	bgmos="(Disabled)"
-elif grep -q  '(sleep 25; python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
+elif grep -q  '(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
 	bgmos="(Enabled)"
 else
 	bgmos="(Disabled)"
