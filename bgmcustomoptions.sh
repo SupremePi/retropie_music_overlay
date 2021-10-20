@@ -91,15 +91,15 @@ stats_check
 }
 
 function enable_musicos() {
-if grep -q "#sudo 'python /home/pi/RetroPie/roms/music/BGM.py &'" "/opt/retropie/configs/all/autostart.sh"; then
+if grep -q '#sudo python /home/pi/RetroPie/roms/music/BGM.py &' "/opt/retropie/configs/all/autostart.sh"; then
 	#bgmos="(Enabled)"
-	sudo sed -i "s/\#sudo 'python/sudo 'python/g" /opt/retropie/configs/all/autostart.sh
-elif grep -q "sudo 'python /home/pi/RetroPie/roms/music/BGM.py &'" "/opt/retropie/configs/all/autostart.sh"; then
+	sudo sed -i 's/\#sudo python/sudo python/g' /opt/retropie/configs/all/autostart.sh
+elif grep -q 'sudo python /home/pi/RetroPie/roms/music/BGM.py &' "/opt/retropie/configs/all/autostart.sh"; then
 	#bgmos="(Disabled)"
-	sudo sed -i "s/sudo 'python/\#sudo 'python/g" /opt/retropie/configs/all/autostart.sh
-elif ! grep -q "#sudo 'python /home/pi/RetroPie/roms/music/BGM.py &'" "/opt/retropie/configs/all/autostart.sh" || ! grep -q "sudo 'python /home/pi/RetroPie/roms/music/BGM.py &'" "/opt/retropie/configs/all/autostart.sh"; then
+	sudo sed -i 's/sudo python/\#sudo python/g' /opt/retropie/configs/all/autostart.sh
+elif ! grep -q '#sudo python /home/pi/RetroPie/roms/music/BGM.py &' "/opt/retropie/configs/all/autostart.sh" || ! grep -q 'sudo python /home/pi/RetroPie/roms/music/BGM.py &' "/opt/retropie/configs/all/autostart.sh"; then
 	mkdir /home/pi/temp
-	sed "$ i\sudo 'python /home/pi/RetroPie/roms/music/BGM.py &'" /opt/retropie/configs/all/autostart.sh > /home/pi/temp/auto.sh
+	sed '$ i\sudo python /home/pi/RetroPie/roms/music/BGM.py &' /opt/retropie/configs/all/autostart.sh > /home/pi/temp/auto.sh
 	cat /home/pi/temp/auto.sh > /opt/retropie/configs/all/autostart.sh
 	rm -rf /home/pi/temp/*
 	rmdir --ignore-fail-on-non-empty /home/pi/temp
@@ -472,9 +472,9 @@ if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]; then
 else
 	bgms="(Enabled)"
 fi
-if grep -q  "#sudo 'python /home/pi/RetroPie/roms/music/BGM.py &'" "/opt/retropie/configs/all/autostart.sh"; then
+if grep -q  '#sudo python /home/pi/RetroPie/roms/music/BGM.py &' "/opt/retropie/configs/all/autostart.sh"; then
 	bgmos="(Disabled)"
-elif grep -q  "sudo 'python /home/pi/RetroPie/roms/music/BGM.py &'" "/opt/retropie/configs/all/autostart.sh"; then
+elif grep -q  'sudo python /home/pi/RetroPie/roms/music/BGM.py &' "/opt/retropie/configs/all/autostart.sh"; then
 	bgmos="(Enabled)"
 else
 	bgmos="(Disabled)"
