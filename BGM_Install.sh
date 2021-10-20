@@ -80,6 +80,14 @@ case $input in
 esac
 ##### Setting up Splash Screen
 sudo sed -i -E "s/.*/\/home\/pi\/RetroPie\/splashscreens\/JarvisSplash.mp4/" /etc/splashscreen.list
+if ! grep -q '#(sleep 25; python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh" || ! grep -q '(sleep 25; python /home/pi/RetroPie/roms/music/BGM.py & >/dev/null 2>&1)' "/opt/retropie/configs/all/autostart.sh"; then
+	mkdir /home/pi/temp
+	sed '$ i\(sleep 25; python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &\n(sleep 3; mpg123 -f 32768 --loop 1 /home/pi/Music/jarvis-intro.mp3 >/dev/null 2>&1) &
+' /opt/retropie/configs/all/autostart.sh > /home/pi/temp/auto.sh
+	cat /home/pi/temp/auto.sh > /opt/retropie/configs/all/autostart.sh
+	rm -rf /home/pi/temp/*
+	rmdir --ignore-fail-on-non-empty /home/pi/temp
+fi
 ##### Add pixel font
 sudo mkdir -p /usr/share/fonts/opentype
 sudo cp Pixel.otf /usr/share/fonts/opentype/
