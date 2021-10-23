@@ -33,7 +33,7 @@ stats_check
     local choice
 
     while true; do
-        choice=$(dialog --backtitle "RetroPie Background Music Control Script v1.60		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $volume		Now Playing: $ms" --title " MAIN MENU " \
+        choice=$(dialog --colors --backtitle "RetroPie Background Music Control Script v1.60		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $volume		Now Playing: $ms" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "Choose An Option Below" 25 85 20 \
             01 "Enable/Disable Background Music $bgms" \
@@ -90,7 +90,7 @@ function vol_menu() {
     local choice
 
     while true; do
-        choice=$(dialog --backtitle "RetroPie Background Music Volume Control		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $volume		Now Playing: $ms" --title " MAIN MENU " \
+        choice=$(dialog --colors --backtitle "RetroPie Background Music Volume Control		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $volume		Now Playing: $ms" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "You can choose the volume level one after another until you are happy with your settings." 25 75 20 \
             01 "Set Background Music Volume to 100%" \
@@ -343,7 +343,7 @@ stats_check
 local choice
 
     while true; do
-        choice=$(dialog --backtitle "Select Your Music Choice Below		BGM On Boot $bgmos		BGM Playing $bgms" --title " MAIN MENU " \
+        choice=$(dialog --colors --backtitle "Select Your Music Choice Below		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $volume		Now Playing: $ms" --title " MAIN MENU " \
             --ok-label OK --cancel-label Back \
             --menu "What action would you like to perform? Background Music $bgms" 25 85 20 \
             01 "Enable/Disable Arcade Music $msa" \
@@ -543,72 +543,72 @@ stats_check
 }
 function stats_check() {
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]; then
-	bgms="(Disabled)"
+	bgms="(\Z1Disabled\Zn)"
 else
-	bgms="(Enabled)"
+	bgms="(\Z2Enabled\Zn)"
 fi
 if grep -q  '#(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
-	bgmos="(Disabled)"
+	bgmos="(\Z1Disabled\Zn)"
 elif grep -q  '(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
-	bgmos="(Enabled)"
+	bgmos="(\Z2Enabled\Zn)"
 else
-	bgmos="(Disabled)"
+	bgmos="(\Z1Disabled\Zn)"
 fi
 if grep -q "overlay_enable = True" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ovs="(Enabled)"
+	ovs="(\Z2Enabled\Zn)"
 else
-	ovs="(Disabled)"
+	ovs="(\Z1Disabled\Zn)"
 fi
 if grep -q "overlay_fade_out = True" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ovf="(Enabled)"
+	ovf="(\Z2Enabled\Zn)"
 else
-	ovf="(Disabled)"
+	ovf="(\Z1Disabled\Zn)"
 fi
 if grep -q "overlay_rounded_corners = True" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ocr="(Enabled)"
+	ocr="(\Z2Enabled\Zn)"
 else
-	ocr="(Disabled)"
+	ocr="(\Z1Disabled\Zn)"
 fi
 if grep -q "overlay_replace_newline = True" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ons="(Enabled)"
+	ons="(\Z2Enabled\Zn)"
 else
-	ons="(Disabled)"
+	ons="(\Z1Disabled\Zn)"
 fi
 if grep -q "musicdir = musicdiroff" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ms="(Disabled)"
+	ms="(\Z1Disabled\Zn)"
 elif grep -q "musicdir = musicdirac" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ms="(Arcade)"
+	ms="(\Z2Arcade\Zn)"
 elif grep -q "musicdir = musicdirbttf" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ms="(Back To The Future)"
+	ms="(\Z2Back To The Future\Zn)"
 elif grep -q "musicdir = musicdircustom" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ms="(Custom)"
+	ms="(\Z2Custom\Zn)"
 elif grep -q "musicdir = musicdirst" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ms="(Supreme Team)"
+	ms="(\Z2Supreme Team\Zn)"
 elif grep -q "musicdir = musicdiruvf" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ms="(Ultimate Vs Fighter)"
+	ms="(\Z2Ultimate Vs Fighter\Zn)"
 elif grep -q "musicdir = musicdirvenom" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ms="(Venom)"
+	ms="(\Z2Venom\Zn)"
 fi
 if grep -q "maxvolume = 1.00" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="100%"
+	volume="\Z3100%\Zn"
 elif grep -q "maxvolume = 0.90" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="90%"
+	volume="\Z390%\Zn"
 elif grep -q "maxvolume = 0.80" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="80%"
+	volume="\Z380%\Zn"
 elif grep -q "maxvolume = 0.70" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="70%"
+	volume="\Z370%\Zn"
 elif grep -q "maxvolume = 0.60" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="60%"
+	volume="\Z360%\Zn"
 elif grep -q "maxvolume = 0.50" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="50%"
+	volume="\Z350%\Zn"
 elif grep -q "maxvolume = 0.40" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="40%"
+	volume="\Z340%\Zn"
 elif grep -q "maxvolume = 0.30" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="30%"
+	volume="\Z330%\Zn"
 elif grep -q "maxvolume = 0.20" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="20%"
+	volume="\Z320%\Zn"
 elif grep -q "maxvolume = 0.10" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="10%"
+	volume="\Z310%\Zn"
 fi
 }
 main_menu
