@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#RetroPie Background Music Control Script Version 1.60
 infobox= ""
 infobox="${infobox}_______________________________________________________\n\n"
 infobox="${infobox}\n"
@@ -8,11 +8,12 @@ infobox="${infobox}The background music python script has been installed on this
 infobox="${infobox}\n"
 infobox="${infobox}This script will play MP3 & OGG files during menu navigation in either Emulation Station or Attract mode.\n"
 infobox="${infobox}\n"
-infobox="${infobox}A Few special new folders have been created in the /home/pi/RetroPie/roms/music directory called \"arcade\",\n"
-infobox="${infobox}\"bttf\", \"st\", \"uvf\", \"venom\", and this last one \"custom\" is for placing your own MP3 files into.\n"
+infobox="${infobox}A Few special new folders have been created in the /home/pi/RetroPie/roms/music directory called \"arcade\"\n"
+infobox="${infobox}(Arcade), \"bttf\" (Back To The Future), \"st\" (Supremem Team), \"uvf\" (Ultimate Vs Fighter), \"venom\" (Venom),\n"
+infobox="${infobox}and this last one \"custom\" (Custom) is for placing your own MP3 files into.\n"
 infobox="${infobox}\n"
-infobox="${infobox}Also included in this script is the ability to select between the different music folders you can disable\n"
-infobox="${infobox}and enable them, the music will then automatically start playing.\n"
+infobox="${infobox}Also included in this script is the ability to select between the different music folders you can disable them all\n"
+infobox="${infobox}or enable them, but only one at a time, the music will then automatically start playing.\n"
 infobox="${infobox}\n"
 infobox="${infobox}Launch a game, the music will stop. Upon exiting out of the game the music will begin playing again.\n"
 infobox="${infobox}\n"
@@ -23,8 +24,8 @@ infobox="${infobox}and separate the song title to a separate newlines.\n"
 infobox="${infobox}\n"
 infobox="${infobox}\n\n"
 
-dialog --backtitle "RetroPie Background Music Control" \
---title "RetroPie Background Music Control" \
+dialog --backtitle "RetroPie Background Music Control Script v1.60" \
+--title "RetroPie Background Music Control Script v1.60" \
 --msgbox "${infobox}" 35 110
 
 function main_menu() {
@@ -32,34 +33,28 @@ stats_check
     local choice
 
     while true; do
-        choice=$(dialog --backtitle "RetroPie Background Music Control		BGM On Boot $bgmos		BGM Playing $bgms" --title " MAIN MENU " \
+        choice=$(dialog --backtitle "RetroPie Background Music Control Script v1.60		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $volume		Now Playing: $ms" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "Choose An Option Below" 25 85 20 \
             01 "Enable/Disable Background Music $bgms" \
             02 "Enable/Disable BGM On-Boot $bgmos" \
-            03 "Volume Background Music: 100% $v100" \
-            04 "Volume Background Music: 75% $v75" \
-            05 "Volume Background Music: 50% $v50" \
-            06 "Volume Background Music: 25% $v25" \
-            07 "Enable/Disable Overlay $ovs" \
-            08 "Enable/Disable Overlay Fadeout $ovf" \
-            09 "Enable/Disable Overlay Rounded Corners $ocr" \
-            10 "Enable/Disable Overlay Line Separator $ons" \
-            11 "Music Selection $ms" \
+            03 "Enable/Disable Overlay $ovs" \
+            04 "Enable/Disable Overlay Fadeout $ovf" \
+            05 "Enable/Disable Overlay Rounded Corners $ocr" \
+            06 "Enable/Disable Overlay Line Separator $ons" \
+            07 "Music Selection $ms" \
+            08 "Background Music Volume Control" \
             2>&1 > /dev/tty)
 
         case "$choice" in
             01) enable_music  ;;
             02) enable_musicos  ;;
-            03) volume100  ;;
-            04) volume75  ;;
-            05) volume50  ;;
-            06) volume25  ;;
-            07) overlay_enable  ;;
-            08) overlay_fade_out  ;;
-            09) overlay_rounded_corners  ;;
-            10) overlay_replace_newline  ;;
-            11) music_select  ;;
+            03) overlay_enable  ;;
+            04) overlay_fade_out  ;;
+            05) overlay_rounded_corners  ;;
+            06) overlay_replace_newline  ;;
+            07) music_select  ;;
+            08) vol_menu  ;;
             *)  break ;;
         esac
     done
@@ -68,28 +63,18 @@ function enable_music() {
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
 sudo rm -f /home/pi/RetroPie/roms/music/DisableMusic
-if grep -q 'maxvolume = 0.50' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	sed -i -E 's/maxvolume = 0.50/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
-elif grep -q 'maxvolume = 0.75' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	sed -i -E 's/maxvolume = 0.75/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
-elif grep -q 'maxvolume = 1.00' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	sed -i -E 's/maxvolume = 1.00/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
-elif grep -q 'maxvolume = 0.25' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	sed -i -E 's/maxvolume = 0.25/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
-fi
+        CUR_VAL=`grep "maxCUR_VAL =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+        export CUR_VAL
+        perl -p -i -e 's/maxCUR_VAL = $ENV{CUR_VAL}/maxCUR_VAL = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
+        (python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 else
 touch /home/pi/RetroPie/roms/music/DisableMusic
-sudo pkill -f BGM.py
-sudo pkill -f pngview
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 fi
 sleep 2
 stats_check
 }
-
 function enable_musicos() {
 if grep -q '#(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
 	#bgmos="(Enabled)"
@@ -101,88 +86,185 @@ fi
 sleep 2
 stats_check
 }
+function vol_menu() {
+    local choice
 
-function volume100() {
-if grep -q 'maxvolume = 1.00' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	echo "Volume Already 100%" 3 23
-elif grep -q 'maxvolume = 0.75' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	sed -i -E 's/maxvolume = 0.75/maxvolume = 1.00/g' /home/pi/RetroPie/roms/music/BGM.py
-elif grep -q 'maxvolume = 0.50' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	sed -i -E 's/maxvolume = 0.50/maxvolume = 1.00/g' /home/pi/RetroPie/roms/music/BGM.py
-elif grep -q 'maxvolume = 0.25' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	sed -i -E 's/maxvolume = 0.25/maxvolume = 1.00/g' /home/pi/RetroPie/roms/music/BGM.py
-fi
+    while true; do
+        choice=$(dialog --backtitle "RetroPie Background Music Volume Control		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $volume		Now Playing: $ms" --title " MAIN MENU " \
+            --ok-label OK --cancel-label Exit \
+            --menu "You can choose the volume level one after another until you are happy with your settings." 25 75 20 \
+            01 "Set Background Music Volume to 100%" \
+            02 "Set Background Music Volume to 90%" \
+            03 "Set Background Music Volume to 80%" \
+            04 "Set Background Music Volume to 70%" \
+            05 "Set Background Music Volume to 60%" \
+            06 "Set Background Music Volume to 50%" \
+            07 "Set Background Music Volume to 40%" \
+            08 "Set Background Music Volume to 30%" \
+            09 "Set Background Music Volume to 20%" \
+            10 "Set Background Music Volume to 10%" \
+            2>&1 > /dev/tty)
+
+        case "$choice" in
+            01) 100_v  ;;
+            02) 90_v  ;;
+            03) 80_v  ;;
+            04) 70_v  ;;
+            05) 60_v  ;;
+            06) 50_v  ;;
+            07) 40_v  ;;
+            08) 30_v  ;;
+            09) 20_v  ;;
+            10) 10_v  ;;
+            *)  break ;;
+        esac
+    done
+}
+function 100_v() {
+	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	export CUR_VAL
+	perl -p -i -e 's/maxvolume = $ENV{maxvolume}/maxvolume = 1.00/g' /home/pi/RetroPie/roms/music/BGM.py
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
 	echo "Background Music Disabled!"
 else
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
 stats_check
 }
-function volume75() {
-if grep -q 'maxvolume = 0.75' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	echo "Volume Already 75%"
-elif grep -q 'maxvolume = 1.00' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	sed -i -E 's/maxvolume = 1.00/maxvolume = 0.75/g' /home/pi/RetroPie/roms/music/BGM.py
-elif grep -q 'maxvolume = 0.50' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	sed -i -E 's/maxvolume = 0.50/maxvolume = 0.75/g' /home/pi/RetroPie/roms/music/BGM.py
-elif grep -q 'maxvolume = 0.25' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	sed -i -E 's/maxvolume = 0.25/maxvolume = 0.75/g' /home/pi/RetroPie/roms/music/BGM.py
-fi
+function 90_v() {
+	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	export CUR_VAL
+	perl -p -i -e 's/maxvolume = $ENV{maxvolume}/maxvolume = 0.90/g' /home/pi/RetroPie/roms/music/BGM.py
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
 	echo "Background Music Disabled!"
 else
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
 stats_check
 }
-function volume50() {
-if grep -q 'maxvolume = 0.50' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	echo "Volume Already 50%"
-elif grep -q 'maxvolume = 0.75' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	sed -i -E 's/maxvolume = 0.75/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
-elif grep -q 'maxvolume = 1.00' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	sed -i -E 's/maxvolume = 1.00/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
-elif grep -q 'maxvolume = 0.25' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	sed -i -E 's/maxvolume = 0.25/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
-fi
+function 80_v() {
+	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	export CUR_VAL
+	perl -p -i -e 's/maxvolume = $ENV{maxvolume}/maxvolume = 0.80/g' /home/pi/RetroPie/roms/music/BGM.py
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
 	echo "Background Music Disabled!"
 else
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
 stats_check
 }
-function volume25() {
-sudo pkill -f BGM.py
-sudo pkill -f pngview
-if grep -q 'maxvolume = 0.25' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	echo "Volume Already 25%"
-elif grep -q 'maxvolume = 0.75' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	sed -i -E 's/maxvolume = 0.75/maxvolume = 0.25/g' /home/pi/RetroPie/roms/music/BGM.py
-elif grep -q 'maxvolume = 0.50' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	sed -i -E 's/maxvolume = 0.50/maxvolume = 0.25/g' /home/pi/RetroPie/roms/music/BGM.py
-elif grep -q 'maxvolume = 1.00' "/home/pi/RetroPie/roms/music/BGM.py"; then
-	sed -i -E 's/maxvolume = 1.00/maxvolume = 0.25/g' /home/pi/RetroPie/roms/music/BGM.py
-fi
+function 70_v() {
+	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	export CUR_VAL
+	perl -p -i -e 's/maxvolume = $ENV{maxvolume}/maxvolume = 0.70/g' /home/pi/RetroPie/roms/music/BGM.py
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
 	echo "Background Music Disabled!"
 else
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+fi
+sleep 2
+stats_check
+}
+function 60_v() {
+	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	export CUR_VAL
+	perl -p -i -e 's/maxvolume = $ENV{maxvolume}/maxvolume = 0.60/g' /home/pi/RetroPie/roms/music/BGM.py
+if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
+then
+	echo "Background Music Disabled!"
+else
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+fi
+sleep 2
+stats_check
+}
+function 50_v() {
+	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	export CUR_VAL
+	perl -p -i -e 's/maxvolume = $ENV{maxvolume}/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
+if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
+then
+	echo "Background Music Disabled!"
+else
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+fi
+sleep 2
+stats_check
+}
+function 40_v() {
+	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	export CUR_VAL
+	perl -p -i -e 's/maxvolume = $ENV{maxvolume}/maxvolume = 0.40/g' /home/pi/RetroPie/roms/music/BGM.py
+if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
+then
+	echo "Background Music Disabled!"
+else
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+fi
+sleep 2
+stats_check
+}
+function 30_v() {
+	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	export CUR_VAL
+	perl -p -i -e 's/maxvolume = $ENV{maxvolume}/maxvolume = 0.30/g' /home/pi/RetroPie/roms/music/BGM.py
+if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
+then
+	echo "Background Music Disabled!"
+else
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+fi
+sleep 2
+stats_check
+}
+function 20_v() {
+	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	export CUR_VAL
+	perl -p -i -e 's/maxvolume = $ENV{maxvolume}/maxvolume = 0.20/g' /home/pi/RetroPie/roms/music/BGM.py
+if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
+then
+	echo "Background Music Disabled!"
+else
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+fi
+sleep 2
+stats_check
+}
+function 10_v() {
+	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	export CUR_VAL
+	perl -p -i -e 's/maxvolume = $ENV{maxvolume}/maxvolume = 0.10/g' /home/pi/RetroPie/roms/music/BGM.py
+if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
+then
+	echo "Background Music Disabled!"
+else
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
@@ -198,8 +280,8 @@ if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
 	echo "Background Music Disabled!"
 else
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
@@ -215,8 +297,8 @@ if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
 	echo "Background Music Disabled!"
 else
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
@@ -232,8 +314,8 @@ if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
 	echo "Background Music Disabled!"
 else
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
@@ -249,8 +331,8 @@ if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
 	echo "Background Music Disabled!"
 else
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
@@ -305,8 +387,8 @@ if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
 	echo "Background Music Disabled!"
 else
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
@@ -335,8 +417,8 @@ if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
 	echo "Background Music Disabled!"
 else
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
@@ -364,8 +446,8 @@ if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
 	echo "Background Music Disabled!"
 else
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
@@ -394,8 +476,8 @@ if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
 	echo "Background Music Disabled!"
 else
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
@@ -423,8 +505,8 @@ if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
 	echo "Background Music Disabled!"
 else
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
@@ -452,8 +534,8 @@ if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
 	echo "Background Music Disabled!"
 else
-	sudo pkill -f BGM.py
-	sudo pkill -f pngview
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
 fi
 sleep 2
@@ -497,7 +579,7 @@ if grep -q "musicdir = musicdiroff" "/home/pi/RetroPie/roms/music/BGM.py"; then
 elif grep -q "musicdir = musicdirac" "/home/pi/RetroPie/roms/music/BGM.py"; then
 	ms="(Arcade)"
 elif grep -q "musicdir = musicdirbttf" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ms="(BTTF)"
+	ms="(Back To The Future)"
 elif grep -q "musicdir = musicdircustom" "/home/pi/RetroPie/roms/music/BGM.py"; then
 	ms="(Custom)"
 elif grep -q "musicdir = musicdirst" "/home/pi/RetroPie/roms/music/BGM.py"; then
@@ -507,77 +589,26 @@ elif grep -q "musicdir = musicdiruvf" "/home/pi/RetroPie/roms/music/BGM.py"; the
 elif grep -q "musicdir = musicdirvenom" "/home/pi/RetroPie/roms/music/BGM.py"; then
 	ms="(Venom)"
 fi
-if grep -q "musicdir = musicdirac" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	msa="(Enabled)"
-	msb="(Disabled)"
-	msc="(Disabled)"
-	mss="(Disabled)"
-	msu="(Disabled)"
-	msv="(Disabled)"
-elif grep -q "musicdir = musicdirbttf" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	msa="(Disabled)"
-	msb="(Enabled)"
-	msc="(Disabled)"
-	mss="(Disabled)"
-	msu="(Disabled)"
-	msv="(Disabled)"
-elif grep -q "musicdir = musicdircustom" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	msa="(Disabled)"
-	msb="(Disabled)"
-	msc="(Enabled)"
-	mss="(Disabled)"
-	msu="(Disabled)"
-	msv="(Disabled)"
-elif grep -q "musicdir = musicdirst" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	msa="(Disabled)"
-	msb="(Disabled)"
-	msc="(Disabled)"
-	mss="(Enabled)"
-	msu="(Disabled)"
-	msv="(Disabled)"
-elif grep -q "musicdir = musicdiruvf" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	msa="(Disabled)"
-	msb="(Disabled)"
-	msc="(Disabled)"
-	mss="(Disabled)"
-	msu="(Enabled)"
-	msv="(Disabled)"
-elif grep -q "musicdir = musicdirvenom" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	msa="(Disabled)"
-	msb="(Disabled)"
-	msc="(Disabled)"
-	mss="(Disabled)"
-	msu="(Disabled)"
-	msv="(Enabled)"
-elif grep -q "musicdir = musicdiroff" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	msa="(Disabled)"
-	msb="(Disabled)"
-	msc="(Disabled)"
-	mss="(Disabled)"
-	msu="(Disabled)"
-	msv="(Disabled)"
-fi
 if grep -q "maxvolume = 1.00" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	v100="(Enabled)"
-	v75=""
-	v50=""
-	v25=""
-elif grep -q "maxvolume = 0.75" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	v100=""
-	v75="(Enabled)"
-	v50=""
-	v25=""
+	volume="100%"
+elif grep -q "maxvolume = 0.90" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	volume="90%"
+elif grep -q "maxvolume = 0.80" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	volume="80%"
+elif grep -q "maxvolume = 0.70" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	volume="70%"
+elif grep -q "maxvolume = 0.60" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	volume="60%"
 elif grep -q "maxvolume = 0.50" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	v100=""
-	v75=""
-	v50="(Enabled)"
-	v25=""
-elif grep -q "maxvolume = 0.25" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	v100=""
-	v75=""
-	v50=""
-	v25="(Enabled)"
+	volume="50%"
+elif grep -q "maxvolume = 0.40" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	volume="40%"
+elif grep -q "maxvolume = 0.30" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	volume="30%"
+elif grep -q "maxvolume = 0.20" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	volume="20%"
+elif grep -q "maxvolume = 0.10" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	volume="10%"
 fi
 }
-
 main_menu
