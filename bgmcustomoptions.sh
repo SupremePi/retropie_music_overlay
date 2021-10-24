@@ -346,21 +346,23 @@ local choice
         choice=$(dialog --colors --backtitle "Select Your Music Choice Below		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $volume		Now Playing: $ms" --title " MAIN MENU " \
             --ok-label OK --cancel-label Back \
             --menu "What action would you like to perform? Background Music $bgms" 25 85 20 \
-            01 "Enable/Disable Arcade Music $msa" \
-            02 "Enable/Disable BTTF Music $msb" \
-            03 "Enable/Disable Custom Music $msc" \
-            04 "Enable/Disable Supreme Team Music $mss" \
-            05 "Enable/Disable Ultimate Vs Fighter Music $msu" \
-            06 "Enable/Disable Venom Music $msv" \
+            01 "Enable/Disable Arcade Music" \
+            02 "Enable/Disable BTTF Music" \
+            03 "Enable/Disable Custom Music" \
+            04 "Enable/Disable Nostalgia Trip V3 Music" \
+            05 "Enable/Disable Supreme Team Music" \
+            06 "Enable/Disable Ultimate Vs Fighter Music" \
+            07 "Enable/Disable Venom Music" \
             2>&1 > /dev/tty)
 
         case "$choice" in
             01) enable_arcade  ;;
             02) enable_bttf  ;;
             03) enable_custom  ;;
-            04) enable_st  ;;
-            05) enable_uvf  ;;
-            06) enable_venom  ;;
+            04) enable_nt  ;;
+            05) enable_st  ;;
+            06) enable_uvf  ;;
+            07) enable_venom  ;;
             *)  break ;;
         esac
     done
@@ -372,6 +374,8 @@ elif grep -q 'musicdir = musicdirbttf' "/home/pi/RetroPie/roms/music/BGM.py"; th
 	sed -i -E 's/musicdir = musicdirbttf/musicdir = musicdirac/g' /home/pi/RetroPie/roms/music/BGM.py
 elif grep -q 'musicdir = musicdircustom' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdircustom/musicdir = musicdirac/g' /home/pi/RetroPie/roms/music/BGM.py
+elif grep -q 'musicdir = musicdirnt' "/home/pi/RetroPie/roms/music/BGM.py"; then
+	sed -i -E 's/musicdir = musicdirnt/musicdir = musicdirac/g' /home/pi/RetroPie/roms/music/BGM.py
 elif grep -q 'musicdir = musicdirst' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdirst/musicdir = musicdirac/g' /home/pi/RetroPie/roms/music/BGM.py
 elif grep -q 'musicdir = musicdiruvf' "/home/pi/RetroPie/roms/music/BGM.py"; then
@@ -402,6 +406,8 @@ elif grep -q 'musicdir = musicdirac' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdirac/musicdir = musicdirbttf/g' /home/pi/RetroPie/roms/music/BGM.py
 elif grep -q 'musicdir = musicdircustom' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdircustom/musicdir = musicdirbttf/g' /home/pi/RetroPie/roms/music/BGM.py
+elif grep -q 'musicdir = musicdirnt' "/home/pi/RetroPie/roms/music/BGM.py"; then
+	sed -i -E 's/musicdir = musicdirnt/musicdir = musicdirbttf/g' /home/pi/RetroPie/roms/music/BGM.py
 elif grep -q 'musicdir = musicdirst' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdirst/musicdir = musicdirbttf/g' /home/pi/RetroPie/roms/music/BGM.py
 elif grep -q 'musicdir = musicdiruvf' "/home/pi/RetroPie/roms/music/BGM.py"; then
@@ -431,6 +437,8 @@ elif grep -q 'musicdir = musicdirac' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdirac/musicdir = musicdircustom/g' /home/pi/RetroPie/roms/music/BGM.py
 elif grep -q 'musicdir = musicdirbttf' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdirbttf/musicdir = musicdircustom/g' /home/pi/RetroPie/roms/music/BGM.py
+elif grep -q 'musicdir = musicdirnt' "/home/pi/RetroPie/roms/music/BGM.py"; then
+	sed -i -E 's/musicdir = musicdirnt/musicdir = musicdircustom/g' /home/pi/RetroPie/roms/music/BGM.py
 elif grep -q 'musicdir = musicdirst' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdirst/musicdir = musicdircustom/g' /home/pi/RetroPie/roms/music/BGM.py
 elif grep -q 'musicdir = musicdiruvf' "/home/pi/RetroPie/roms/music/BGM.py"; then
@@ -453,6 +461,37 @@ fi
 sleep 2
 stats_check
 }
+function enable_nt() {
+if grep -q 'musicdir = musicdiroff' "/home/pi/RetroPie/roms/music/BGM.py"; then
+	sed -i -E 's/musicdir = musicdiroff/musicdir = musicdirnt/g' /home/pi/RetroPie/roms/music/BGM.py
+elif grep -q 'musicdir = musicdirac' "/home/pi/RetroPie/roms/music/BGM.py"; then
+	sed -i -E 's/musicdir = musicdirac/musicdir = musicdirnt/g' /home/pi/RetroPie/roms/music/BGM.py
+elif grep -q 'musicdir = musicdirbttf' "/home/pi/RetroPie/roms/music/BGM.py"; then
+	sed -i -E 's/musicdir = musicdirbttf/musicdir = musicdirnt/g' /home/pi/RetroPie/roms/music/BGM.py
+elif grep -q 'musicdir = musicdircustom' "/home/pi/RetroPie/roms/music/BGM.py"; then
+	sed -i -E 's/musicdir = musicdircustom/musicdir = musicdirnt/g' /home/pi/RetroPie/roms/music/BGM.py
+elif grep -q 'musicdir = musicdirst' "/home/pi/RetroPie/roms/music/BGM.py"; then
+	sed -i -E 's/musicdir = musicdirst/musicdir = musicdirnt/g' /home/pi/RetroPie/roms/music/BGM.py
+elif grep -q 'musicdir = musicdiruvf' "/home/pi/RetroPie/roms/music/BGM.py"; then
+	sed -i -E 's/musicdir = musicdiruvf/musicdir = musicdirnt/g' /home/pi/RetroPie/roms/music/BGM.py
+elif grep -q 'musicdir = musicdirvenom' "/home/pi/RetroPie/roms/music/BGM.py"; then
+	sed -i -E 's/musicdir = musicdirvenom/musicdir = musicdirnt/g' /home/pi/RetroPie/roms/music/BGM.py
+else
+if grep -q 'musicdir = musicdirnt' "/home/pi/RetroPie/roms/music/BGM.py"; then
+	sed -i -E 's/musicdir = musicdirnt/musicdir = musicdiroff/g' /home/pi/RetroPie/roms/music/BGM.py
+fi
+fi
+if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
+then
+	echo "Background Music Disabled!"
+else
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
+	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+fi
+sleep 2
+stats_check
+}
 function enable_st() {
 if grep -q 'musicdir = musicdiroff' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdiroff/musicdir = musicdirst/g' /home/pi/RetroPie/roms/music/BGM.py
@@ -462,11 +501,12 @@ elif grep -q 'musicdir = musicdirbttf' "/home/pi/RetroPie/roms/music/BGM.py"; th
 	sed -i -E 's/musicdir = musicdirbttf/musicdir = musicdirst/g' /home/pi/RetroPie/roms/music/BGM.py
 elif grep -q 'musicdir = musicdircustom' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdircustom/musicdir = musicdirst/g' /home/pi/RetroPie/roms/music/BGM.py
+elif grep -q 'musicdir = musicdirnt' "/home/pi/RetroPie/roms/music/BGM.py"; then
+	sed -i -E 's/musicdir = musicdirnt/musicdir = musicdirst/g' /home/pi/RetroPie/roms/music/BGM.py
 elif grep -q 'musicdir = musicdiruvf' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdiruvf/musicdir = musicdirst/g' /home/pi/RetroPie/roms/music/BGM.py
 elif grep -q 'musicdir = musicdirvenom' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdirvenom/musicdir = musicdirst/g' /home/pi/RetroPie/roms/music/BGM.py
-
 else
 if grep -q 'musicdir = musicdirst' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdirst/musicdir = musicdiroff/g' /home/pi/RetroPie/roms/music/BGM.py
@@ -492,6 +532,8 @@ elif grep -q 'musicdir = musicdirbttf' "/home/pi/RetroPie/roms/music/BGM.py"; th
 	sed -i -E 's/musicdir = musicdirbttf/musicdir = musicdiruvf/g' /home/pi/RetroPie/roms/music/BGM.py
 elif grep -q 'musicdir = musicdircustom' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdircustom/musicdir = musicdiruvf/g' /home/pi/RetroPie/roms/music/BGM.py
+elif grep -q 'musicdir = musicdirnt' "/home/pi/RetroPie/roms/music/BGM.py"; then
+	sed -i -E 's/musicdir = musicdirnt/musicdir = musicdiruvf/g' /home/pi/RetroPie/roms/music/BGM.py
 elif grep -q 'musicdir = musicdirst' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdirst/musicdir = musicdiruvf/g' /home/pi/RetroPie/roms/music/BGM.py
 elif grep -q 'musicdir = musicdirvenom' "/home/pi/RetroPie/roms/music/BGM.py"; then
@@ -521,6 +563,8 @@ elif grep -q 'musicdir = musicdirbttf' "/home/pi/RetroPie/roms/music/BGM.py"; th
 	sed -i -E 's/musicdir = musicdirbttf/musicdir = musicdirvenom/g' /home/pi/RetroPie/roms/music/BGM.py
 elif grep -q 'musicdir = musicdircustom' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdircustom/musicdir = musicdirvenom/g' /home/pi/RetroPie/roms/music/BGM.py
+elif grep -q 'musicdir = musicdirnt' "/home/pi/RetroPie/roms/music/BGM.py"; then
+	sed -i -E 's/musicdir = musicdirnt/musicdir = musicdirvenom/g' /home/pi/RetroPie/roms/music/BGM.py
 elif grep -q 'musicdir = musicdirst' "/home/pi/RetroPie/roms/music/BGM.py"; then
 	sed -i -E 's/musicdir = musicdirst/musicdir = musicdirvenom/g' /home/pi/RetroPie/roms/music/BGM.py
 elif grep -q 'musicdir = musicdiruvf' "/home/pi/RetroPie/roms/music/BGM.py"; then
@@ -584,6 +628,8 @@ elif grep -q "musicdir = musicdircustom" "/home/pi/RetroPie/roms/music/BGM.py"; 
 	ms="(\Z2Custom\Zn)"
 elif grep -q "musicdir = musicdirst" "/home/pi/RetroPie/roms/music/BGM.py"; then
 	ms="(\Z2Supreme Team\Zn)"
+elif grep -q "musicdir = musicdirnt" "/home/pi/RetroPie/roms/music/BGM.py"; then
+	ms="(\Z2Nostalgia Trip V3\Zn)"
 elif grep -q "musicdir = musicdiruvf" "/home/pi/RetroPie/roms/music/BGM.py"; then
 	ms="(\Z2Ultimate Vs Fighter\Zn)"
 elif grep -q "musicdir = musicdirvenom" "/home/pi/RetroPie/roms/music/BGM.py"; then

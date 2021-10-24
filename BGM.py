@@ -15,6 +15,7 @@ startdelay = 0 # Value (in seconds) to delay audio start.  If you have a splash 
 musicdirac = '/home/pi/RetroPie/roms/music/arcade'
 musicdirbttf = '/home/pi/RetroPie/roms/music/bttf'
 musicdircustom = '/home/pi/RetroPie/roms/music/custom'
+musicdirnt = '/home/pi/RetroPie/roms/music/nt'
 musicdirst = '/home/pi/RetroPie/roms/music/st'
 musicdiruvf = '/home/pi/RetroPie/roms/music/uvf'
 musicdirvenom = '/home/pi/RetroPie/roms/music/venom'
