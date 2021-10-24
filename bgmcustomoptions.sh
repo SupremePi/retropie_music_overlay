@@ -621,19 +621,19 @@ fi
 if grep -q "musicdir = musicdiroff" "/home/pi/RetroPie/roms/music/BGM.py"; then
 	ms="(\Z1Disabled\Zn)"
 elif grep -q "musicdir = musicdirac" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ms="(\Z2Arcade\Zn)"
+	ms="(\Z3Arcade\Zn)"
 elif grep -q "musicdir = musicdirbttf" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ms="(\Z2Back To The Future\Zn)"
+	ms="(\Z3Back To The Future\Zn)"
 elif grep -q "musicdir = musicdircustom" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ms="(\Z2Custom\Zn)"
+	ms="(\Z3Custom\Zn)"
 elif grep -q "musicdir = musicdirst" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ms="(\Z2Supreme Team\Zn)"
+	ms="(\Z3Supreme Team\Zn)"
 elif grep -q "musicdir = musicdirnt" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ms="(\Z2Nostalgia Trip V3\Zn)"
+	ms="(\Z3Nostalgia Trip V3\Zn)"
 elif grep -q "musicdir = musicdiruvf" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ms="(\Z2Ultimate Vs Fighter\Zn)"
+	ms="(\Z3Ultimate Vs Fighter\Zn)"
 elif grep -q "musicdir = musicdirvenom" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	ms="(\Z2Venom\Zn)"
+	ms="(\Z3Venom\Zn)"
 fi
 if grep -q "maxvolume = 1.00" "/home/pi/RetroPie/roms/music/BGM.py"; then
 	volume="\Z3100%\Zn"
