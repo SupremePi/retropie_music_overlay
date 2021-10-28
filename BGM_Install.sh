@@ -54,7 +54,8 @@ function main_menu() {
 function install_bgm_1() {
 prep_work
 gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
-unzip -q bgm.zip -d /home/pi/RetroPie && rm -f bgm.zip
+unzip -q /home/pi/bgm.zip -d /home/pi/RetroPie
+rm -f bgm.zip
 setup
 rebootq
 }
@@ -62,8 +63,10 @@ function install_bgm_2() {
 prep_work
 gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
 gdown https://drive.google.com/uc?id=1-BHwb4oT6GiwpRv7l3VLHuJLsRxScGNV
-unzip -q bgm.zip -d /home/pi/RetroPie && rm -f bgm.zip
-unzip -q custombgm.zip -d /home/pi/RetroPie && rm -f custombgm.zip
+unzip -q /home/pi/bgm.zip -d /home/pi/RetroPie
+unzip -q /home/pi/custombgm.zip -d /home/pi/RetroPie
+rm -f bgm.zip
+rm -f custombgm.zip
 mv -f /home/pi/RetroPie/roms/music/custom/'No Music in Folder.mp3' /home/pi/RetroPie/roms/music/
 setup
 rebootq
@@ -162,7 +165,7 @@ if ! grep -q '#(python /home/pi/RetroPie/roms/music/BGM.py & > /dev/null 2>&1)' 
 	sed -i 's/\#(python/(python/g' /opt/retropie/configs/all/autostart.sh
 fi
 if ! grep -q '(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
-	sed -i -E '$ i\(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' /opt/retropie/configs/all/autostart.sh
+	sed -i -E '$ i\(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &' /opt/retropie/configs/all/autostart.sh
 else
 	echo "BGM already running at boot!"
 fi
