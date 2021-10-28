@@ -34,11 +34,12 @@ dialog --backtitle "RetroPie Background Music Update Script v1.60" \
 --msgbox "${infobox}" 35 110
 clear
 ##### Install needed packages
-sudo apt-get install imagemagick fbi python-pip python3-pip # to generate overlays
+sudo apt-get update -y
+sudo apt-get install -y imagemagick fbi python-pip python3-pip # to generate overlays
 sudo pip install gdown
 if sudo apt-get --simulate install python-pygame
 then 
-	sudo apt-get install python-pygame # to control music
+	sudo apt-get install -y python-pygame # to control music
 else
 	echo "
 

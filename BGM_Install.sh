@@ -53,18 +53,18 @@ function main_menu() {
 }
 function install_bgm_1() {
 prep_work
-	gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
-	unzip -q bgm.zip -d /home/pi/RetroPie && rm -f bgm.zip
+gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
+unzip -q bgm.zip -d /home/pi/RetroPie && rm -f bgm.zip
 setup
 rebootq
 }
 function install_bgm_2() {
 prep_work
-	gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
-	gdown https://drive.google.com/uc?id=1-BHwb4oT6GiwpRv7l3VLHuJLsRxScGNV
-	unzip -q bgm.zip -d /home/pi/RetroPie && rm -f bgm.zip
-	unzip -q custombgm.zip -d /home/pi/RetroPie && rm -f custombgm.zip
-	mv -f /home/pi/RetroPie/roms/music/custom/'No Music in Folder.mp3' /home/pi/RetroPie/roms/music/
+gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
+gdown https://drive.google.com/uc?id=1-BHwb4oT6GiwpRv7l3VLHuJLsRxScGNV
+unzip -q bgm.zip -d /home/pi/RetroPie && rm -f bgm.zip
+unzip -q custombgm.zip -d /home/pi/RetroPie && rm -f custombgm.zip
+mv -f /home/pi/RetroPie/roms/music/custom/'No Music in Folder.mp3' /home/pi/RetroPie/roms/music/
 setup
 rebootq
 }
@@ -72,11 +72,12 @@ rebootq
 function prep_work() {
 ##### Install needed packages
 clear
-sudo apt-get install imagemagick fbi python-pip python3-pip # to generate overlays
+sudo apt-get update -y
+sudo apt-get install -y imagemagick fbi python-pip python3-pip # to generate overlays
 sudo pip install gdown
 if sudo apt-get --simulate install python-pygame
 then 
-	sudo apt-get install python-pygame # to control music
+	sudo apt-get install -y python-pygame # to control music
 else
 	echo "
 
