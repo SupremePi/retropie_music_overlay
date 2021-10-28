@@ -1,11 +1,77 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 # BGM_Install.sh
 #
 # Updated script by thepitster https://github.com/ALLRiPPED/ 
 #############################################
 # Install background music + overlay
 #############################################
+infobox= ""
+infobox="${infobox}_______________________________________________________\n\n"
+infobox="${infobox}\n"
+infobox="${infobox}RetroPie Background Music Install Script\n\n"
+infobox="${infobox}The background music python and control scripts will be installed on this system.\n"
+infobox="${infobox}\n"
+infobox="${infobox}This script will play MP3 & OGG files during menu navigation in either Emulation Station or Attract mode.\n"
+infobox="${infobox}\n"
+infobox="${infobox}A Few special new folders have been created in the ~/RetroPie/roms/music directory called \"arcade\"\n"
+infobox="${infobox}(Arcade), \"bttf\" (Back To The Future), \"st\" (Supremem Team), \"uvf\" (Ultimate Vs Fighter), \"venom\" (Venom),\n"
+infobox="${infobox}and this last one \"custom\" (Custom) is for placing your own MP3 files into.\n"
+infobox="${infobox}\n"
+infobox="${infobox}Also included in this script is the ability to select between the different music folders you can disable them all\n"
+infobox="${infobox}or enable them, but only one at a time, the music will then automatically start playing.\n"
+infobox="${infobox}\n"
+infobox="${infobox}Launch a game, the music will stop. Upon exiting out of the game the music will begin playing again.\n"
+infobox="${infobox}\n"
+infobox="${infobox}This also lets you turn off certain options for BGM.py such as, Enable/Disable the Overlay, Fadeout effect,\n"
+infobox="${infobox}Rounded Corners on Overlays, an option to turn the dashes, or hyphens, with a space on both sides\n"
+infobox="${infobox}\" - \"\n"
+infobox="${infobox}and separate the song title to a separate new lines.\n"
+infobox="${infobox}\n"
+infobox="${infobox}\n\n"
+
+dialog --backtitle "RetroPie Background Music Install Script v1.60" \
+--title "RetroPie Background Music Install Script v1.60" \
+--msgbox "${infobox}" 35 110
+
+function main_menu() {
+    local choice
+
+    while true; do
+        choice=$(dialog --colors --backtitle "RetroPie Background Music Install Script v1.60" --title " MAIN MENU " \
+            --ok-label OK --cancel-label Exit \
+            --menu "Choose An Option Below" 25 85 20 \
+            01 "Install Background Music without Custom Music" \
+            02 "Install Background Music with Custom Music" \
+            2>&1 > /dev/tty)
+
+        case "$choice" in
+            01) install_bgm_1  ;;
+            02) install_bgm_2  ;;
+            *)  break ;;
+        esac
+    done
+}
+function install_bgm_1() {
+prep_work
+	gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
+	unzip -q bgm.zip -d ~/RetroPie && rm -f bgm.zip
+setup
+rebootq
+}
+function install_bgm_2() {
+prep_work
+	gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
+	gdown https://drive.google.com/uc?id=1-BHwb4oT6GiwpRv7l3VLHuJLsRxScGNV
+	unzip -q bgm.zip -d ~/RetroPie && rm -f bgm.zip
+	unzip -q custombgm.zip -d ~/RetroPie && rm -f custombgm.zip
+	mv -f ~/RetroPie/roms/music/custom/'No Music in Folder.mp3' ~/RetroPie/roms/music/
+setup
+rebootq
+}
+
+function prep_work() {
 ##### Install needed packages
+clear
 sudo apt-get install imagemagick fbi python-pip python3-pip # to generate overlays
 sudo pip install gdown
 if sudo apt-get --simulate install python-pygame
@@ -51,7 +117,7 @@ sudo chmod 0777 BGM.py
 sudo chmod 0777 bgmcustomoptions.sh
 if [ ! -d  "~/RetroPie/roms/music/" ];
 then
-	mkdir /home/pi/RetroPie/roms/music/
+	mkdir ~/RetroPie/roms/music/
 else
 	echo "~/RetroPie/roms/music Exists!"
 fi	
@@ -61,29 +127,9 @@ elif [ -f "~/RetroPie/roms/music/BGM.py" ]; then #Remove old version if it is th
 	rm -f ~/RetroPie/roms/music/BGM.py
 fi
 cp BGM.py ~/RetroPie/roms/music/
-read -r -p "Would You Like To Also Install My Very Own Custom Music? [Y/n] " input
-case $input in
-	[yY][eE][sS]|[yY])
-	gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
-	gdown https://drive.google.com/uc?id=1-BHwb4oT6GiwpRv7l3VLHuJLsRxScGNV
-	unzip -q bgm.zip -d ~/RetroPie && rm -f bgm.zip
-	unzip -q custombgm.zip -d ~/RetroPie && rm -f custombgm.zip
-	mv -f ~/RetroPie/roms/music/custom/'No Music in Folder.mp3' ~/RetroPie/roms/music/
-	;;
-    [nN][oO]|[nN])
-	gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
-	unzip -q bgm.zip -d ~/RetroPie && rm -f bgm.zip
-	;;
-	*)
-	echo "Invalid input..."
-	;;
-esac
-##### Setting up Splash Screen
-sudo sed -i -E "s/.*/\/home\/pi\/RetroPie\/splashscreens\/JarvisSplash.mp4/" /etc/splashscreen.list
-if ! grep -q '#(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh" || ! grep -q '(python /home/pi/RetroPie/roms/music/BGM.py & >/dev/null 2>&1)' "/opt/retropie/configs/all/autostart.sh"; then
-	sed '$ i\(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' /opt/retropie/configs/all/autostart.sh > ~/retropie_music_overlay/auto.sh
-	cat ~/retropie_music_overlay/auto.sh > /opt/retropie/configs/all/autostart.sh
-fi
+}
+
+function setup() {
 ##### Add pixel font
 sudo mkdir -p /usr/share/fonts/opentype
 sudo cp Pixel.otf /usr/share/fonts/opentype/
@@ -111,6 +157,15 @@ else
 	cat ~/temp > ~/RetroPie/retropiemenu/gamelist.xml
 	rm -f ~/temp
 fi
+if ! grep -q '(#python ~/RetroPie/roms/music/BGM.py & >/dev/null 2>&1)' "/opt/retropie/configs/all/autostart.sh"; then
+	sed -i 's/\#(python/(python/g' /opt/retropie/configs/all/autostart.sh
+fi
+if ! grep -q '(python ~/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
+	sed -i -E '$ i\(python ~/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' /opt/retropie/configs/all/autostart.sh
+else
+	echo "BGM already running at boot!"
+fi
+
 cd ~/
 sudo rm -r ~/retropie_music_overlay
 ##### Disable ODROID BGM script if it exists
@@ -127,3 +182,25 @@ echo "BGM has been set up to run automatically when the device boots!
 
 "
 echo "Thanks for trying out my BGM build"
+
+}
+function rebootq() {
+read -r -p "Would You Like To Reboot So The Changes Can Take Effect? [Y/n] " input
+case $input in
+	[yY][eE][sS]|[yY])
+	sleep 3
+	clear
+	sudo reboot
+	;;
+    [nN][oO]|[nN])
+	exit
+	;;
+	*)
+	echo "Invalid input..."
+	;;
+esac
+}
+
+main_menu
+
+clear

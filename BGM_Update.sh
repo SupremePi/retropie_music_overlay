@@ -5,6 +5,34 @@
 #############################################
 # Update background music + overlay
 #############################################
+infobox= ""
+infobox="${infobox}_______________________________________________________\n\n"
+infobox="${infobox}\n"
+infobox="${infobox}RetroPie Background Music Install Script\n\n"
+infobox="${infobox}The background music python and control scripts will be Updated on this system.\n"
+infobox="${infobox}\n"
+infobox="${infobox}This script will play MP3 & OGG files during menu navigation in either Emulation Station or Attract mode.\n"
+infobox="${infobox}\n"
+infobox="${infobox}A Few special new folders have been created in the ~/RetroPie/roms/music directory called \"arcade\"\n"
+infobox="${infobox}(Arcade), \"bttf\" (Back To The Future), \"st\" (Supremem Team), \"uvf\" (Ultimate Vs Fighter), \"venom\" (Venom),\n"
+infobox="${infobox}and this last one \"custom\" (Custom) is for placing your own MP3 files into.\n"
+infobox="${infobox}\n"
+infobox="${infobox}Also included in this script is the ability to select between the different music folders you can disable them all\n"
+infobox="${infobox}or enable them, but only one at a time, the music will then automatically start playing.\n"
+infobox="${infobox}\n"
+infobox="${infobox}Launch a game, the music will stop. Upon exiting out of the game the music will begin playing again.\n"
+infobox="${infobox}\n"
+infobox="${infobox}This also lets you turn off certain options for BGM.py such as, Enable/Disable the Overlay, Fadeout effect,\n"
+infobox="${infobox}Rounded Corners on Overlays, an option to turn the dashes, or hyphens, with a space on both sides\n"
+infobox="${infobox}\" - \"\n"
+infobox="${infobox}and separate the song title to a separate newlines.\n"
+infobox="${infobox}\n"
+infobox="${infobox}\n\n"
+
+dialog --backtitle "RetroPie Background Music Update Script v1.60" \
+--title "RetroPie Background Music Update Script v1.60" \
+--msgbox "${infobox}" 35 110
+clear
 ##### Install needed packages
 sudo apt-get install imagemagick fbi python-pip python3-pip # to generate overlays
 sudo pip install gdown
@@ -50,7 +78,7 @@ sudo chmod 0777 BGM.py
 sudo chmod 0777 bgmcustomoptions.sh
 if [ ! -d  "~/RetroPie/roms/music/" ];
 then
-	mkdir /home/pi/RetroPie/roms/music/
+	mkdir ~/RetroPie/roms/music/
 else
 	echo "~/RetroPie/roms/music Exists!"
 fi	
@@ -86,3 +114,17 @@ echo "BGM has been set up to run automatically when the device boots!
 
 "
 echo "Thanks for trying out my BGM build"
+read -r -p "Would You Like To Reboot So The Changes Can Take Effect? [Y/n] " input
+case $input in
+	[yY][eE][sS]|[yY])
+	sleep 3
+	clear
+	sudo reboot
+	;;
+    [nN][oO]|[nN])
+	exit
+	;;
+	*)
+	echo "Invalid input..."
+	;;
+esac
