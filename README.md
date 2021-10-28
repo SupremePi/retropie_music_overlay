@@ -24,6 +24,11 @@ Pictures here: https://imgur.com/a/J9iek
 wget -qO- https://git.io/JKum9 | bash
 ```
 
+## To Update
+```
+wget -qO- https://git.io/JPkkg | bash
+```
+
 <b>You will still have to set up the script to run automatically when the Pi boots!:
 Run "sudo nano /etc/rc.local"
 Near the bottom, on the line above "exit 0", put the following code
