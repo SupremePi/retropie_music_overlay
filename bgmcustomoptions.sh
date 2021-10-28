@@ -66,7 +66,7 @@ sudo rm -f /home/pi/RetroPie/roms/music/DisableMusic
         CUR_VAL=`grep "maxCUR_VAL =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
         export CUR_VAL
         perl -p -i -e 's/maxCUR_VAL = $ENV{CUR_VAL}/maxCUR_VAL = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
-        (python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+        (python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 else
 touch /home/pi/RetroPie/roms/music/DisableMusic
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
@@ -76,10 +76,10 @@ sleep 2
 stats_check
 }
 function enable_musicos() {
-if grep -q '#(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
+if grep -q '#(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
 	#bgmos="(Enabled)"
 	sudo sed -i 's/\#(python/(python/g' /opt/retropie/configs/all/autostart.sh
-elif grep -q '(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
+elif grep -q '(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
 	#bgmos="(Disabled)"
 	sudo sed -i 's/(python/\#(python/g' /opt/retropie/configs/all/autostart.sh
 fi
@@ -130,7 +130,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -145,7 +145,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -160,7 +160,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -175,7 +175,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -190,7 +190,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -205,7 +205,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -220,7 +220,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -235,7 +235,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -250,7 +250,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -265,7 +265,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -282,7 +282,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -299,7 +299,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -316,7 +316,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -333,7 +333,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -393,7 +393,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -425,7 +425,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -456,7 +456,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -487,7 +487,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -518,7 +518,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -549,7 +549,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -580,7 +580,7 @@ then
 else
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
-	(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &
+	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
 sleep 2
 stats_check
@@ -591,9 +591,9 @@ if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]; then
 else
 	bgms="(\Z2Enabled\Zn)"
 fi
-if grep -q  '#(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
+if grep -q  '#(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
 	bgmos="(\Z1Disabled\Zn)"
-elif grep -q  '(python /home/pi/RetroPie/roms/music/BGM.py >/dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
+elif grep -q  '(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &' "/opt/retropie/configs/all/autostart.sh"; then
 	bgmos="(\Z2Enabled\Zn)"
 else
 	bgmos="(\Z1Disabled\Zn)"
