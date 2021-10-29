@@ -55,7 +55,7 @@ function install_bgm_1() {
 clear
 prep_work
 gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
-unzip -q /home/pi/bgm.zip -d /home/pi/RetroPie
+unzip -q bgm.zip -d /home/pi/RetroPie
 rm -f bgm.zip
 setup
 rebootq
@@ -65,8 +65,8 @@ clear
 prep_work
 gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
 gdown https://drive.google.com/uc?id=1-BHwb4oT6GiwpRv7l3VLHuJLsRxScGNV
-unzip -q /home/pi/bgm.zip -d /home/pi/RetroPie
-unzip -q /home/pi/custombgm.zip -d /home/pi/RetroPie
+unzip -q bgm.zip -d /home/pi/RetroPie
+unzip -q custombgm.zip -d /home/pi/RetroPie
 mv -f /home/pi/RetroPie/roms/music/custom/'No Music in Folder.mp3' /home/pi/RetroPie/roms/music/
 setup
 rebootq
@@ -114,10 +114,13 @@ fi
 cd /home/pi/retropie_music_overlay/
 sudo chmod +x BGM.py
 sudo chmod +x bgmcustomoptions.sh
+sudo chmod +x exit-splash
 sudo chown $currentuser:$currentuser BGM.py
 sudo chown $currentuser:$currentuser bgmcustomoptions.sh
+sudo chown $currentuser:$currentuser exit-splash
 sudo chmod 0777 BGM.py
 sudo chmod 0777 bgmcustomoptions.sh
+sudo chmod 0777 exit-splash
 if [ ! -d  "/home/pi/RetroPie/roms/music/" ];
 then
 	mkdir /home/pi/RetroPie/roms/music/
@@ -196,7 +199,6 @@ echo "BGM has been set up to run automatically when the device boots!
 
 "
 echo "Thanks for trying out my BGM build"
-
 }
 function rebootq() {
 read -r -p "Would You Like To Reboot So The Changes Can Take Effect? [Y/n] " input
