@@ -55,7 +55,7 @@ function install_bgm_1() {
 clear
 prep_work
 gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
-unzip -q bgm.zip -d /home/pi/RetroPie
+unzip -q /home/pi/retropie-status-overlay/bgm.zip -d /home/pi/RetroPie
 rm -f bgm.zip
 setup
 rebootq
