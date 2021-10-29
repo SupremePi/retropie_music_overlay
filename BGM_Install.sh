@@ -55,17 +55,17 @@ function install_bgm_1() {
 clear
 prep_work
 gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
-unzip -q /home/pi/retropie-status-overlay/bgm.zip -d /home/pi/RetroPie
+unzip -q /home/pi/retropie_music_overlay/bgm.zip -d /home/pi/RetroPie
 setup
 rebootq
 }
 function install_bgm_2() {
 clear
 prep_work
-gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe -O /home/pi/retropie-status-overlay/bgm.zip
-gdown https://drive.google.com/uc?id=1-BHwb4oT6GiwpRv7l3VLHuJLsRxScGNV -O /home/pi/retropie-status-overlay/custombgm.zip
-unzip -q /home/pi/retropie-status-overlay/bgm.zip -d /home/pi/RetroPie
-unzip -q /home/pi/retropie-status-overlay/custombgm.zip -d /home/pi/RetroPie
+gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe -O /home/pi/retropie_music_overlay/bgm.zip
+gdown https://drive.google.com/uc?id=1-BHwb4oT6GiwpRv7l3VLHuJLsRxScGNV -O /home/pi/retropie_music_overlay/custombgm.zip
+unzip -q /home/pi/retropie_music_overlay/bgm.zip -d /home/pi/RetroPie
+unzip -q /home/pi/retropie_music_overlay/custombgm.zip -d /home/pi/RetroPie
 mv -f /home/pi/RetroPie/roms/music/custom/'No Music in Folder.mp3' /home/pi/RetroPie/roms/music/
 setup
 rebootq
@@ -111,15 +111,15 @@ elif [[ $currentuser == "pigaming" ]]; then
 	sudo make install
 fi
 cd /home/pi/retropie_music_overlay/
-sudo chmod +x BGM.py
-sudo chmod +x bgmcustomoptions.sh
-sudo chmod +x exit-splash
-sudo chown $currentuser:$currentuser BGM.py
-sudo chown $currentuser:$currentuser bgmcustomoptions.sh
-sudo chown $currentuser:$currentuser exit-splash
-sudo chmod 0777 BGM.py
-sudo chmod 0777 bgmcustomoptions.sh
-sudo chmod 0777 exit-splash
+sudo chmod +x /home/pi/retropie_music_overlay/BGM.py
+sudo chmod +x /home/pi/retropie_music_overlay/bgmcustomoptions.sh
+sudo chmod +x /home/pi/retropie_music_overlay/exit-splash
+sudo chown $currentuser:$currentuser /home/pi/retropie_music_overlay/BGM.py
+sudo chown $currentuser:$currentuser /home/pi/retropie_music_overlay/bgmcustomoptions.sh
+sudo chown $currentuser:$currentuser /home/pi/retropie_music_overlay/exit-splash
+sudo chmod 0777 /home/pi/retropie_music_overlay/BGM.py
+sudo chmod 0777 /home/pi/retropie_music_overlay/bgmcustomoptions.sh
+sudo chmod 0777 /home/pi/retropie_music_overlay/exit-splash
 if [ ! -d  "/home/pi/RetroPie/roms/music/" ];
 then
 	mkdir /home/pi/RetroPie/roms/music/
@@ -172,12 +172,13 @@ else
 fi
 ##### Setting up Splash & Exit Screens
 sudo sed -i -E "s/.*/\/home\/pi\/RetroPie\/splashscreens\/JarvisSplash.mp4/" /etc/splashscreen.list
-mkdir /home/pi/.emulationstation/scripts/reboot
-mkdir /home/pi/.emulationstation/scripts/shutdown
-cp exit-splash /home/pi/.emulationstation/scripts/reboot/
-cp exit-splash /home/pi/.emulationstation/scripts/shutdown/
-if ! grep -q '/home/pi/.emulationstation/scripts/shutdown/exit-splash' "/opt/retropie/configs/all/autostart.sh"; then
-	sed -i -E '$a\/home/pi/.emulationstation/scripts/shutdown/exit-splash' /opt/retropie/configs/all/autostart.sh
+mkdir /opt/retropie/configs/all/emulationstation/scripts
+mkdir /opt/retropie/configs/all/emulationstation/scripts/reboot
+mkdir /opt/retropie/configs/all/emulationstation/scripts/shutdown
+cp exit-splash /opt/retropie/configs/all/emulationstation/scripts/reboot/
+cp exit-splash /opt/retropie/configs/all/emulationstation/scripts/shutdown/
+if ! grep -q '/opt/retropie/configs/all/emulationstation/scripts/shutdown/exit-splash' "/opt/retropie/configs/all/autostart.sh"; then
+	sed -i -E '$a\/opt/retropie/configs/all/emulationstation/scripts/shutdown/exit-splash' /opt/retropie/configs/all/autostart.sh
 else
 	echo "Exit Splash Already Set!"
 fi
