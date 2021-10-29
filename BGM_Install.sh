@@ -172,18 +172,16 @@ else
 fi
 ##### Setting up Splash & Exit Screens
 sudo sed -i -E "s/.*/\/home\/pi\/RetroPie\/splashscreens\/JarvisSplash.mp4/" /etc/splashscreen.list
-mkdir /opt/retropie/configs/all/emulationstation/scripts
-mkdir /opt/retropie/configs/all/emulationstation/scripts/reboot
-mkdir /opt/retropie/configs/all/emulationstation/scripts/shutdown
-cp exit-splash /opt/retropie/configs/all/emulationstation/scripts/reboot/
-cp exit-splash /opt/retropie/configs/all/emulationstation/scripts/shutdown/
+mkdir -p /opt/retropie/configs/all/emulationstation/scripts/reboot
+mkdir -p /opt/retropie/configs/all/emulationstation/scripts/shutdown
+cp /home/pi/retropie_music_overlay/exit-splash /opt/retropie/configs/all/emulationstation/scripts/reboot/
+cp /home/pi/retropie_music_overlay/exit-splash /opt/retropie/configs/all/emulationstation/scripts/shutdown/
 if ! grep -q '/opt/retropie/configs/all/emulationstation/scripts/shutdown/exit-splash' "/opt/retropie/configs/all/autostart.sh"; then
 	sed -i -E '$a\/opt/retropie/configs/all/emulationstation/scripts/shutdown/exit-splash' /opt/retropie/configs/all/autostart.sh
 else
 	echo "Exit Splash Already Set!"
 fi
 cd /home/pi/
-sudo rm -r /home/pi/retropie_music_overlay
 ##### Disable ODROID BGM script if it exists
 if [ -a /home/pi/scripts/bgm/start.sc ]; then
 	pkill -STOP mpg123
@@ -203,10 +201,12 @@ function rebootq() {
 read -r -p "Would You Like To Reboot So The Changes Can Take Effect? [Y/n] " input
 case $input in
 	[yY][eE][sS]|[yY])
+	sudo rm -r /home/pi/retropie_music_overlay
 	sleep 3
 	sudo reboot
 	;;
     [nN][oO]|[nN])
+	sudo rm -r /home/pi/retropie_music_overlay
 	exit
 	;;
 	*)
