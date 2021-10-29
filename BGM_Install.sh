@@ -65,8 +65,8 @@ clear
 prep_work
 gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
 gdown https://drive.google.com/uc?id=1-BHwb4oT6GiwpRv7l3VLHuJLsRxScGNV
-unzip -q bgm.zip -d /home/pi/RetroPie
-unzip -q custombgm.zip -d /home/pi/RetroPie
+unzip -q /home/pi/retropie-status-overlay/bgm.zip -d /home/pi/RetroPie
+unzip -q /home/pi/retropie-status-overlay/custombgm.zip -d /home/pi/RetroPie
 mv -f /home/pi/RetroPie/roms/music/custom/'No Music in Folder.mp3' /home/pi/RetroPie/roms/music/
 setup
 rebootq
