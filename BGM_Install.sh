@@ -56,7 +56,6 @@ clear
 prep_work
 gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
 unzip -q /home/pi/retropie-status-overlay/bgm.zip -d /home/pi/RetroPie
-rm -f bgm.zip
 setup
 rebootq
 }
