@@ -54,10 +54,11 @@ function main_menu() {
 function install_bgm_1() {
 clear
 prep_work
-gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
+gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe -O /home/pi/retropie_music_overlay/bgm.zip
 unzip -q /home/pi/retropie_music_overlay/bgm.zip -d /home/pi/RetroPie
 setup
 rebootq
+exit
 }
 function install_bgm_2() {
 clear
@@ -69,6 +70,7 @@ unzip -q /home/pi/retropie_music_overlay/custombgm.zip -d /home/pi/RetroPie
 mv -f /home/pi/RetroPie/roms/music/custom/'No Music in Folder.mp3' /home/pi/RetroPie/roms/music/
 setup
 rebootq
+exit
 }
 
 function prep_work() {
@@ -137,9 +139,9 @@ cp BGM.py /home/pi/RetroPie/roms/music/
 function setup() {
 ##### Add pixel font
 sudo mkdir -p /usr/share/fonts/opentype
-sudo cp Pixel.otf /usr/share/fonts/opentype/
+sudo cp /home/pi/retropie_music_overlay/Pixel.otf /usr/share/fonts/opentype/
 ##### Add menu options for BGM toggles
-cp backgroundmusic.png /home/pi/RetroPie/retropiemenu/icons/
+cp /home/pi/retropie_music_overlay/backgroundmusic.png /home/pi/RetroPie/retropiemenu/icons/
 if [ -f "/home/pi/RetroPie/retropiemenu/bgmcustomoptions.sh" ]; # Remove old version if it is there
 then
 	sudo rm -f /home/pi/RetroPie/retropiemenu/bgmcustomoptions.sh
@@ -198,20 +200,30 @@ echo "BGM has been set up to run automatically when the device boots!
 echo "Thanks for trying out my BGM build"
 }
 function rebootq() {
-read -r -p "Would You Like To Reboot So The Changes Can Take Effect? [Y/n] " input
-case $input in
-	[yY][eE][sS]|[yY])
-	sudo rm -r /home/pi/retropie_music_overlay
-	sleep 3
-	sudo reboot
-	;;
-    [nN][oO]|[nN])
+    local choice
+
+    while true; do
+        choice=$(dialog --colors --backtitle "Would You Like To Reboot So The Changes Can Take Effect? [Y/n]" --title " MAIN MENU " \
+            --ok-label OK --cancel-label Exit \
+            --menu "Choose An Option Below" 25 85 20 \
+            01 "Reboot Later" \
+            02 "Reboot Now" \
+            2>&1 > /dev/tty)
+
+        case "$choice" in
+            01) rebootl  ;;
+            02) rebootn  ;;
+            *)  break ;;
+        esac
+    done
+}
+function rebootl() {
 	sudo rm -r /home/pi/retropie_music_overlay
 	exit
-	;;
-	*)
-	echo "Invalid input..."
-	;;
-esac
+}
+function rebootn() {
+sudo rm -r /home/pi/retropie_music_overlay
+sleep 3
+sudo reboot
 }
 main_menu
