@@ -65,8 +65,6 @@ gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
 gdown https://drive.google.com/uc?id=1-BHwb4oT6GiwpRv7l3VLHuJLsRxScGNV
 unzip -q /home/pi/bgm.zip -d /home/pi/RetroPie
 unzip -q /home/pi/custombgm.zip -d /home/pi/RetroPie
-rm -f bgm.zip
-rm -f custombgm.zip
 mv -f /home/pi/RetroPie/roms/music/custom/'No Music in Folder.mp3' /home/pi/RetroPie/roms/music/
 setup
 rebootq
@@ -218,4 +216,4 @@ esac
 
 main_menu
 
-clear
+#clear
