@@ -136,17 +136,6 @@ cp BGM.py /home/pi/RetroPie/roms/music/
 }
 
 function setup() {
-##### Setting up Splash & Exit Screens
-sudo sed -i -E "s/.*/\/home\/pi\/RetroPie\/splashscreens\/JarvisSplash.mp4/" /etc/splashscreen.list
-mkdir /home/pi/.emulationstation/scripts/reboot
-mkdir /home/pi/.emulationstation/scripts/shutdown
-cp exit-splash /home/pi/.emulationstation/scripts/reboot/
-cp exit-splash /home/pi/.emulationstation/scripts/shutdown/
-if ! grep -q '/home/pi/.emulationstation/scripts/shutdown/exit-splash' "/opt/retropie/configs/all/autostart.sh"; then
-	sed -i -E '$a\/home/pi/.emulationstation/scripts/shutdown/exit-splash' /opt/retropie/configs/all/autostart.sh
-else
-	echo "Exit Splash Already Set!"
-fi
 ##### Add pixel font
 sudo mkdir -p /usr/share/fonts/opentype
 sudo cp Pixel.otf /usr/share/fonts/opentype/
@@ -182,7 +171,17 @@ if ! grep -q '(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &' "
 else
 	echo "BGM already running at boot!"
 fi
-
+##### Setting up Splash & Exit Screens
+sudo sed -i -E "s/.*/\/home\/pi\/RetroPie\/splashscreens\/JarvisSplash.mp4/" /etc/splashscreen.list
+mkdir /home/pi/.emulationstation/scripts/reboot
+mkdir /home/pi/.emulationstation/scripts/shutdown
+cp exit-splash /home/pi/.emulationstation/scripts/reboot/
+cp exit-splash /home/pi/.emulationstation/scripts/shutdown/
+if ! grep -q '/home/pi/.emulationstation/scripts/shutdown/exit-splash' "/opt/retropie/configs/all/autostart.sh"; then
+	sed -i -E '$a\/home/pi/.emulationstation/scripts/shutdown/exit-splash' /opt/retropie/configs/all/autostart.sh
+else
+	echo "Exit Splash Already Set!"
+fi
 cd /home/pi/
 sudo rm -r /home/pi/retropie_music_overlay
 ##### Disable ODROID BGM script if it exists
@@ -215,5 +214,4 @@ case $input in
 	;;
 esac
 }
-
 main_menu
