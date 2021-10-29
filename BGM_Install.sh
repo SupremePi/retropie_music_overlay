@@ -72,7 +72,6 @@ rebootq
 
 function prep_work() {
 ##### Install needed packages
-clear
 sudo apt-get update -y
 sudo apt-get install -y imagemagick fbi python-pip python3-pip # to generate overlays
 sudo pip install gdown
@@ -202,7 +201,6 @@ read -r -p "Would You Like To Reboot So The Changes Can Take Effect? [Y/n] " inp
 case $input in
 	[yY][eE][sS]|[yY])
 	sleep 3
-	clear
 	sudo reboot
 	;;
     [nN][oO]|[nN])
@@ -215,5 +213,3 @@ esac
 }
 
 main_menu
-
-#clear
