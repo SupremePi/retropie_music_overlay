@@ -52,6 +52,7 @@ function main_menu() {
     done
 }
 function install_bgm_1() {
+clear
 prep_work
 gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
 unzip -q /home/pi/bgm.zip -d /home/pi/RetroPie
@@ -60,6 +61,7 @@ setup
 rebootq
 }
 function install_bgm_2() {
+clear
 prep_work
 gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe
 gdown https://drive.google.com/uc?id=1-BHwb4oT6GiwpRv7l3VLHuJLsRxScGNV
