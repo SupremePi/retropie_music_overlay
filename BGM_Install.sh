@@ -134,6 +134,17 @@ cp BGM.py /home/pi/RetroPie/roms/music/
 }
 
 function setup() {
+##### Setting up Splash & Exit Screens
+sudo sed -i -E "s/.*/\/home\/pi\/RetroPie\/splashscreens\/JarvisSplash.mp4/" /etc/splashscreen.list
+mkdir /home/pi/.emulationstation/scripts/reboot
+mkdir /home/pi/.emulationstation/scripts/shutdown
+cp exit-splash /home/pi/.emulationstation/scripts/reboot/
+cp exit-splash /home/pi/.emulationstation/scripts/shutdown/
+if ! grep -q '/home/pi/.emulationstation/scripts/shutdown/exit-splash' "/opt/retropie/configs/all/autostart.sh"; then
+	sed -i -E '$a\/home/pi/.emulationstation/scripts/shutdown/exit-splash' /opt/retropie/configs/all/autostart.sh
+else
+	echo "Exit Splash Already Set!"
+fi
 ##### Add pixel font
 sudo mkdir -p /usr/share/fonts/opentype
 sudo cp Pixel.otf /usr/share/fonts/opentype/
