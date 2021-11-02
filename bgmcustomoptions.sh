@@ -63,14 +63,14 @@ function enable_music() {
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
 sudo rm -f /home/pi/RetroPie/roms/music/DisableMusic
-        CUR_VAL=`grep "maxCUR_VAL =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+        CUR_VAL=$(grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}')
         export CUR_VAL
-        perl -p -i -e 's/maxCUR_VAL = $ENV{CUR_VAL}/maxCUR_VAL = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
+        sudo perl -p -i -e 's/maxvolume = $ENV{CUR_VAL}/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
         (python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 else
 touch /home/pi/RetroPie/roms/music/DisableMusic
-	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
-	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
+	sudo pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	sudo pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 fi
 sleep 2
 stats_check
@@ -121,7 +121,7 @@ function vol_menu() {
     done
 }
 function 100_v() {
-	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	CUR_VAL=$(grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}')
 	export CUR_VAL
 	perl -p -i -e 's/maxvolume = $ENV{CUR_VAL}/maxvolume = 1.00/g' /home/pi/RetroPie/roms/music/BGM.py
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
@@ -136,7 +136,7 @@ sleep 2
 stats_check
 }
 function 90_v() {
-	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	CUR_VAL=$(grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}')
 	export CUR_VAL
 	perl -p -i -e 's/maxvolume = $ENV{CUR_VAL}/maxvolume = 0.90/g' /home/pi/RetroPie/roms/music/BGM.py
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
@@ -151,7 +151,7 @@ sleep 2
 stats_check
 }
 function 80_v() {
-	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	CUR_VAL=$(grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}')
 	export CUR_VAL
 	perl -p -i -e 's/maxvolume = $ENV{CUR_VAL}/maxvolume = 0.80/g' /home/pi/RetroPie/roms/music/BGM.py
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
@@ -166,7 +166,7 @@ sleep 2
 stats_check
 }
 function 70_v() {
-	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	CUR_VAL=$(grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}')
 	export CUR_VAL
 	perl -p -i -e 's/maxvolume = $ENV{CUR_VAL}/maxvolume = 0.70/g' /home/pi/RetroPie/roms/music/BGM.py
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
@@ -181,7 +181,7 @@ sleep 2
 stats_check
 }
 function 60_v() {
-	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	CUR_VAL=$(grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}')
 	export CUR_VAL
 	perl -p -i -e 's/maxvolume = $ENV{CUR_VAL}/maxvolume = 0.60/g' /home/pi/RetroPie/roms/music/BGM.py
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
@@ -196,7 +196,7 @@ sleep 2
 stats_check
 }
 function 50_v() {
-	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	CUR_VAL=$(grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}')
 	export CUR_VAL
 	perl -p -i -e 's/maxvolume = $ENV{CUR_VAL}/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
@@ -211,7 +211,7 @@ sleep 2
 stats_check
 }
 function 40_v() {
-	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	CUR_VAL=$(grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}')
 	export CUR_VAL
 	perl -p -i -e 's/maxvolume = $ENV{CUR_VAL}/maxvolume = 0.40/g' /home/pi/RetroPie/roms/music/BGM.py
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
@@ -226,7 +226,7 @@ sleep 2
 stats_check
 }
 function 30_v() {
-	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	CUR_VAL=$(grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}')
 	export CUR_VAL
 	perl -p -i -e 's/maxvolume = $ENV{CUR_VAL}/maxvolume = 0.30/g' /home/pi/RetroPie/roms/music/BGM.py
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
@@ -241,7 +241,7 @@ sleep 2
 stats_check
 }
 function 20_v() {
-	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	CUR_VAL=$(grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}')
 	export CUR_VAL
 	perl -p -i -e 's/maxvolume = $ENV{CUR_VAL}/maxvolume = 0.20/g' /home/pi/RetroPie/roms/music/BGM.py
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
@@ -256,7 +256,7 @@ sleep 2
 stats_check
 }
 function 10_v() {
-	CUR_VAL=`grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}'`
+	CUR_VAL=$(grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}')
 	export CUR_VAL
 	perl -p -i -e 's/maxvolume = $ENV{CUR_VAL}/maxvolume = 0.10/g' /home/pi/RetroPie/roms/music/BGM.py
 if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
@@ -297,7 +297,7 @@ if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
 	echo "Background Music Disabled!"
 else
-	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	sudo pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
