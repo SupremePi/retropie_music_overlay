@@ -65,12 +65,12 @@ then
 sudo rm -f /home/pi/RetroPie/roms/music/DisableMusic
         CUR_VAL=$(grep "maxvolume =" /home/pi/RetroPie/roms/music/BGM.py|awk '{print $3}')
         export CUR_VAL
-        sudo perl -p -i -e 's/maxvolume = $ENV{CUR_VAL}/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
+        perl -p -i -e 's/maxvolume = $ENV{CUR_VAL}/maxvolume = 0.50/g' /home/pi/RetroPie/roms/music/BGM.py
         (python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 else
 touch /home/pi/RetroPie/roms/music/DisableMusic
-	sudo pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
-	sudo pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 fi
 sleep 2
 stats_check
@@ -297,7 +297,7 @@ if [ -f /home/pi/RetroPie/roms/music/DisableMusic ]
 then
 	echo "Background Music Disabled!"
 else
-	sudo pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
+	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
