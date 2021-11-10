@@ -19,7 +19,7 @@ Add a menu items in the retropie section to enable/disable the music and set vol
 
 Pictures here: https://imgur.com/a/J9iek
 
-## To install
+## To install, This will Install Splash and Exit Screens
 ```
 wget -qO- https://git.io/JKum9 | bash
 ```
