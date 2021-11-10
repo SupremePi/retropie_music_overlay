@@ -34,7 +34,7 @@ the script has a one line install, so no need to clone a repo (it does all that 
 Now if you so choose to install my custom music what you wil;l get is the music Soundtrack from the game Brutal Legends, starring Jack Black.
 This "Custom" music consists of 108 Heavy Metal songs from the original game soundtrack.
 
-I also included in the control script are ways to turn on and off certain features, like the Overlay itself, Overlay Fadeout, Rounded Corrners (purely cosmetic), and Line Separator that basically separates to t anew line after a dash/hyphen is present  in the file name, simplier terms it takes a file named
+I also included in the control script are ways to turn on and off certain features, like the Overlay itself, Overlay Fadeout, Rounded Corrners (purely cosmetic), and Line Separator that basically separates to a new line after a dash/hyphen is present in the file name, simplier terms it takes a file named
 
      Crash Team Racing Nitro-Fueled - Menu Theme
 and shows up like this
