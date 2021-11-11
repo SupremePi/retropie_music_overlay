@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/env bash
 # BGM_Update.sh
 #
 # Updated script by thepitster https://github.com/ALLRiPPED/ 
