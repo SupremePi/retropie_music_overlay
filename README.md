@@ -24,7 +24,7 @@ Create the /home/pi/RetroPie/roms/music folder for music.
 Add a menu items in the retropie section to enable/disable the music and set volume, plus setup for custom and other music.
 
 Picture here:<br>
-<img src="https://i.imgur.com/d1uGlbm.png" alt="drawing" width="400"/>
+<img src="https://i.imgur.com/d1uGlbm.png" alt="Preview" width="400" target="_blank"/>
 
 ## More Information
 This is apart of a background music script I have been working on, does something similar to Kio Diekin's theme and music script, but mine only deals in music, and of course the splash screens installation.
@@ -46,8 +46,7 @@ and shows up like this
 but there it is folks have fun
 
 ## Preview
-[![intro Splash](https://i.imgur.com/89zHvNN.png)](https://www.youtube.com/watch?v=99B3D2kEkZI "Link Title")
-
+<a href="https://www.youtube.com/watch?v=99B3D2kEkZI" alt="Preview" target="_blank"><img src="https://i.imgur.com/89zHvNN.png"></img></a>
 ## To install, This will Also Install Splash and Exit Screens
      wget -qO- https://git.io/JKum9 | bash
 
