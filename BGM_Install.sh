@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # BGM_Install.sh
 #
 # Updated script by thepitster https://github.com/ALLRiPPED/ 
