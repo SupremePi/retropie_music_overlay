@@ -43,7 +43,8 @@ stats_check
             05 "Enable/Disable Overlay Rounded Corners $ocr" \
             06 "Enable/Disable Overlay Line Separator $ons" \
             07 "Music Selection $ms" \
-            08 "Background Music Volume Control" \
+            08 "Enable/Disable Exit Splash $exs" \
+            09 "Volume Control $volume" \
             2>&1 > /dev/tty)
 
         case "$choice" in
@@ -54,7 +55,8 @@ stats_check
             05) overlay_rounded_corners  ;;
             06) overlay_replace_newline  ;;
             07) music_select  ;;
-            08) vol_menu  ;;
+            08) exit_splash  ;;
+            09) vol_menu  ;;
             *)  break ;;
         esac
     done
@@ -72,7 +74,7 @@ touch /home/pi/RetroPie/roms/music/DisableMusic
 	pgrep -f "python /home/pi/RetroPie/roms/music/BGM.py"|xargs sudo kill -9 > /dev/null 2>&1
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function enable_musicos() {
@@ -83,7 +85,7 @@ elif grep -q '(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &' "
 	#bgmos="(Disabled)"
 	sudo sed -i 's/(python/\#(python/g' /opt/retropie/configs/all/autostart.sh
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function vol_menu() {
@@ -132,7 +134,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function 90_v() {
@@ -147,7 +149,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function 80_v() {
@@ -162,7 +164,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function 70_v() {
@@ -177,7 +179,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function 60_v() {
@@ -192,7 +194,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function 50_v() {
@@ -207,7 +209,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function 40_v() {
@@ -222,7 +224,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function 30_v() {
@@ -237,7 +239,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function 20_v() {
@@ -252,7 +254,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function 10_v() {
@@ -267,7 +269,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function overlay_enable() {
@@ -284,7 +286,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function overlay_fade_out() {
@@ -301,7 +303,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function overlay_rounded_corners() {
@@ -318,7 +320,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function overlay_replace_newline() {
@@ -335,7 +337,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function music_select() {
@@ -395,7 +397,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 
@@ -427,7 +429,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function enable_custom() {
@@ -458,7 +460,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function enable_nt() {
@@ -489,7 +491,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function enable_st() {
@@ -520,7 +522,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function enable_uvf() {
@@ -551,7 +553,7 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
 stats_check
 }
 function enable_venom() {
@@ -582,7 +584,16 @@ else
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1
 	(python /home/pi/RetroPie/roms/music/BGM.py > /dev/null 2>&1) &
 fi
-sleep 2
+sleep 1
+stats_check
+}
+function exit_splash() {
+if [ -f /home/pi/RetroPie/splashscreens/JarvisExitOff.mp4 ]; then
+	sudo mv -f /home/pi/RetroPie/splashscreens/JarvisExitOff.mp4 /home/pi/RetroPie/splashscreens/JarvisExit.mp4
+else
+	sudo mv -f /home/pi/RetroPie/splashscreens/JarvisExit.mp4 /home/pi/RetroPie/splashscreens/JarvisExitOff.mp4
+fi
+sleep 1
 stats_check
 }
 function stats_check() {
@@ -636,25 +647,30 @@ elif grep -q "musicdir = musicdirvenom" "/home/pi/RetroPie/roms/music/BGM.py"; t
 	ms="(\Z3Venom\Zn)"
 fi
 if grep -q "maxvolume = 1.00" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="\Z3100%\Zn"
+	volume="(\Z3100%\Zn)"
 elif grep -q "maxvolume = 0.90" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="\Z390%\Zn"
+	volume="(\Z390%\Zn)"
 elif grep -q "maxvolume = 0.80" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="\Z380%\Zn"
+	volume="(\Z380%\Zn)"
 elif grep -q "maxvolume = 0.70" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="\Z370%\Zn"
+	volume="(\Z370%\Zn)"
 elif grep -q "maxvolume = 0.60" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="\Z360%\Zn"
+	volume="(\Z360%\Zn)"
 elif grep -q "maxvolume = 0.50" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="\Z350%\Zn"
+	volume="(\Z350%\Zn)"
 elif grep -q "maxvolume = 0.40" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="\Z340%\Zn"
+	volume="(\Z340%\Zn)"
 elif grep -q "maxvolume = 0.30" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="\Z330%\Zn"
+	volume="(\Z330%\Zn)"
 elif grep -q "maxvolume = 0.20" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="\Z320%\Zn"
+	volume="(\Z320%\Zn)"
 elif grep -q "maxvolume = 0.10" "/home/pi/RetroPie/roms/music/BGM.py"; then
-	volume="\Z310%\Zn"
+	volume="(\Z310%\Zn)"
+fi
+if [ -f /home/pi/RetroPie/splashscreens/JarvisExitOff.mp4 ]; then
+	exs="(\Z1Disabled\Zn)"
+else
+	exs="(\Z2Enabled\Zn)"
 fi
 }
 main_menu
