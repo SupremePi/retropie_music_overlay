@@ -46,7 +46,7 @@ and shows up like this
 but there it is folks have fun
 
 ## Preview
-<a href="https://www.youtube.com/watch?v=99B3D2kEkZI" alt="Preview" target="_blank"><img src="https://i.imgur.com/89zHvNN.png"></a>
+<a href="https://www.youtube.com/watch?v=99B3D2kEkZI" alt="Preview" target="_blank"><img src="https://i.imgur.com/89zHvNN.png" alt="Preview" target="_blank"></a>
 ## To install, This will Also Install Splash and Exit Screens
      wget -qO- https://git.io/JKum9 | bash
 
