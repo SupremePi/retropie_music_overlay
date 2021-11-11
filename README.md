@@ -54,11 +54,10 @@ but there it is folks have fun
      wget -qO- https://git.io/JPkkg | bash
 
 ## Future Plans
-#### Adding the ability to change overlay and text colors
-#### Adding the ability to change the placement of the overlay (top, bottom, right, left)
-#### Adding the ability to change overlay and text colors
-#### Adding the ability to change the size of the overlay
-#### Adding the ability to change how long to hide the overlay in seconds
+#### Adding the ability to the control script to change overlay and text colors
+#### Adding the ability to the control script to change the placement of the overlay (top, bottom, right, left)
+#### Adding the ability to the control script to change the size of the overlay
+#### Adding the ability to the control script to change how long to hide the overlay in seconds
 
 ## CONFIG SECTION
 Edit these manually to adjust the script to your needs:
