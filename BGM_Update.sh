@@ -14,7 +14,7 @@ infobox="${infobox}\n"
 infobox="${infobox}This script will play MP3 & OGG files during menu navigation in either Emulation Station or Attract mode.\n"
 infobox="${infobox}\n"
 infobox="${infobox}A Few special new folders have been created in the /home/pi/RetroPie/roms/music directory called \"arcade\"\n"
-infobox="${infobox}(Arcade), \"bttf\" (Back To The Future), \"st\" (Supremem Team), \"uvf\" (Ultimate Vs Fighter), \"venom\" (Venom),\n"
+infobox="${infobox}(Arcade), \"bttf\" (Back To The Future), \"st\" (Suprememe Team), \"uvf\" (Ultimate Vs Fighter), \"venom\" (Venom),\n"
 infobox="${infobox}and this last one \"custom\" (Custom) is for placing your own MP3 files into.\n"
 infobox="${infobox}\n"
 infobox="${infobox}Also included in this script is the ability to select between the different music folders you can disable them all\n"
@@ -50,7 +50,7 @@ Unable to install python-pygame, please update your system (\"sudo apt-get upgra
 fi
 cd ~
 if [ -d "/home/pi/retropie_music_overlay" ]; then #delete folder if it is there
-	echo "/home/pi/retropie_music_overlay Exsists. Now Removing ..."
+	echo "/home/pi/retropie_music_overlay Exists. Now Removing ..."
 	sudo rm -r /home/pi/retropie_music_overlay
 fi
 currentuser=$(whoami) # Check user and then stop the script if root
