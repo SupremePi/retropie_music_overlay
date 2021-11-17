@@ -1,4 +1,4 @@
-## RetroPie Background Music Overlay v1.60
+## RetroPie Background Music Overlay v1.62
 This has all the files needed to install the background music script with added overlays!
 
 If you would like to manually install this script:
@@ -57,7 +57,7 @@ but there it is folks have fun
 #### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change overlay and text colors.
 #### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change the placement of the overlay (top, bottom, right, left).
 #### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change the size of the overlay.
-#### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change how long to hide the overlay in seconds.
+####  Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to the control script to change how long to hide the overlay in seconds.~~
 ####  Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to turn the exit splash on or off.~~
 
 ## CONFIG SECTION
@@ -110,4 +110,4 @@ BGM Overlay code added by madmodder123
 
 Version 1.01 - Changed song_title.png to write to RAM instead of the SD Card (Thanks zerojay!)
 
-Version 1.60 - Added one line install and control scripts by thepitster
+Version 1.62 - Added one line install and control scripts by thepitster

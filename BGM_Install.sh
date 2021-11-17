@@ -29,15 +29,15 @@ infobox="${infobox}and separate the song title to a separate new lines.\n"
 infobox="${infobox}\n"
 infobox="${infobox}\n\n"
 
-dialog --backtitle "RetroPie Background Music Install Script v1.60" \
---title "RetroPie Background Music Install Script v1.60" \
+dialog --backtitle "RetroPie Background Music Install Script v1.62" \
+--title "RetroPie Background Music Install Script v1.62" \
 --msgbox "${infobox}" 35 110
 
 function main_menu() {
     local choice
 
     while true; do
-        choice=$(dialog --colors --backtitle "RetroPie Background Music Install Script v1.60" --title " MAIN MENU " \
+        choice=$(dialog --colors --backtitle "RetroPie Background Music Install Script v1.62" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "Choose An Option Below" 25 85 20 \
             01 "Install Background Music without Custom Music" \
