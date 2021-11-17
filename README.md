@@ -54,11 +54,11 @@ but there it is folks have fun
      wget -qO- https://git.io/JPkkg | bash
 
 ## Future Plans
-#### Adding the ability to the control script to change overlay and text colors.
-#### Adding the ability to the control script to change the placement of the overlay (top, bottom, right, left).
-#### Adding the ability to the control script to change the size of the overlay.
-#### Adding the ability to the control script to change how long to hide the overlay in seconds.
-####  Done. <img src="https://i.imgur.com/Bvn5WKe.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to turn the exit splash on or off.~~
+#### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change overlay and text colors.
+#### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change the placement of the overlay (top, bottom, right, left).
+#### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change the size of the overlay.
+#### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change how long to hide the overlay in seconds.
+####  Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to turn the exit splash on or off.~~
 
 ## CONFIG SECTION
 Edit these manually to adjust the script to your needs:
