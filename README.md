@@ -110,4 +110,4 @@ BGM Overlay code added by madmodder123
 
 Version 1.01 - Changed song_title.png to write to RAM instead of the SD Card (Thanks zerojay!)
 
-Version 1.62 - Added one line install and control scripts by thepitster
+Version 1.60 - Added one line install and control scripts by thepitster
