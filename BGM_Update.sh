@@ -8,7 +8,7 @@
 infobox= ""
 infobox="${infobox}_______________________________________________________\n\n"
 infobox="${infobox}\n"
-infobox="${infobox}RetroPie Background Music Install Script\n\n"
+infobox="${infobox}RetroPie Background Music Overlay Update Script\n\n"
 infobox="${infobox}The background music python and control scripts will be Updated on this system.\n"
 infobox="${infobox}\n"
 infobox="${infobox}This script will play MP3 & OGG files during menu navigation in either Emulation Station or Attract mode.\n"
@@ -29,14 +29,12 @@ infobox="${infobox}and separate the song title to a separate newlines.\n"
 infobox="${infobox}\n"
 infobox="${infobox}\n\n"
 
-dialog --backtitle "RetroPie Background Music Update Script v1.62" \
---title "RetroPie Background Music Update Script v1.62" \
+dialog --backtitle "RetroPie Background Music Overlay Update Script v1.63" \
+--title "RetroPie Background Music Overlay Update Script v1.63" \
 --msgbox "${infobox}" 35 110
 clear
 ##### Install needed packages
 sudo apt-get update -y
-sudo apt-get install -y imagemagick fbi python-pip python3-pip # to generate overlays
-sudo pip install gdown
 if sudo apt-get --simulate install python-pygame
 then 
 	sudo apt-get install -y python-pygame # to control music
@@ -48,6 +46,8 @@ Unable to install python-pygame, please update your system (\"sudo apt-get upgra
 	"
 	exit
 fi
+sudo apt-get install -y imagemagick fbi python-pip python3-pip # to generate overlays
+sudo pip install gdown
 cd ~
 if [ -d "/home/pi/retropie_music_overlay" ]; then #delete folder if it is there
 	echo "/home/pi/retropie_music_overlay Exists. Now Removing ..."
@@ -101,11 +101,6 @@ fi
 cp bgmcustomoptions.sh /home/pi/RetroPie/retropiemenu/
 cd /home/pi/
 sudo rm -r /home/pi/retropie_music_overlay
-##### Disable ODROID BGM script if it exists
-if [ -a /home/pi/scripts/bgm/start.sc ]; then
-	pkill -STOP mpg123
-	sudo rm /home/pi/scripts/bgm/start.sc
-fi
 ##### Explain stuff to the user
 printf "\n\n\n"
 echo "Place your personal music files in /home/$currentuser/RetroPie/roms/music/custom/"

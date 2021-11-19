@@ -8,7 +8,7 @@
 infobox= ""
 infobox="${infobox}_______________________________________________________\n\n"
 infobox="${infobox}\n"
-infobox="${infobox}RetroPie Background Music Install Script\n\n"
+infobox="${infobox}RetroPie Background Music Overlay Install Script\n\n"
 infobox="${infobox}The background music python and control scripts will be installed on this system.\n"
 infobox="${infobox}\n"
 infobox="${infobox}This script will play MP3 & OGG files during menu navigation in either Emulation Station or Attract mode.\n"
@@ -28,28 +28,33 @@ infobox="${infobox}\" - \"\n"
 infobox="${infobox}and separate the song title to a separate new lines.\n"
 infobox="${infobox}\n"
 infobox="${infobox}\n\n"
-
-dialog --backtitle "RetroPie Background Music Install Script v1.62" \
---title "RetroPie Background Music Install Script v1.62" \
+dialog --backtitle "RetroPie Background Music Overlay Install Script v1.63" \
+--title "RetroPie Background Music Overlay Install Script v1.63" \
 --msgbox "${infobox}" 35 110
-
 function main_menu() {
     local choice
-
     while true; do
-        choice=$(dialog --colors --backtitle "RetroPie Background Music Install Script v1.62" --title " MAIN MENU " \
+        choice=$(dialog --colors --backtitle "RetroPie Background Music Overlay Install Script v1.63" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "Choose An Option Below" 25 85 20 \
-            01 "Install Background Music without Custom Music" \
-            02 "Install Background Music with Custom Music" \
+			01 "Install RetroPie BGM Overlay without Any Music"
+            02 "Install RetroPie BGM Overlay without Custom Music" \
+            03 "Install RetroPie BGM Overlay with Custom Music" \
             2>&1 > /dev/tty)
-
         case "$choice" in
-            01) install_bgm_1  ;;
-            02) install_bgm_2  ;;
+			01) install_bgm
+            02) install_bgm_1  ;;
+            03) install_bgm_2  ;;
             *)  break ;;
         esac
     done
+}
+function install_bgm() {
+clear
+prep_work
+setup
+rebootq
+exit
 }
 function install_bgm_1() {
 clear
@@ -72,12 +77,9 @@ setup
 rebootq
 exit
 }
-
 function prep_work() {
 ##### Install needed packages
 sudo apt-get update -y
-sudo apt-get install -y imagemagick fbi python-pip python3-pip # to generate overlays
-sudo pip install gdown
 if sudo apt-get --simulate install python-pygame
 then 
 	sudo apt-get install -y python-pygame # to control music
@@ -89,6 +91,8 @@ Unable to install python-pygame, please update your system (\"sudo apt-get upgra
 	"
 	exit
 fi
+sudo apt-get install -y omxplayer python-pygame mpg123 imagemagick python-urllib3 libpng12-0 fbi python-pip python3-pip # to generate overlays
+sudo pip install gdown
 cd ~
 if [ -d "/home/pi/retropie_music_overlay" ]; then #delete folder if it is there
 	echo "/home/pi/retropie_music_overlay Exists. Now Removing ..."
@@ -135,7 +139,6 @@ elif [ -f "/home/pi/RetroPie/roms/music/BGM.py" ]; then #Remove old version if i
 fi
 cp BGM.py /home/pi/RetroPie/roms/music/
 }
-
 function setup() {
 ##### Add pixel font
 sudo mkdir -p /usr/share/fonts/opentype
@@ -173,6 +176,8 @@ else
 	echo "BGM already running at boot!"
 fi
 ##### Setting up Splash & Exit Screens
+wget -O "/home/pi/RetroPie/splashscreens/JarvisSplash.mp4" --progress=bar:force:noscroll --show-progress -q "https://github.com/ALLRiPPED/retropie_music_overlay/raw/master/splashscreens/JarvisSplash.mp4"
+wget -O "/home/pi/RetroPie/splashscreens/JarvisExit.mp4" --progress=bar:force:noscroll --show-progress -q "https://github.com/ALLRiPPED/retropie_music_overlay/raw/master/splashscreens/JarvisExit.mp4"
 sudo sed -i -E "s/.*/\/home\/pi\/RetroPie\/splashscreens\/JarvisSplash.mp4/" /etc/splashscreen.list
 mkdir -p /opt/retropie/configs/all/emulationstation/scripts/reboot
 mkdir -p /opt/retropie/configs/all/emulationstation/scripts/shutdown
@@ -219,6 +224,7 @@ function rebootq() {
 }
 function rebootl() {
 	sudo rm -r /home/pi/retropie_music_overlay
+	sleep 3
 	exit
 }
 function rebootn() {
