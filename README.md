@@ -1,4 +1,4 @@
-## RetroPie Background Music Overlay v1.62
+## RetroPie Background Music Overlay v1.63
 This has all the files needed to install the background music script with added overlays!
 
 If you would like to manually install this script:
