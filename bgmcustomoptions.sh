@@ -22,13 +22,15 @@ stats_check
             02 "Enable/Disable BGM On-Boot $bgmos" \
             03 "Volume Control $volume" \
             04 "Music Selection $ms" \
+            - "-------------------------------------" \
             05 "Enable/Disable Overlay $ovs" \
             06 "Enable/Disable Overlay Fadeout $ovf" \
             07 "Adjust Overlay Fadeout Time $oft" \
             08 "Enable/Disable Overlay Rounded Corners $ocr" \
             09 "Enable/Disable Overlay Line Separator $ons" \
             10 "Enable/Disable Exit Splash $exs" \
-			11 "View RetroPie BGM Overlay Disclamer" \
+            - "-------------------------------------" \
+            11 "View RetroPie BGM Overlay Disclamer" \
             2>&1 > /dev/tty)
         case "$choice" in
             01) enable_music  ;;
@@ -41,8 +43,9 @@ stats_check
             08) overlay_rounded_corners  ;;
             09) overlay_replace_newline  ;;
             10) exit_splash  ;;
-			11) disclaim  ;;
-            *)  break ;;
+            11) disclaim  ;;
+            -) none  ;;
+            *) break ;;
         esac
     done
 }
