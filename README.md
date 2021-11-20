@@ -57,8 +57,9 @@ but there it is folks have fun
 #### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change overlay and text colors.
 #### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change the placement of the overlay (top, bottom, right, left).
 #### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change the size of the overlay.
-####  Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to the control script to change how long to hide the overlay in seconds.~~
-####  Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to turn the exit splash on or off.~~
+#### Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to the control script to change the music directory to a custom location.~~
+#### Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to the control script to change how long to hide the overlay in seconds.~~
+#### Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to turn the exit splash on or off.~~
 
 ## CONFIG SECTION
 Edit these manually to adjust the script to your needs:
