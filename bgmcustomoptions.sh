@@ -45,6 +45,7 @@ stats_check
             10) exit_splash  ;;
             11) disclaim  ;;
             -) none  ;;
+            +) nono  ;;
             *) break ;;
         esac
     done
@@ -443,7 +444,7 @@ DISCLAIMER="${DISCLAIMER}This also lets you turn off certain options for BGM.py 
 DISCLAIMER="${DISCLAIMER}Rounded Corners on Overlays, an option to turn the dashes, or hyphens, with a space on both sides\n"
 DISCLAIMER="${DISCLAIMER}\" - \"\n"
 DISCLAIMER="${DISCLAIMER}and separate the song title to a separate newlines.\n"
-DISCLAIMER="${DISCLAIMER}'https://github.com/ALLRiPPED/retropie_music_overlay'\n"
+DISCLAIMER="${DISCLAIMER}https://github.com/ALLRiPPED/retropie_music_overlay/\n"
 dialog --colors --backtitle "RetroPie Background Music Overlay Control Script v2.00 beta		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $volume		Now Playing: $ms" \
 --title "DISCLAIMER" \
 --msgbox "${DISCLAIMER}" 35 110
