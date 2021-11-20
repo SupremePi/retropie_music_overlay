@@ -5,8 +5,6 @@
 import os
 import time
 import random
-#import pygame # if you don't have pygame: sudo apt-get install python-pygame
-#also that line is commented out as we import the mixer specifically a bit further down.
 import re
 import subprocess # used to grab screen resolution
 
@@ -25,8 +23,10 @@ musicdiroff = '/home/pi/RetroPie/roms/music'
 musicdir = musicdiroff
 maxvolume = 0.75
 volumefadespeed = 0.02
-restart = True # If true, this will cause the script to fade the music out and -stop- the song rather than pause it.
-startsong = "" # if this is not blank, this is the EXACT, CaSeSeNsAtIvE filename of the song you always want to play first on boot.
+# If true, this will cause the script to fade the music out and -stop- the song rather than pause it.
+restart = True
+# if this is not blank, this is the EXACT, CaSeSeNsAtIvE filename of the song you always want to play first on boot.
+startsong = ""
 
 ### if ~ is used, change it to home directory (EXAMPLE: "~/BGM" to "/home/pi/BGM")
 if "~/" in musicdir:
