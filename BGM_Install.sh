@@ -28,13 +28,13 @@ infobox="${infobox}\" - \"\n"
 infobox="${infobox}and separate the song title to a separate new lines.\n"
 infobox="${infobox}\n"
 infobox="${infobox}\n\n"
-dialog --backtitle "RetroPie Background Music Overlay Install Script v1.63" \
---title "RetroPie Background Music Overlay Install Script v1.63" \
+dialog --backtitle "RetroPie Background Music Overlay Install Script v1.65" \
+--title "RetroPie Background Music Overlay Install Script v1.65" \
 --msgbox "${infobox}" 35 110
 function main_menu() {
     local choice
     while true; do
-        choice=$(dialog --colors --backtitle "RetroPie Background Music Overlay Install Script v1.63" --title " MAIN MENU " \
+        choice=$(dialog --colors --backtitle "RetroPie Background Music Overlay Install Script v1.65" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "Choose An Option Below" 25 85 20 \
 			01 "Install RetroPie BGM Overlay without Any Music"
@@ -91,7 +91,7 @@ Unable to install python-pygame, please update your system (\"sudo apt-get upgra
 	"
 	exit
 fi
-sudo apt-get install -y omxplayer python-pygame mpg123 imagemagick python-urllib3 libpng12-0 fbi python-pip python3-pip # to generate overlays
+sudo apt-get install -y omxplayer mpg123 imagemagick python-urllib3 libpng12-0 fbi python-pip python3-pip # to generate overlays
 sudo pip install gdown
 cd ~
 if [ -d "/home/pi/retropie_music_overlay" ]; then #delete folder if it is there

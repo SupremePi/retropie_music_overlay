@@ -11,7 +11,9 @@ import re
 import subprocess # used to grab screen resolution
 
 ###CONFIG SECTION###
-startdelay = 0 # Value (in seconds) to delay audio start.  If you have a splash screen with audio and the script is playing music over the top of it, increase this value to delay the script from starting.
+# Value (in seconds) to delay audio start.  If you have a splash screen with audio and the script is playing music over the top of it, increase this value to delay the script from starting.
+startdelay = 0
+# "/home/pi/" is the equivalent to "~"
 musicdirac = '/home/pi/RetroPie/roms/music/arcade'
 musicdirbttf = '/home/pi/RetroPie/roms/music/bttf'
 musicdircustom = '/home/pi/RetroPie/roms/music/custom'
@@ -20,15 +22,15 @@ musicdirst = '/home/pi/RetroPie/roms/music/st'
 musicdiruvf = '/home/pi/RetroPie/roms/music/uvf'
 musicdirvenom = '/home/pi/RetroPie/roms/music/venom'
 musicdiroff = '/home/pi/RetroPie/roms/music'
-musicdir = musicdiroff # "/home/pi/" is the equivalent to "~"
-maxvolume = 0.50
+musicdir = musicdiroff
+maxvolume = 0.75
 volumefadespeed = 0.02
 restart = True # If true, this will cause the script to fade the music out and -stop- the song rather than pause it.
 startsong = "" # if this is not blank, this is the EXACT, CaSeSeNsAtIvE filename of the song you always want to play first on boot.
 
-### if ~ is used, change it to home directory (EXAMPLE: "/home/pi/BGM" to "/home/pi/BGM")
-if "/home/pi/" in musicdir:
-	musicdir = os.path.expanduser(musicdir)
+### if ~ is used, change it to home directory (EXAMPLE: "~/BGM" to "/home/pi/BGM")
+if "~/" in musicdir:
+	musicdir=os.path.expanduser(musicdir)
 
 # Read screen resolution for overlay settings
 fbset_exists = os.path.isfile('/bin/fbset')
@@ -59,32 +61,40 @@ else:
 	resolution = "ERROR"
 
 ###Overlay Config###
-overlay_enable = True # Enable or disable the overlay
-overlay_fade_out = True # Change to "False" to have the overlay remain on the screen until an emulator/application is launched
-overlay_fade_out_time = 10 # Hide the overlay after X seconds
+# Enable or disable the overlay
+overlay_enable = True
+# Change to "False" to have the overlay remain on the screen until an emulator/application is launched
+overlay_fade_out = True
+# Hide the overlay after X seconds
+overlay_fade_out_time = 10
 overlay_pngview_location = '/usr/local/bin/pngview'
-overlay_background_color = 'DimGray' #White is default
-overlay_text_color = 'Black' #DimGray is default
-#overlay_text_font = '/usr/share/fonts/opentype/Pixel.otf' # Pixel font included by default
-overlay_text_font = 'FreeSans' # Default system font
-overlay_rounded_corners = True #Set to "True" round the corners of the overlay
-overlay_replace_newline = True # Set to "True" to turn all " - " symbols in song title to new line characters. (Mostly for OGST Display)
+# White is default
+overlay_background_color = 'DimGray'
+# DimGray is default
+overlay_text_color = 'Black'
+# Pixel font included by default
+#overlay_text_font = '/usr/share/fonts/opentype/Pixel.otf'
+# Default system font
+overlay_text_font = 'FreeSans'
+# Set to "True" round the corners of the overlay
+overlay_rounded_corners = True
+# Set to "True" to turn all " - " symbols in song title to new line characters. (Mostly for OGST Display)
+overlay_replace_newline = True
+overlay_size_1080p = '600x64'
+overlay_size_720p = '300x21'
+overlay_size_sd = '150x15'
+overlay_x_offset = '0'
+overlay_y_offset = '0'
 
 # The code below adjusts the size/location of the overlay depending upon the screen resolution
 # Adjust these to your needs
 if resolution == "1080p":
-	overlay_size = '600x64'
-	overlay_x_offset = '0'
-	overlay_y_offset = '0'
+	overlay_size = overlay_size_1080p
 elif resolution == "720p":
-	overlay_size = '300x21'
-	overlay_x_offset = '0'
-	overlay_y_offset = '0'
+	overlay_size = overlay_size_720p
 else:
 	# Any resolution lower than 720p
-	overlay_size = '150x15'
-	overlay_x_offset = '0'
-	overlay_y_offset = '0'
+	overlay_size = overlay_size_sd
 
 # Get the user's name
 user = os.path.expanduser('~')          
@@ -298,3 +308,5 @@ while True:
 	#end of the main while loop
 	
 print "An error has occurred that has stopped BGM.py from executing." #theoretically you should never get this far.
+
+
