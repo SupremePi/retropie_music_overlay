@@ -181,7 +181,7 @@ local choice
         esac
     done
 }
-function enable_arcade() {
+enable_arcade() {
 if grep -q 'musicdir = musicdiroff' "${SCRIPT_LOC}"; then
 	sed -i -E 's/musicdir = musicdiroff/musicdir = musicdirac/g' ${SCRIPT_LOC}
 elif grep -q 'musicdir = musicdirbttf' "${SCRIPT_LOC}"; then
