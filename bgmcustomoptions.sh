@@ -11,32 +11,6 @@ TITLE="RetroPie Background Music Overlay v1.65"
 AUTOSTART="/opt/retropie/configs/all/autostart.sh"
 OLDIFS=$IFS
 
-infobox= ""
-infobox="${infobox}_______________________________________________________\n\n"
-infobox="${infobox}\n"
-infobox="${infobox}RetroPie Background Music Overlay Control Script\n\n"
-infobox="${infobox}The background music python script has been installed on this system.\n"
-infobox="${infobox}\n"
-infobox="${infobox}This script will play MP3 & OGG files during menu navigation in either Emulation Station or Attract mode.\n"
-infobox="${infobox}\n"
-infobox="${infobox}A Few special new folders have been created in the /home/pi/RetroPie/roms/music directory called \"arcade\"\n"
-infobox="${infobox}(Arcade), \"bttf\" (Back To The Future), \"st\" (Supremem Team), \"uvf\" (Ultimate Vs Fighter), \"venom\" (Venom),\n"
-infobox="${infobox}and this last one \"custom\" (Custom) is for placing your own MP3 files into.\n"
-infobox="${infobox}\n"
-infobox="${infobox}Also included in this script is the ability to select between the different music folders you can disable them all\n"
-infobox="${infobox}or enable them, but only one at a time, the music will then automatically start playing.\n"
-infobox="${infobox}\n"
-infobox="${infobox}Launch a game, the music will stop. Upon exiting out of the game the music will begin playing again.\n"
-infobox="${infobox}\n"
-infobox="${infobox}This also lets you turn off certain options for BGM.py such as, Enable/Disable the Overlay, Fadeout effect,\n"
-infobox="${infobox}Rounded Corners on Overlays, an option to turn the dashes, or hyphens, with a space on both sides\n"
-infobox="${infobox}\" - \"\n"
-infobox="${infobox}and separate the song title to a separate newlines.\n"
-infobox="${infobox}\n"
-infobox="${infobox}\n\n"
-dialog --backtitle "RetroPie Background Music Overlay Control Script v1.65" \
---title "RetroPie Background Music Overlay Control Script v1.65" \
---msgbox "${infobox}" 35 110
 main_menu() {
 stats_check
     local choice
@@ -54,6 +28,7 @@ stats_check
             08 "Enable/Disable Overlay Rounded Corners $ocr" \
             09 "Enable/Disable Overlay Line Separator $ons" \
             10 "Enable/Disable Exit Splash $exs" \
+			11 "View RetroPie BGM Overlay Disclamer" \
             2>&1 > /dev/tty)
         case "$choice" in
             01) enable_music  ;;
@@ -66,6 +41,7 @@ stats_check
             08) overlay_rounded_corners  ;;
             09) overlay_replace_newline  ;;
             10) exit_splash  ;;
+			11) disclaim  ;;
             *)  break ;;
         esac
     done
@@ -128,7 +104,7 @@ stats_check
 overlay_fade_out_time() {
 oldfadeouttime=$(grep "overlay_fade_out_time = " ${SCRIPT_LOC}|awk '{print $3}')
 export oldfadeouttime
-fadeouttime=$(dialog --title "Adjust the Fadeout time of the Relay" --inputbox "Input the Relay Fadeout Time:" 8 40 3>&1 1>&2 2>&3 3>&-)
+fadeouttime=$(dialog --colors --title "Adjust the Fadeout time of the Relay		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $volume		Now Playing: $ms" --inputbox "Input the Relay Fadeout Time:" 8 40 3>&1 1>&2 2>&3 3>&-)
 export fadeouttime
 perl -p -i -e 's/overlay_fade_out_time = $ENV{oldfadeouttime}/overlay_fade_out_time = $ENV{fadeouttime}/g' ${SCRIPT_LOC}
 bgm_check
@@ -443,8 +419,30 @@ else
 	pgrep -f "python "$SCRIPT_LOC|xargs sudo kill -9 > /dev/null 2>&1 &
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1 &
 	sleep 1
-	(nohup python $SCRIPT_LOC > /dev/null 2>&1) &
+	(nohup python $SCRIPT_LOC > /dev/null 2>&1) &  > /dev/null 2>&1 &
 fi
 sleep 1
+}
+function disclaim() {
+DISCLAIMER= ""
+DISCLAIMER="${DISCLAIMER}_______________________________________________________\n\n"
+DISCLAIMER="${DISCLAIMER}\n"
+DISCLAIMER="${DISCLAIMER}RetroPie Background Music Overlay Control Script\n\n"
+DISCLAIMER="${DISCLAIMER}The background music python script has been installed on this system.\n"
+DISCLAIMER="${DISCLAIMER}This script will play MP3 & OGG files during menu navigation in either Emulation Station or Attract mode.\n"
+DISCLAIMER="${DISCLAIMER}A Few special new folders have been created in the /home/pi/RetroPie/roms/music directory called \"arcade\"\n"
+DISCLAIMER="${DISCLAIMER}(Arcade), \"bttf\" (Back To The Future), \"st\" (Supremem Team), \"uvf\" (Ultimate Vs Fighter), \"venom\" (Venom),\n"
+DISCLAIMER="${DISCLAIMER}and this last one \"custom\" (Custom) is for placing your own MP3 files into.\n"
+DISCLAIMER="${DISCLAIMER}Also included in this script is the ability to select between the different music folders you can disable them all\n"
+DISCLAIMER="${DISCLAIMER}or enable them, but only one at a time, the music will then automatically start playing.\n"
+DISCLAIMER="${DISCLAIMER}Launch a game, the music will stop. Upon exiting out of the game the music will begin playing again.\n"
+DISCLAIMER="${DISCLAIMER}This also lets you turn off certain options for BGM.py such as, Enable/Disable the Overlay, Fadeout effect,\n"
+DISCLAIMER="${DISCLAIMER}Rounded Corners on Overlays, an option to turn the dashes, or hyphens, with a space on both sides\n"
+DISCLAIMER="${DISCLAIMER}\" - \"\n"
+DISCLAIMER="${DISCLAIMER}and separate the song title to a separate newlines.\n"
+DISCLAIMER="${DISCLAIMER}'https://github.com/ALLRiPPED/retropie_music_overlay'\n"
+dialog --colors --backtitle "RetroPie Background Music Overlay Control Script v2.00 beta		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $volume		Now Playing: $ms" \
+--title "DISCLAIMER" \
+--msgbox "${DISCLAIMER}" 35 110
 }
 main_menu
