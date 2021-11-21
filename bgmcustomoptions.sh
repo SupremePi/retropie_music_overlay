@@ -1,9 +1,10 @@
 #!/bin/bash
 #RetroPie Background Music Overlay Control Script Version 1.65
 SCRIPT_LOC="/home/pi/RetroPie/roms/music/BGM.py"
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 INSTALL_DIR=$(dirname "${SCRIPT_LOC}")
-MUSIC_DIR="$(grep 'musicdir =' "${SCRIPT_LOC}"|awk '{print $3}')"
+MUSIC_DIR="/home/pi/RetroPie/roms/music"
+MUSIC_DIR="${MUSIC_DIR/#~/$HOME}"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 SECTION="RetroPie Background Music Overlay v1.65"
 BACKTITLE="RetroPie Background Music Overlay Control Script v1.65"
@@ -18,18 +19,19 @@ stats_check
         choice=$(dialog --colors --backtitle "RetroPie Background Music Overlay Control Script v1.65		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $volume		Now Playing: $ms" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "Choose An Option Below" 25 85 20 \
+            - "-----------BGM Settings--------------" \
             01 "Enable/Disable Background Music $bgms" \
             02 "Enable/Disable BGM On-Boot $bgmos" \
             03 "Volume Control $volume" \
             04 "Music Selection $ms" \
-            - "-------------------------------------" \
+            - "-----------Overlay Settings----------" \
             05 "Enable/Disable Overlay $ovs" \
             06 "Enable/Disable Overlay Fadeout $ovf" \
             07 "Adjust Overlay Fadeout Time $oft" \
             08 "Enable/Disable Overlay Rounded Corners $ocr" \
             09 "Enable/Disable Overlay Line Separator $ons" \
             10 "Enable/Disable Exit Splash $exs" \
-            - "-------------------------------------" \
+            - "--------------Disclamer--------------" \
             11 "View RetroPie BGM Overlay Disclamer" \
             2>&1 > /dev/tty)
         case "$choice" in
@@ -405,7 +407,7 @@ elif grep -q "musicdir = musicdiruvf" "${SCRIPT_LOC}"; then
 elif grep -q "musicdir = musicdirvenom" "${SCRIPT_LOC}"; then
 	ms="(\Z3Venom\Zn)"
 else
-	ms="(\Z3Other\Zn)"
+	ms="(\Z3$(basename $CUR_PLY | sed -e 's/^"//' -e 's/"$//')\Zn)"
 fi
 vol=$(grep "maxvolume =" "${SCRIPT_LOC}"|awk '{print $3}' | awk '{print $1 * 100}')
 volume="(\Z3"$vol"%\Zn)"
