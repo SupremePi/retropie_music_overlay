@@ -31,7 +31,7 @@ infobox="${infobox}\n\n"
 dialog --backtitle "RetroPie Background Music Overlay Install Script v1.65" \
 --title "RetroPie Background Music Overlay Install Script v1.65" \
 --msgbox "${infobox}" 35 110
-function main_menu() {
+main_menu() {
     local choice
     while true; do
         choice=$(dialog --colors --backtitle "RetroPie Background Music Overlay Install Script v1.65" --title " MAIN MENU " \
@@ -49,14 +49,14 @@ function main_menu() {
         esac
     done
 }
-function install_bgm() {
+install_bgm() {
 clear
 prep_work
 setup
 rebootq
 exit
 }
-function install_bgm_1() {
+install_bgm_1() {
 clear
 prep_work
 gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe -O /home/pi/retropie_music_overlay/bgm.zip
@@ -65,7 +65,7 @@ setup
 rebootq
 exit
 }
-function install_bgm_2() {
+install_bgm_2() {
 clear
 prep_work
 gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe -O /home/pi/retropie_music_overlay/bgm.zip
@@ -77,7 +77,7 @@ setup
 rebootq
 exit
 }
-function prep_work() {
+prep_work() {
 ##### Install needed packages
 sudo apt-get update -y
 if sudo apt-get --simulate install python-pygame
@@ -139,7 +139,7 @@ elif [ -f "/home/pi/RetroPie/roms/music/BGM.py" ]; then #Remove old version if i
 fi
 cp BGM.py /home/pi/RetroPie/roms/music/
 }
-function setup() {
+setup() {
 ##### Add pixel font
 sudo mkdir -p /usr/share/fonts/opentype
 sudo cp /home/pi/retropie_music_overlay/Pixel.otf /usr/share/fonts/opentype/
@@ -158,7 +158,7 @@ if [ ! -f "/home/pi/RetroPie/retropiemenu/gamelist.xml" ]; # If file doesn't exi
 then
 	cp /opt/retropie/configs/all/emulationstation/gamelists/retropie/gamelist.xml /home/pi/RetroPie/retropiemenu/gamelist.xml
 fi
-CONTENT1="<game>\n<path>./bgmcustomoptions.sh</path>\n<name>Background Music Options</name>\n<desc>Toggles background music options such as music ON/OFF and volume control. Set and play MP3/OGG files during menu navigation in both Emulation Station and Attract Mode. A Few special new folders have been created in the /music directory called "arcade", "bttf", "st", "uvf", "venom", and this last one "custom" is for placing your own MP3/OGG files into. Once you place your music files into this folder and enable it, the music will automatically begin playing.</desc>\n<image>./icons/backgroundmusic.png</image>\n</game>"
+CONTENT1="<game>\n<path>./bgmcustomoptions.sh</path>\n<name>Background Music Options</name>\n<desc>Toggles background music options such as music ON/OFF and volume control. Set and play MP3/OGG files during menu navigation in both Emulation Station and Attract Mode. A Few special new folders have been created in the /music directory called "arcade", "bttf", "st", "uvf", "venom", and this last one "custom" is for placing your own MP3/OGG files into. Once you place your music files into this folder and enable it, the music will automatically begin playing.</desc>\n<image>./icons/backgroundmusic.png</image>\n<releasedate>20211110T000251</releasedate>\n<developer>Livewire, madmodder123, thepitster</developer>\n<publisher>Livewire, madmodder123, thepitster</publisher>\n<genre>BGM Control Script</genre>\n</game>"
 C1=$(echo $CONTENT1 | sed 's/\//\\\//g')
 if grep -q bgmcustomoptions.sh "/home/$currentuser/RetroPie/retropiemenu/gamelist.xml"; then # Check if menu entry is already there or not
 	echo "gamelist.xml entry confirmed"
@@ -204,7 +204,7 @@ echo "BGM has been set up to run automatically when the device boots!
 "
 echo "Thanks for trying out my BGM build"
 }
-function rebootq() {
+rebootq() {
     local choice
 
     while true; do
@@ -222,12 +222,12 @@ function rebootq() {
         esac
     done
 }
-function rebootl() {
+rebootl() {
 	sudo rm -r /home/pi/retropie_music_overlay
 	sleep 3
 	exit
 }
-function rebootn() {
+rebootn() {
 sudo rm -r /home/pi/retropie_music_overlay
 sleep 3
 sudo reboot
