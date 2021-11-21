@@ -3,7 +3,8 @@
 SCRIPT_LOC="/home/pi/RetroPie/roms/music/BGM.py"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 INSTALL_DIR=$(dirname "${SCRIPT_LOC}")
-MUSIC_DIR="$(grep 'musicdir =' "${SCRIPT_LOC}"|awk '{print $3}')"
+MUSIC_DIR="/home/pi/RetroPie/roms/music"
+MUSIC_DIR="${$MUSIC_DIR/#~/$HOME}"
 
 SECTION="RetroPie Background Music Overlay v1.65"
 BACKTITLE="RetroPie Background Music Overlay Control Script v1.65"
