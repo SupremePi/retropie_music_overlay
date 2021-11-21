@@ -1,12 +1,12 @@
 #!/bin/bash
-#RetroPie Background Music Overlay Control Script Version 1.65
+#RetroPie Background Music Overlay Control Script Version 1.70
 SCRIPT_LOC="/home/pi/RetroPie/roms/music/BGM.py"
 INSTALL_DIR=$(dirname "${SCRIPT_LOC}")
 MUSIC_DIR="/home/pi/RetroPie/roms/music"
 MUSIC_DIR="${MUSIC_DIR/#~/$HOME}"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-BACKTITLE="RetroPie Background Music Overlay Control Script v1.65"
-TITLE="RetroPie Background Music Overlay v1.65"
+BACKTITLE="RetroPie Background Music Overlay Control Script v1.70"
+TITLE="RetroPie Background Music Overlay v1.70"
 AUTOSTART="/opt/retropie/configs/all/autostart.sh"
 LOG_LOC="/dev/shm/retropiemo.log"
 OLDIFS=$IFS
@@ -15,7 +15,7 @@ main_menu() {
 stats_check
     local choice
     while true; do
-        choice=$(dialog --colors --backtitle "RetroPie Background Music Overlay Control Script v1.65		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $volume		Now Playing: $ms" --title " MAIN MENU " \
+        choice=$(dialog --colors --backtitle "RetroPie Background Music Overlay Control Script v1.70		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $volume		Now Playing: $ms" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "Choose An Option Below" 25 85 20 \
             - "------------BGM Settings-------------" \
@@ -73,6 +73,8 @@ stats_check
 }
 set_bgm_volume() {
 local NEW_VAL
+CUR_VOL=$(grep "maxvolume =" ${SCRIPT_LOC}|awk '{print $3}')
+export CUR_VOL
 NEW_VAL=$(dialog \
 --backtitle "$BACKTITLE" \
 --title "$TITLE" \
@@ -82,9 +84,7 @@ if [ -z "$NEW_VAL" ] || [ "$NEW_VAL" == "$CUR_VOL" ]; then return; fi;
 echo "BGM volume set to $NEW_VAL%"
 NEW_VAL=$(echo "$NEW_VAL" | awk '{print $1 / 100}')
 export NEW_VAL
-CUR_VAL=$(grep "maxvolume =" ${SCRIPT_LOC}|awk '{print $3}')
-export CUR_VAL
-perl -p -i -e 's/maxvolume = $ENV{CUR_VAL}/maxvolume = $ENV{NEW_VAL}/g' ${SCRIPT_LOC}
+perl -p -i -e 's/maxvolume = $ENV{CUR_VOL}/maxvolume = $ENV{NEW_VAL}/g' ${SCRIPT_LOC}
 bgm_check
 stats_check
 }
@@ -378,7 +378,7 @@ else
 fi
 overlay_fadeout_time=$(grep "overlay_fade_out_time = " "$SCRIPT_LOC"|awk '{print $3}')
 export overlay_fadeout_time
-oft="(\Z3"$overlay_fadeout_time" Sec\Zn)"
+oft="(\Z3$overlay_fadeout_time Sec\Zn)"
 if grep -q "overlay_rounded_corners = True" "${SCRIPT_LOC}"; then
 	ocr=$enable
 else
@@ -409,7 +409,7 @@ else
 	ms="(\Z3$(basename $CUR_PLY | sed -e 's/^"//' -e 's/"$//')\Zn)"
 fi
 vol=$(grep "maxvolume =" "${SCRIPT_LOC}"|awk '{print $3}' | awk '{print $1 * 100}')
-volume="(\Z3"$vol"%\Zn)"
+volume="(\Z3$vol%\Zn)"
 if [ -f /home/pi/RetroPie/splashscreens/JarvisExitOff.mp4 ]; then
 	exs=$disable
 else
@@ -424,7 +424,7 @@ else
 	pgrep -f "python "$SCRIPT_LOC|xargs sudo kill -9 > /dev/null 2>&1 &
 	pgrep -f pngview|xargs sudo kill -9 > /dev/null 2>&1 &
 	sleep 1
-	(nohup python $SCRIPT_LOC > /dev/null 2>&1) &  > /dev/null 2>&1 &
+	(nohup python $SCRIPT_LOC > /dev/null 2>&1) &
 fi
 sleep 1
 }
