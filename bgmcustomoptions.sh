@@ -19,7 +19,7 @@ stats_check
         choice=$(dialog --colors --backtitle "RetroPie Background Music Overlay Control Script v1.65		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $volume		Now Playing: $ms" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "Choose An Option Below" 25 85 20 \
-            - "-----------BGM Settings--------------" \
+            - "------------BGM Settings-------------" \
             01 "Enable/Disable Background Music $bgms" \
             02 "Enable/Disable BGM On-Boot $bgmos" \
             03 "Volume Control $volume" \
