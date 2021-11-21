@@ -5,11 +5,10 @@ INSTALL_DIR=$(dirname "${SCRIPT_LOC}")
 MUSIC_DIR="/home/pi/RetroPie/roms/music"
 MUSIC_DIR="${MUSIC_DIR/#~/$HOME}"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-
-SECTION="RetroPie Background Music Overlay v1.65"
 BACKTITLE="RetroPie Background Music Overlay Control Script v1.65"
 TITLE="RetroPie Background Music Overlay v1.65"
 AUTOSTART="/opt/retropie/configs/all/autostart.sh"
+LOG_LOC="/dev/shm/retropiemo.log"
 OLDIFS=$IFS
 
 main_menu() {
