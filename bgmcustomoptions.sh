@@ -18,19 +18,19 @@ stats_check
         choice=$(dialog --colors --backtitle "RetroPie Background Music Overlay Control Script v1.70		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $volume		Now Playing: $ms" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "Choose An Option Below" 25 85 20 \
-            - "------------BGM Settings-------------" \
+            - "--------------BGM Settings---------------" \
             01 "Enable/Disable Background Music $bgms" \
             02 "Enable/Disable BGM On-Boot $bgmos" \
             03 "Volume Control $volume" \
             04 "Music Selection $ms" \
-            - "-----------Overlay Settings----------" \
+            - "-------------Overlay Settings------------" \
             05 "Enable/Disable Overlay $ovs" \
             06 "Enable/Disable Overlay Fadeout $ovf" \
             07 "Adjust Overlay Fadeout Time $oft" \
             08 "Enable/Disable Overlay Rounded Corners $ocr" \
             09 "Enable/Disable Overlay Line Separator $ons" \
             10 "Enable/Disable Exit Splash $exs" \
-            - "--------------Disclamer--------------" \
+            - "----------------Disclamer----------------" \
             11 "View RetroPie BGM Overlay Disclamer" \
             2>&1 > /dev/tty)
         case "$choice" in
@@ -390,7 +390,7 @@ else
 	ons=$disable
 fi
 if grep -q "musicdir = musicdiroff" "${SCRIPT_LOC}"; then
-	ms="(\Z1Disabled\Zn)"
+	ms=$disable
 elif grep -q "musicdir = musicdirac" "${SCRIPT_LOC}"; then
 	ms="(\Z3Arcade\Zn)"
 elif grep -q "musicdir = musicdirbttf" "${SCRIPT_LOC}"; then
@@ -406,6 +406,8 @@ elif grep -q "musicdir = musicdiruvf" "${SCRIPT_LOC}"; then
 elif grep -q "musicdir = musicdirvenom" "${SCRIPT_LOC}"; then
 	ms="(\Z3Venom\Zn)"
 else
+	CUR_PLY=$(grep "musicdir =" "${SCRIPT_LOC}"|awk '{print $3}')
+	export CUR_PLY
 	ms="(\Z3$(basename $CUR_PLY | sed -e 's/^"//' -e 's/"$//')\Zn)"
 fi
 vol=$(grep "maxvolume =" "${SCRIPT_LOC}"|awk '{print $3}' | awk '{print $1 * 100}')
