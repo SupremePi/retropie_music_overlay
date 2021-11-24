@@ -1,5 +1,5 @@
 #!/bin/bash
-# BGM_Install.sh
+# Quick_BGM_Install.sh
 # Updated script by thepitster https://github.com/ALLRiPPED/ 
 #############################################
 # Install background music + overlay
@@ -105,17 +105,12 @@ if [ -a $HOME/scripts/bgm/start.sc ]; then
 	pkill -STOP mpg123
 	sudo rm $HOME/scripts/bgm/start.sc
 fi
-if [ -d "$HOME/retropie_music_overlay" ]; then #delete folder if it is there
-	echo "$HOME/retropie_music_overlay Exists. Now Removing ..."
-	sudo rm -r $HOME/retropie_music_overlay
-fi
 currentuser=$(whoami) # Check user and then stop the script if root
 if [[ $currentuser == "root" ]]; then
 	echo "DON'T RUN THIS SCRIPT AS ROOT! USE './BGM_Install.sh' !"
 	exit
 fi
 ##### Download the files needed and install the script + utilities
-git clone https://github.com/ALLRiPPED/retropie_music_overlay.git
 cd $HOME/retropie_music_overlay
 if [[ $currentuser == "pi" ]]; then #Use pngview if using Raspberry Pi
 	sudo chmod +x pngview
@@ -239,12 +234,10 @@ rebootq() {
     done
 }
 rebootl() {
-	sudo rm -r /home/pi/retropie_music_overlay
 	sleep 3
 	exit
 }
 rebootn() {
-sudo rm -r /home/pi/retropie_music_overlay
 sleep 3
 sudo reboot
 }

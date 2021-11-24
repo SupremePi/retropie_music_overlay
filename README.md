@@ -1,6 +1,5 @@
-## RetroPie Background Music Overlay v1.65
+## RetroPie Background Music Overlay v2.0
 This has all the files needed to install the background music script with added overlays!<br>
-
 If you would like to manually install this script:
 
      sudo apt-get install omxplayer python-pygame mpg123 imagemagick python-urllib3 libpng12-0 fbi python-pip python3-pip
@@ -11,8 +10,8 @@ then
 
      git clone https://github.com/ALLRiPPED/retropie_music_overlay.git
      cd retropie_music_overlay
-     sudo chmod +x BGM_Install.sh
-     ./BGM_Install.sh
+     sudo chmod +x Quick_BGM_Install.sh
+     ./Quick_BGM_Install.sh
 and it will do the following:<br>
 Download stuff needed (make sure u have the dependencies above, if you have ODROID it should autodetect and install the needed ones)<br>
 Move pngview to the correct directory.<br>
@@ -41,16 +40,19 @@ but there it is folks have fun
 ## To install, This will Also Install Splash and Exit Screens
      wget -qO- https://git.io/JKum9 | bash
 
-## To Update
-     wget -qO- https://git.io/JPkkg | bash
-
 ## Future Plans
 #### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change overlay and text colors.
 #### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change the size of the overlay.
-#### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change the placement of the overlay (top, bottom, right, left). [Beta Only](https://github.com/ALLRiPPED/retropie_music_overlay/tree/beta-2.00)
-#### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change the music directory to a custom location. [Beta Only](https://github.com/ALLRiPPED/retropie_music_overlay/tree/beta-2.00)
+#### Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to the control script to change the placement of the overlay (top, bottom, right, left).~~ 
+#### Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to the control script to change the music directory to a custom location.~~
 #### Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to the control script to change how long to hide the overlay in seconds.~~
 #### Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to turn the exit splash on or off.~~
+
+## Color Section
+
+This is where you will find the info you will need to change the colors of the background and font on the Overlay.<br>
+At the moment I have a color table here with color names that can be typed in to the RPBGMO bash gui, right now they have to be typed in cause getting bash script color is not as easy to code as you would think.
+### [Table of Color Names](https://allripped.github.io/ImageMagickColors.html)
 
 ## CONFIG SECTION
 Edit these manually to adjust the script to your needs:

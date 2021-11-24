@@ -8,19 +8,13 @@ import random
 import re
 import subprocess # used to grab screen resolution
 
+disablemusic='/home/pi/RetroPie/roms/music/DisableMusic'
+
 ###CONFIG SECTION###
 # Value (in seconds) to delay audio start.  If you have a splash screen with audio and the script is playing music over the top of it, increase this value to delay the script from starting.
 startdelay = 0
-# "/home/pi/" is the equivalent to "~"
-musicdirac = '/home/pi/RetroPie/roms/music/arcade'
-musicdirbttf = '/home/pi/RetroPie/roms/music/bttf'
-musicdircustom = '/home/pi/RetroPie/roms/music/custom'
-musicdirnt = '/home/pi/RetroPie/roms/music/nt'
-musicdirst = '/home/pi/RetroPie/roms/music/st'
-musicdiruvf = '/home/pi/RetroPie/roms/music/uvf'
-musicdirvenom = '/home/pi/RetroPie/roms/music/venom'
-musicdiroff = '/home/pi/RetroPie/roms/music'
-musicdir = musicdiroff
+# "/home/pi" is the equivalent to "~"
+musicdir = "/home/pi/RetroPie/roms/music"
 maxvolume = 0.75
 volumefadespeed = 0.02
 # If true, this will cause the script to fade the music out and -stop- the song rather than pause it.
@@ -49,8 +43,6 @@ elif tvservice_exists:
 else:
     print "ERROR COUDLN'T FIND FBSET OR TVSERVICE! Please contact madmodder123 for help!"
 	
-#print "Resolution - " + resolution + " - " + screen_width + "x" + screen_height
-
 if int(screen_height) >= 900:
 	resolution = "1080p"
 elif int(screen_height) >= 600 and int(screen_height) <= 800:
@@ -67,24 +59,22 @@ overlay_enable = True
 overlay_fade_out = True
 # Hide the overlay after X seconds
 overlay_fade_out_time = 10
-overlay_pngview_location = '/usr/local/bin/pngview'
+overlay_pngview_location = "/usr/local/bin/pngview"
 # White is default
-overlay_background_color = 'DimGray'
+overlay_background_color = "DimGray"
 # DimGray is default
-overlay_text_color = 'Black'
-# Pixel font included by default
-#overlay_text_font = '/usr/share/fonts/opentype/Pixel.otf'
-# Default system font
-overlay_text_font = 'FreeSans'
+overlay_text_color = "Black"
+# Default system font included by default
+overlay_text_font = "/usr/share/fonts/truetype/GROBOLD.ttf"
 # Set to "True" round the corners of the overlay
 overlay_rounded_corners = True
 # Set to "True" to turn all " - " symbols in song title to new line characters. (Mostly for OGST Display)
-overlay_replace_newline = True
-overlay_size_1080p = '600x64'
-overlay_size_720p = '300x21'
-overlay_size_sd = '150x15'
-overlay_x_offset = '0'
-overlay_y_offset = '0'
+overlay_replace_newline = False
+overlay_size_1080p = "600x32"
+overlay_size_720p = "300x21"
+overlay_size_sd = "150x15"
+overlay_x_offset = "1320"
+overlay_y_offset = "1048"
 
 # The code below adjusts the size/location of the overlay depending upon the screen resolution
 # Adjust these to your needs
@@ -102,20 +92,16 @@ user = os.path.split(user)[-1]
 OGST_exists = False # Don't change this. It will automatically detect if OGST is used.
 if user == "pi":
 	HOST_SYSTEM = "Raspberry Pi"
-	#print "Raspberry Pi"
 elif user == "pigaming":
 	HOST_SYSTEM = "ODROID"
-	#print "ODROID"
 	#Check if the OGST case is being used (ODROID ONLY)
 	framebuffer1_exists = os.path.exists('/dev/fb1')
 	ogstdir = os.path.expanduser("/home/pi/ogst")
 	OGST_dir_exists = os.path.isdir(ogstdir)
 	if framebuffer1_exists == OGST_dir_exists == True:
 		OGST_exists = True
-		#print "OGST CONFIRMED"
 else:
 	HOST_SYSTEM = "Linux"
-	#print "Linux System"
 
 ## ~~~~~~~~~ODROID OGST SETTINGS~~~~~~~~~~~~~~~~~~
 if OGST_exists == True:
@@ -203,11 +189,11 @@ while True:
 				continue
 				
 	#Check to see if the DisableMusic file exists; if it does, stop doing everything!
-	if os.path.exists('/home/pi/RetroPie/roms/music/DisableMusic'):
+	if os.path.exists(disablemusic):
 		print "DisableMusic found!"
 		if mixer.music.get_busy():
 			mixer.music.stop();
-		while (os.path.exists('/home/pi/RetroPie/roms/music/DisableMusic')):
+		while (os.path.exists(disablemusic)):
 			time.sleep(15)
 		print "DisableMusic gone!"
 
@@ -219,17 +205,14 @@ while True:
 		if overlay_enable == True :
 			if HOST_SYSTEM == "Raspberry Pi":
 				os.system("sudo killall -q " + overlay_pngview_location + " &") # Kill song overlay if it is open
-				#print "Killing pngview overlay if it is open before starting"
 		lastsong=currentsong
 		mixer.music.set_volume(maxvolume) # Pygame sets this to 1.0 on new song; in case max volume -isnt- 1, set it to max volume.
 		mixer.music.play()
-		#print "BGM Now Playing: " + song
 		song_title = re.sub(r"(" + musicdir + "/|\.\w*$)", "", song) # Remove directory and extension from song
 		if overlay_replace_newline == True:
 			song_title = song_title.replace(" - ","\n")
 		if overlay_enable == True:
 			if HOST_SYSTEM == "Raspberry Pi":
-				#print "Starting Raspberry Pi overlay"
 				generate_image = "sudo convert " + overlay_rounded + "-background " + overlay_background_color + " -fill " + overlay_text_color + " -font " + overlay_text_font + " -gravity center -size " + overlay_size + " label:\"" + song_title + "\" " + overlay_tmp_file # Generate png from text 
 				os.system(generate_image)
 				show_overlay = overlay_pngview_location + " -d 0 -b 0x0000 -l 15000 -y " + overlay_y_offset + " -x " + overlay_x_offset + " " + overlay_tmp_file + " &" # ( -n cmd doesn't seem to work)
@@ -239,12 +222,10 @@ while True:
 					os.system("sudo killall -q " + overlay_pngview_location + " &") # Kill song overlay
 			elif HOST_SYSTEM == "ODROID":
 				#ODROID
-				#print "Starting ODROID (or other linux) overlay"
 				generate_image = "sudo convert " + overlay_rounded + "-background " + overlay_background_color + " -fill " + overlay_text_color + " -font " + overlay_text_font + " -gravity center -size " + overlay_size + " label:\"" + song_title + "\" " + overlay_tmp_file # Generate png from text
 				os.system(generate_image)
 				if OGST_exists == True:
 					#OGST SCREEN
-					#print "Starting OGST overlay"
 					OGST_display_code = "cat /dev/fb1 > " + tmp_folder + "image.raw; img2fb -i " + overlay_tmp_file + "; sleep " + str(overlay_fade_out_time) + "; cat " + tmp_folder + "image.raw > /dev/fb1"
 					os.system(OGST_display_code) 
 				else:
@@ -266,7 +247,6 @@ while True:
 			if procname[:-1] in emulatornames: #If the process name is in our list of known emulators
 				emulator = pid;
 				#Turn down the music
-				##print "Emulator found! " + procname[:-1] + " Muting the music..."
 				if overlay_enable == True:
 					if HOST_SYSTEM == "Raspberry Pi":
 						os.system("sudo killall -q " + overlay_pngview_location + " &") # Kill song overlay
@@ -280,11 +260,9 @@ while True:
 					mixer.music.stop() #we aren't going to resume the audio, so stop it outright.
 				else:
 					mixer.music.pause() #we are going to resume, so pause it.
-				#print("Muted.  Monitoring emulator.")
 				while os.path.exists("/proc/" + pid):
 					time.sleep(1); # Delay 1 second and check again.
 				#Turn up the music
-				#print "Emulator finished, resuming audio..."
 				if not restart:
 					mixer.music.unpause() #resume
 					while volume < maxvolume:
@@ -299,7 +277,6 @@ while True:
 							if overlay_fade_out == True:
 								time.sleep(overlay_fade_out_time)
 								os.system("sudo killall -q " + overlay_pngview_location + " &") # Kill song overlay	
-				#print "Music Resumed"
 				volume=maxvolume # ensures that the volume is manually set (if restart is True, volume would be at zero)
 		except IOError: #proc has already terminated, ignore.
 			continue

@@ -29,8 +29,8 @@ infobox="${infobox}and separate the song title to a separate newlines.\n"
 infobox="${infobox}\n"
 infobox="${infobox}\n\n"
 
-dialog --backtitle "RetroPie Background Music Overlay Update Script v1.65" \
---title "RetroPie Background Music Overlay Update Script v1.65" \
+dialog --backtitle "RetroPie Background Music Overlay Update Script v2.00 beta" \
+--title "RetroPie Background Music Overlay Update Script v2.00 beta" \
 --msgbox "${infobox}" 35 110
 clear
 ##### Install needed packages

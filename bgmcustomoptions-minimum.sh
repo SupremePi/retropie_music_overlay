@@ -21,25 +21,26 @@ stats_check
             - "------------BGM Settings-------------" \
             01 "Enable/Disable Background Music $bgms" \
             02 "Enable/Disable BGM On-Boot $bgmos" \
-            03 "Music Selection $ms" \
-            - "-----------Sound Settings-----------" \
-            04 "Volume Control $vol" \
-            05 "Music Start Delay $msd" \
+            03 "Volume Control $vol" \
+            04 "Change Music Folder $ms" \
+            05 "Disable Music Folder" \
+            06 "Music Start Delay $msd" \
             - "-----------Overlay Settings----------" \
-            06 "Overlay Settings" \
+            07 "Overlay Settings" \
             - "----------------Other----------------" \
-            07 "Enable/Disable Exit Splash $exs" \
-            08 "View RetroPie BGM Overlay Disclamer" \
+            08 "Enable/Disable Exit Splash $exs" \
+            09 "View RetroPie BGM Overlay Disclamer" \
             2>&1 > /dev/tty)
         case "$choice" in
             01) enable_music  ;;
             02) enable_musicos  ;;
-            03) music_select  ;;
-            04) set_bgm_volume  ;;
-            05) music_startdelay  ;;
-            06) overlay_menu  ;;
-            07) exit_splash  ;;
-            08) disclaim  ;;
+            03) set_bgm_volume  ;;
+            04) set_music_dir  ;;
+            05) disable_music_dir ;;
+            06) music_startdelay  ;;
+            07) overlay_menu  ;;
+            08) exit_splash  ;;
+            09) disclaim  ;;
             -) none  ;;
             +) nono  ;;
             *) break  ;;
@@ -83,100 +84,6 @@ if [ -z "$NEW_VOL" ] || [ "$NEW_VOL" == "$CUR_VOL" ]; then return; fi;
   CUR_VOL=$(echo  "$CUR_VOL" | awk '{print $1 / 100}')
   export CUR_VOL
 perl -p -i -e 's/maxvolume = $ENV{CUR_VOL}/maxvolume = $ENV{NEW_VOL}/g' $SCRIPT_LOC
-bgm_check
-stats_check
-}
-music_select() {
-stats_check
-local choice
-    while true; do
-        choice=$(dialog --colors --backtitle "Select Your Music Choice Below		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos" --title " MAIN MENU " \
-            --ok-label OK --cancel-label Back \
-            --menu "What action would you like to perform?" 25 85 20 \
-            01 "Enable/Disable Arcade Music" \
-            02 "Enable/Disable BTTF Music" \
-            03 "Enable/Disable Custom Music" \
-            04 "Enable/Disable Nostalgia Trip V3 Music" \
-            05 "Enable/Disable Supreme Team Music" \
-            06 "Enable/Disable Ultimate Vs Fighter Music" \
-            07 "Enable/Disable Venom Music" \
-            08 "Change Music Folder" \
-            09 "Disable Music Folder" \
-            2>&1 > /dev/tty)
-        case "$choice" in
-            01) enable_arcade  ;;
-            02) enable_bttf  ;;
-            03) enable_custom  ;;
-            04) enable_nt  ;;
-            05) enable_st  ;;
-            06) enable_uvf  ;;
-            07) enable_venom  ;;
-            08) set_music_dir ;;
-            09) disable_music_dir ;;
-            *)  break ;;
-        esac
-    done
-}
-enable_arcade() {
-CUR_PLY=$(grep "musicdir =" "$SCRIPT_LOC"|awk '{print $3}')
-export CUR_PLY
-NEW_PLY='"/home/pi/RetroPie/roms/music/arcade"'
-export NEW_PLY
-sed -i -E "s|musicdir = ${CUR_PLY}|musicdir = ${NEW_PLY}|g" $SCRIPT_LOC
-bgm_check
-stats_check
-}
-enable_bttf() {
-CUR_PLY=$(grep "musicdir =" "$SCRIPT_LOC"|awk '{print $3}')
-export CUR_PLY
-NEW_PLY='"/home/pi/RetroPie/roms/music/bttf"'
-export NEW_PLY
-sed -i -E "s|musicdir = ${CUR_PLY}|musicdir = ${NEW_PLY}|g" $SCRIPT_LOC
-bgm_check
-stats_check
-}
-enable_custom() {
-CUR_PLY=$(grep "musicdir =" "$SCRIPT_LOC"|awk '{print $3}')
-export CUR_PLY
-NEW_PLY='"/home/pi/RetroPie/roms/music/custom"'
-export NEW_PLY
-sed -i -E "s|musicdir = ${CUR_PLY}|musicdir = ${NEW_PLY}|g" $SCRIPT_LOC
-bgm_check
-stats_check
-}
-enable_nt() {
-CUR_PLY=$(grep "musicdir =" "$SCRIPT_LOC"|awk '{print $3}')
-export CUR_PLY
-NEW_PLY='"/home/pi/RetroPie/roms/music/nt"'
-export NEW_PLY
-sed -i -E "s|musicdir = ${CUR_PLY}|musicdir = ${NEW_PLY}|g" $SCRIPT_LOC
-bgm_check
-stats_check
-}
-enable_st() {
-CUR_PLY=$(grep "musicdir =" "$SCRIPT_LOC"|awk '{print $3}')
-export CUR_PLY
-NEW_PLY='"/home/pi/RetroPie/roms/music/st"'
-export NEW_PLY
-sed -i -E "s|musicdir = ${CUR_PLY}|musicdir = ${NEW_PLY}|g" $SCRIPT_LOC
-bgm_check
-stats_check
-}
-enable_uvf() {
-CUR_PLY=$(grep "musicdir =" "$SCRIPT_LOC"|awk '{print $3}')
-export CUR_PLY
-NEW_PLY='"/home/pi/RetroPie/roms/music/uvf"'
-export NEW_PLY
-sed -i -E "s|musicdir = ${CUR_PLY}|musicdir = ${NEW_PLY}|g" $SCRIPT_LOC
-bgm_check
-stats_check
-}
-enable_venom() {
-CUR_PLY=$(grep "musicdir =" "$SCRIPT_LOC"|awk '{print $3}')
-export CUR_PLY
-NEW_PLY='"/home/pi/RetroPie/roms/music/venom"'
-export NEW_PLY
-sed -i -E "s|musicdir = ${CUR_PLY}|musicdir = ${NEW_PLY}|g" $SCRIPT_LOC
 bgm_check
 stats_check
 }
@@ -426,20 +333,6 @@ else
 fi
 if grep -q 'musicdir = "/home/pi/RetroPie/roms/music"' "$SCRIPT_LOC"; then
 	ms=$disable
-elif grep -q 'musicdir = "/home/pi/RetroPie/roms/music/arcade"' "$SCRIPT_LOC"; then
-	ms="(\Z3Arcade\Zn)"
-elif grep -q 'musicdir = "/home/pi/RetroPie/roms/music/bttf"' "$SCRIPT_LOC"; then
-	ms="(\Z3Back To The Future\Zn)"
-elif grep -q 'musicdir = "/home/pi/RetroPie/roms/music/custom"' "$SCRIPT_LOC"; then
-	ms="(\Z3Custom\Zn)"
-elif grep -q 'musicdir = "/home/pi/RetroPie/roms/music/st"' "$SCRIPT_LOC"; then
-	ms="(\Z3Supreme Team\Zn)"
-elif grep -q 'musicdir = "/home/pi/RetroPie/roms/music/nt"' "$SCRIPT_LOC"; then
-	ms="(\Z3Nostalgia Trip V3\Zn)"
-elif grep -q 'musicdir = "/home/pi/RetroPie/roms/music/uvf"' "$SCRIPT_LOC"; then
-	ms="(\Z3Ultimate Vs Fighter\Zn)"
-elif grep -q 'musicdir = "/home/pi/RetroPie/roms/music/venom"' "$SCRIPT_LOC"; then
-	ms="(\Z3Venom\Zn)"
 else
 	CUR_PLY=$(grep "musicdir =" "$SCRIPT_LOC"|awk '{print $3}')
 	export CUR_PLY
