@@ -37,12 +37,12 @@ main_menu() {
         choice=$(dialog --colors --backtitle "RetroPie Background Music Overlay Install Script v1.65" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "Choose An Option Below" 25 85 20 \
-			01 "Install RetroPie BGM Overlay without Any Music"
+            01 "Install RetroPie BGM Overlay without Any Music"
             02 "Install RetroPie BGM Overlay without Custom Music" \
             03 "Install RetroPie BGM Overlay with Custom Music" \
             2>&1 > /dev/tty)
         case "$choice" in
-			01) install_bgm
+            01) install_bgm ;;
             02) install_bgm_1  ;;
             03) install_bgm_2  ;;
             *)  break ;;
