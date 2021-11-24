@@ -205,6 +205,7 @@ else
 	echo "BGM already running at boot!"
 fi
 ##### Setting up Splash & Exit Screens
+cp "$HOME/retropie_music_overlay/BGM Folder Diabled.mp3"  $INSTALL_DIR
 cp $HOME/retropie_music_overlay/splashscreens/JarvisSplash.mp4 $HOME/RetroPie/splashscreens/
 cp $HOME/retropie_music_overlay/splashscreens/JarvisExit.mp4 $HOME/RetroPie/splashscreens/
 sudo sed -i -E "s/.*/\/home\/pi\/RetroPie\/splashscreens\/JarvisSplash.mp4/" /etc/splashscreen.list
