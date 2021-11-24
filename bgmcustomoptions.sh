@@ -349,7 +349,7 @@ export NEW_VPOST
 NEW_VPOSB='"1048"'
 export NEW_VPOSB
 if [ $CUR_VPOS = \"0\" ]; then
-	sed -i -E "s/overlay_y_offset = ${CUR_VPOS}/overlay_y_offset = ${NEW_VPOSB}/g" "${SCRIPT_LOC}"
+	sed -i -E "s/overlay_y_offset = ${CUR_VPOS}/overlay_y_offset = ${NEW_VPOSB}/g" $SCRIPT_LOC
 else
 	sed -i -E "s/overlay_y_offset = ${CUR_VPOS}/overlay_y_offset = ${NEW_VPOST}/g" $SCRIPT_LOC
 fi
@@ -364,7 +364,7 @@ export NEW_HPOSL
 NEW_HPOSR='"1320"'
 export NEW_HPOSR
 if [ $CUR_HPOS = \"0\" ]; then
-	sed -i -E "s/overlay_x_offset = ${CUR_HPOS}/overlay_x_offset = ${NEW_HPOSR}/g" "${SCRIPT_LOC}"
+	sed -i -E "s/overlay_x_offset = ${CUR_HPOS}/overlay_x_offset = ${NEW_HPOSR}/g" $SCRIPT_LOC
 else
 	sed -i -E "s/overlay_x_offset = ${CUR_HPOS}/overlay_x_offset = ${NEW_HPOSL}/g" $SCRIPT_LOC
 fi
@@ -384,8 +384,6 @@ if grep -q "#(nohup python $SCRIPT_LOC > /dev/null 2>&1) &" "$AUTOSTART"; then
 	bgmos=$disable
 elif grep -q "(nohup python $SCRIPT_LOC > /dev/null 2>&1) &" "$AUTOSTART"; then
 	bgmos=$enable
-else
-	bgmos=$disable
 fi
 if grep -q "overlay_enable = True" "$SCRIPT_LOC"; then
 	ovs=$enable

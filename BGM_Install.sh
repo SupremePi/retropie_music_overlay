@@ -188,11 +188,11 @@ else
 	cat $HOME/temp > $MENU_DIR/gamelist.xml
 	rm -f $HOME/temp
 fi
-if ! grep -q '#(python /home/pi/.rpbgmo/BGM.py & > /dev/null 2>&1)' "$AUTOSTART"; then
-	sed -i 's/\#(python/(python/g' $AUTOSTART
+if ! grep -q '#(nohup python /home/pi/.rpbgmo/BGM.py & > /dev/null 2>&1)' "$AUTOSTART"; then
+	sed -i 's/\#(nohup python/(nohup python/g' $AUTOSTART
 fi
-if ! grep -q '(python /home/pi/.rpbgmo/BGM.py > /dev/null 2>&1) &' "$AUTOSTART"; then
-	sed -i -E '$ i\(python /home/pi/.rpbgmo/BGM.py > /dev/null 2>&1) &' $AUTOSTART
+if ! grep -q '(nohup python /home/pi/.rpbgmo/BGM.py > /dev/null 2>&1) &' "$AUTOSTART"; then
+	sed -i -E '$ i\(nohup python /home/pi/.rpbgmo/BGM.py > /dev/null 2>&1) &' $AUTOSTART
 else
 	echo "BGM already running at boot!"
 fi
