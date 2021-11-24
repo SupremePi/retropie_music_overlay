@@ -78,7 +78,7 @@ gdown https://drive.google.com/uc?id=1hv2nXThZ5S4OkY-oLGKwMtjmfRYy2cFe -O $HOME/
 gdown https://drive.google.com/uc?id=1-BHwb4oT6GiwpRv7l3VLHuJLsRxScGNV -O $HOME/retropie_music_overlay/custombgm.zip
 unzip -foq $HOME/retropie_music_overlay/bgm.zip -d $HOME/RetroPie
 unzip -foq $HOME/retropie_music_overlay/custombgm.zip -d $HOME/RetroPie
-mv -f $MUSIC_DIR/custom/'No Music in Folder.mp3' $MUSIC_DIR
+rm -f $MUSIC_DIR/custom/'No Music in Folder.mp3'
 setup
 rebootq
 exit
