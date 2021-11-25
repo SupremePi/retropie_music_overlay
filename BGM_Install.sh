@@ -129,7 +129,7 @@ if [[ $currentuser == "root" ]]; then
 fi
 ##### Download the files needed and install the script + utilities
 git clone https://github.com/ALLRiPPED/retropie_music_overlay.git
-git checkout tags/rpbgmov2.0
+#git checkout tags/rpbgmov2.0
 cd $HOME/retropie_music_overlay
 if [[ $currentuser == "pi" ]]; then #Use pngview if using Raspberry Pi
 	sudo chmod +x pngview
