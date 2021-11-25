@@ -147,7 +147,7 @@ stats_check
 disable_music_dir() {
 CUR_PLY=$(grep "musicdir =" "$SCRIPT_LOC"|awk '{print $3}')
 export CUR_PLY
-DEF_DIR='"$INSTALL_DIR"'
+DEF_DIR='"/home/pi/.rpbgmo"'
 export DEF_DIR
 sed -i -E "s|musicdir = ${CUR_PLY}|musicdir = ${DEF_DIR}|g" $SCRIPT_LOC
 bgm_check
@@ -256,7 +256,7 @@ export NEW_VPOST
 NEW_VPOSB='"1048"'
 export NEW_VPOSB
 if [ $CUR_VPOS = \"0\" ]; then
-	sed -i -E "s/overlay_y_offset = ${CUR_VPOS}/overlay_y_offset = ${NEW_VPOSB}/g" "${SCRIPT_LOC}"
+	sed -i -E "s/overlay_y_offset = ${CUR_VPOS}/overlay_y_offset = ${NEW_VPOSB}/g" $SCRIPT_LOC
 else
 	sed -i -E "s/overlay_y_offset = ${CUR_VPOS}/overlay_y_offset = ${NEW_VPOST}/g" $SCRIPT_LOC
 fi
@@ -271,7 +271,7 @@ export NEW_HPOSL
 NEW_HPOSR='"1320"'
 export NEW_HPOSR
 if [ $CUR_HPOS = \"0\" ]; then
-	sed -i -E "s/overlay_x_offset = ${CUR_HPOS}/overlay_x_offset = ${NEW_HPOSR}/g" "${SCRIPT_LOC}"
+	sed -i -E "s/overlay_x_offset = ${CUR_HPOS}/overlay_x_offset = ${NEW_HPOSR}/g" $SCRIPT_LOC
 else
 	sed -i -E "s/overlay_x_offset = ${CUR_HPOS}/overlay_x_offset = ${NEW_HPOSL}/g" $SCRIPT_LOC
 fi
@@ -291,8 +291,6 @@ if grep -q "#(nohup python $SCRIPT_LOC > /dev/null 2>&1) &" "$AUTOSTART"; then
 	bgmos=$disable
 elif grep -q "(nohup python $SCRIPT_LOC > /dev/null 2>&1) &" "$AUTOSTART"; then
 	bgmos=$enable
-else
-	bgmos=$disable
 fi
 if grep -q "overlay_enable = True" "$SCRIPT_LOC"; then
 	ovs=$enable
@@ -331,7 +329,7 @@ if [ $CUR_VPOS = \"0\" ]; then
 else
 	vpos="(\Z3Bottom\Zn)"
 fi
-if grep -q 'musicdir = "/home/pi/RetroPie/roms/music"' "$SCRIPT_LOC"; then
+if grep -q 'musicdir = "/home/pi/.rpbgmo"' "$SCRIPT_LOC"; then
 	ms=$disable
 else
 	CUR_PLY=$(grep "musicdir =" "$SCRIPT_LOC"|awk '{print $3}')

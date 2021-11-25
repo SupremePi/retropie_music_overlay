@@ -240,7 +240,7 @@ stats_check
 disable_music_dir() {
 CUR_PLY=$(grep "musicdir =" "$SCRIPT_LOC"|awk '{print $3}')
 export CUR_PLY
-DEF_DIR='"$INSTALL_DIR"'
+DEF_DIR='"/home/pi/.rpbgmo"'
 export DEF_DIR
 sed -i -E "s|musicdir = ${CUR_PLY}|musicdir = ${DEF_DIR}|g" $SCRIPT_LOC
 bgm_check
@@ -422,7 +422,7 @@ if [ $CUR_VPOS = \"0\" ]; then
 else
 	vpos="(\Z3Bottom\Zn)"
 fi
-if grep -q 'musicdir = "/home/pi/RetroPie/roms/music"' "$SCRIPT_LOC"; then
+if grep -q 'musicdir = "/home/pi/.rpbgmo"' "$SCRIPT_LOC"; then
 	ms=$disable
 elif grep -q 'musicdir = "/home/pi/RetroPie/roms/music/arcade"' "$SCRIPT_LOC"; then
 	ms="(\Z3Arcade\Zn)"

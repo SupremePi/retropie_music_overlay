@@ -8,13 +8,13 @@ import random
 import re
 import subprocess # used to grab screen resolution
 
-disablemusic='/home/pi/RetroPie/roms/music/DisableMusic'
+disablemusic='/home/pi/.rpbgmo/DisableMusic'
 
 ###CONFIG SECTION###
 # Value (in seconds) to delay audio start.  If you have a splash screen with audio and the script is playing music over the top of it, increase this value to delay the script from starting.
 startdelay = 0
 # "/home/pi" is the equivalent to "~"
-musicdir = "/home/pi/RetroPie/roms/music"
+musicdir = "/home/pi/.rpbgmo"
 maxvolume = 0.75
 volumefadespeed = 0.02
 # If true, this will cause the script to fade the music out and -stop- the song rather than pause it.
