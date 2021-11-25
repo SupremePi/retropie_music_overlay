@@ -340,7 +340,7 @@ if grep -q 'musicdir = "/home/pi/.rpbgmo"' "$SCRIPT_LOC"; then
 else
 	CUR_PLY=$(grep "musicdir =" "$SCRIPT_LOC"|awk '{print $3}')
 	export CUR_PLY
-	ms="(\Z3$(basename $CUR_PLY |  | tr -d '"')\Zn)"
+	ms="(\Z3$(basename $CUR_PLY | tr -d '"')\Zn)"
 fi
 vol=$(grep "maxvolume =" "$SCRIPT_LOC"|awk '{print $3}' | awk '{print $1 * 100}')
 vol="(\Z3$vol%\Zn)"
