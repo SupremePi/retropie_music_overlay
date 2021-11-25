@@ -1,12 +1,12 @@
 #!/bin/bash
-#RetroPie Background Music Overlay Control Script Version 2.00
+#RetroPie Background Music Overlay Control Script Version 2.0
 SCRIPT_LOC="/home/pi/.rpbgmo/BGM.py"
 INSTALL_DIR=$(dirname "${SCRIPT_LOC}")
 MUSIC_DIR="/home/pi/RetroPie/roms/music"
 MUSIC_DIR="${MUSIC_DIR/#~/$HOME}"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-BACKTITLE="RetroPie Background Music Overlay Control Script v2.00"
-TITLE="RetroPie Background Music Overlay v2.00"
+BACKTITLE="RetroPie BGM Overlay Control Script v2.0"
+TITLE="RetroPie Background Music Overlay v2.0"
 AUTOSTART="/opt/retropie/configs/all/autostart.sh"
 LOG_LOC="/dev/shm/retropiemo.log"
 OLDIFS=$IFS
@@ -15,19 +15,19 @@ main_menu() {
 stats_check
     local choice
     while true; do
-        choice=$(dialog --colors --backtitle "RetroPie Background Music Overlay Control Script v2.00		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos" --title " MAIN MENU " \
+        choice=$(dialog --colors --backtitle "RetroPie BGM Overlay Control Script v2.0		BGM Status $bgms		Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos		Resolution: $resolution" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "Choose An Option Below" 25 85 20 \
             - "------------BGM Settings-------------" \
             01 "Enable/Disable Background Music $bgms" \
             02 "Enable/Disable BGM On-Boot $bgmos" \
             03 "Music Selection $ms" \
-            - "-----------Sound Settings-----------" \
+            + "-----------Sound Settings-----------" \
             04 "Volume Control $vol" \
             05 "Music Start Delay $msd" \
             - "-----------Overlay Settings----------" \
             06 "Overlay Settings" \
-            - "----------------Other----------------" \
+            + "----------------Other----------------" \
             07 "Enable/Disable Exit Splash $exs" \
             08 "View RetroPie BGM Overlay Disclamer" \
             2>&1 > /dev/tty)
@@ -90,7 +90,7 @@ music_select() {
 stats_check
 local choice
     while true; do
-        choice=$(dialog --colors --backtitle "Select Your Music Choice Below		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos" --title " MAIN MENU " \
+        choice=$(dialog --colors --backtitle "Select Your Music Choice Below		BGM Status $bgms		Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos		Resolution: $resolution" --title " MAIN MENU " \
             --ok-label OK --cancel-label Back \
             --menu "What action would you like to perform?" 25 85 20 \
             01 "Enable/Disable Arcade Music" \
@@ -188,12 +188,12 @@ stats_check
   SELECT=""
   IFS=$'\n'
   local SELECTION
-  CUR_DIR=$(grep "musicdir =" "$SCRIPT_LOC" |(awk '{print $3}') | sed -e 's/^"//' -e 's/"$//')/
+  CUR_DIR=$(grep "musicdir =" "$SCRIPT_LOC" |(awk '{print $3}') | tr -d '"')/
   export CUR_DIR
   while [ -z $SELECTION ]; do
     [[ "${CUR_DIR}" ]] && CUR_DIR="${CUR_DIR}"/
     local cmd=(dialog --colors \
-      --backtitle "$BACKTITLE | Current Folder: $CUR_DIR		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos" \
+      --backtitle "$BACKTITLE | Current Folder: $CUR_DIR	BGM Status $bgms	Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos		Resolution: $resolution" \
       --title "$TITLE" \
       --menu "Choose a music directory" 20 70 20 )
     local iterator=1
@@ -247,14 +247,16 @@ bgm_check
 stats_check
 }
 music_startdelay() {
-startdelaytime=$(dialog \
-	--colors \
-	--title "Adjust the Fadeout time of the Relay		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos" \
-	--inputbox "Input the Start Delay Time:" 8 40 3>&1 1>&2 2>&3 3>&-)
-export startdelaytime
 oldstartdelaytime=$(grep "startdelay = " "$SCRIPT_LOC"|awk '{print $3}')
 export oldstartdelaytime
+startdelaytime=$(dialog --colors --title "Adjust the Music Start Delay" \
+	--inputbox "Input the Start Delay Time:" 8 40 "$oldstartdelaytime" 3>&1 1>&2 2>&3 3>&-)
+export startdelaytime
+if [ $startdelaytime ]; then
 perl -p -i -e 's/startdelay = $ENV{oldstartdelaytime}/startdelay = $ENV{startdelaytime}/g' $SCRIPT_LOC
+else
+	return
+fi
 bgm_check
 stats_check
 }
@@ -270,7 +272,7 @@ overlay_menu() {
 stats_check
 local choice
     while true; do
-        choice=$(dialog --colors --backtitle "Choose OverLay Settings Below		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos" --title " MAIN MENU " \
+        choice=$(dialog --colors --backtitle "Choose OverLay Settings Below		BGM Status $bgms		Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos	Resolution: $resolution" --title " MAIN MENU " \
             --ok-label OK --cancel-label Back \
             --menu "What action would you like to perform?" 25 85 20 \
             01 "Enable/Disable Overlay $ovs" \
@@ -316,10 +318,14 @@ oldfadeouttime=$(grep "overlay_fade_out_time = " "$SCRIPT_LOC"|awk '{print $3}')
 export oldfadeouttime
 fadeouttime=$(dialog \
 	--colors \
-	--title "Adjust the Fadeout time of the Relay		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos" \
-	--inputbox "Input the Relay Fadeout Time:" 8 40 3>&1 1>&2 2>&3 3>&-)
+	--title "Adjust the Fadeout time of the Relay" \
+	--inputbox "Input the Relay Fadeout Time:" 8 40 "$oldfadeouttime" 3>&1 1>&2 2>&3 3>&-)
 export fadeouttime
+if [ $fadeouttime ]; then
 perl -p -i -e 's/overlay_fade_out_time = $ENV{oldfadeouttime}/overlay_fade_out_time = $ENV{fadeouttime}/g' $SCRIPT_LOC
+else
+	return
+fi
 bgm_check
 stats_check
 }
@@ -346,7 +352,7 @@ CUR_VPOS=$(grep "overlay_y_offset =" "$SCRIPT_LOC"|awk '{print $3}')
 export CUR_VPOS
 NEW_VPOST='"0"'
 export NEW_VPOST
-NEW_VPOSB='"1048"'
+NEW_VPOSB=\"$((height-overlay_h_size))\"
 export NEW_VPOSB
 if [ $CUR_VPOS = \"0\" ]; then
 	sed -i -E "s/overlay_y_offset = ${CUR_VPOS}/overlay_y_offset = ${NEW_VPOSB}/g" $SCRIPT_LOC
@@ -361,7 +367,7 @@ CUR_HPOS=$(grep "overlay_x_offset =" "${SCRIPT_LOC}"|awk '{print $3}')
 export CUR_HPOS
 NEW_HPOSL='"0"'
 export NEW_HPOSL
-NEW_HPOSR='"1320"'
+NEW_HPOSR=\"$((width-overlay_w_size))\"
 export NEW_HPOSR
 if [ $CUR_HPOS = \"0\" ]; then
 	sed -i -E "s/overlay_x_offset = ${CUR_HPOS}/overlay_x_offset = ${NEW_HPOSR}/g" $SCRIPT_LOC
@@ -409,15 +415,15 @@ if grep -q "overlay_replace_newline = True" "$SCRIPT_LOC"; then
 else
 	ons=$disable
 fi
-CUR_HPOS=$(grep "overlay_x_offset =" "$SCRIPT_LOC"|awk '{print $3}')
-if [ $CUR_HPOS = \"0\" ]; then
+CUR_HPOS=$(grep "overlay_x_offset =" "$SCRIPT_LOC"|awk '{print $3}' | tr -d '"')
+if [ $CUR_HPOS = "0" ]; then
 	hpos="(\Z3Left\Zn)"
 else
 	hpos="(\Z3Right\Zn)"
 fi
-CUR_VPOS=$(grep "overlay_y_offset =" "$SCRIPT_LOC"|awk '{print $3}')
+CUR_VPOS=$(grep "overlay_y_offset =" "$SCRIPT_LOC"|awk '{print $3}' | tr -d '"')
 export CUR_VPOS
-if [ $CUR_VPOS = \"0\" ]; then
+if [ $CUR_VPOS = "0" ]; then
 	vpos="(\Z3Top\Zn)"
 else
 	vpos="(\Z3Bottom\Zn)"
@@ -441,7 +447,7 @@ elif grep -q 'musicdir = "/home/pi/RetroPie/roms/music/venom"' "$SCRIPT_LOC"; th
 else
 	CUR_PLY=$(grep "musicdir =" "$SCRIPT_LOC"|awk '{print $3}')
 	export CUR_PLY
-	ms="(\Z3$(basename $CUR_PLY | sed -e 's/^"//' -e 's/"$//')\Zn)"
+	ms="(\Z3$(basename $CUR_PLY |  | tr -d '"')\Zn)"
 fi
 vol=$(grep "maxvolume =" "$SCRIPT_LOC"|awk '{print $3}' | awk '{print $1 * 100}')
 vol="(\Z3$vol%\Zn)"
@@ -449,6 +455,28 @@ if [ -f /home/pi/RetroPie/splashscreens/JarvisExitOff.mp4 ]; then
 	exs=$disable
 else
 	exs=$enable
+fi
+width=$(fbset -fb /dev/fb0 | grep '\".*\"' | grep -m 1 -o '[0-9][0-9][0-9]\+x' | tr -d 'x')
+height=$(fbset -fb /dev/fb0 | grep '\".*\"' | grep -m 1 -o 'x[0-9][0-9][0-9]\+' | tr -d 'x')
+if [ "${width}" -ge 3800 ] && [ "${height}" -ge 2100 ]; then
+	res="2160p"
+elif [ "${width}" -ge 1900 ] && [ "${height}" -ge 1000 ] && [ "${width}" -le 2100 ] && [ "${height}" -le 3800 ]; then
+	res="1080p"
+elif [ "${width}" -ge 1000 ] && [ "${height}" -ge 600 ] && [ "${width}" -le 1900 ] && [ "${height}" -le 1000 ]; then
+	res="720p"
+elif [ "${height}" -le 599 ]; then
+	res="SD"
+fi
+resolution="(\Z3$res\Zn)"
+if [ "${width}" -ge 1900 ] && [ "${height}" -ge 1000 ]; then
+	overlay_w_size=600
+	overlay_h_size=32
+elif [ "${width}" -ge 1000 ] && [ "${height}" -ge 600 ] && [ "${width}" -le 1900 ] && [ "${height}" -le 1000 ]; then
+	overlay_w_size=300
+	overlay_h_size=21
+elif [ "${height}" -le 599 ]; then
+	overlay_w_size=150
+	overlay_h_size=15
 fi
 }
 bgm_check() {
@@ -463,7 +491,7 @@ else
 fi
 sleep 1
 }
-function disclaim() {
+disclaim() {
 DISCLAIMER=""
 DISCLAIMER="${DISCLAIMER}_______________________________________________________\n\n"
 DISCLAIMER="${DISCLAIMER}\n"
@@ -479,9 +507,12 @@ DISCLAIMER="${DISCLAIMER}Launch a game, the music will stop. Upon exiting out of
 DISCLAIMER="${DISCLAIMER}This also lets you turn off certain options for BGM.py such as, Enable/Disable the Overlay, Fadeout effect,\n"
 DISCLAIMER="${DISCLAIMER}Rounded Corners on Overlays, an option to turn the dashes, or hyphens, with a space on both sides\n"
 DISCLAIMER="${DISCLAIMER}\" - \"\n"
+DISCLAIMER="${DISCLAIMER}\n"
+DISCLAIMER="${DISCLAIMER}For now it works with 1080 resolution only for the overlay, if you are using a lower resolution I suggest setting the\n"
+DISCLAIMER="${DISCLAIMER}Overlay Postion to Top-Left so you can see it until can set it up for lower resolutions.\n"
 DISCLAIMER="${DISCLAIMER}and separate the song title to a separate newlines.\n"
 DISCLAIMER="${DISCLAIMER}https://github.com/ALLRiPPED/retropie_music_overlay\n"
-dialog --colors --backtitle "RetroPie Background Music Overlay Control Script v2.00		BGM On-Boot $bgmos		BGM Status $bgms		Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos" \
+dialog --colors --backtitle "RetroPie BGM Overlay Control Script v2.0		BGM Status $bgms		Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos	Resolution: $resolution" \
 --title "DISCLAIMER" \
 --msgbox "${DISCLAIMER}" 35 110
 }

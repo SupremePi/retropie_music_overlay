@@ -11,7 +11,7 @@ MUSIC_DIR="${MUSIC_DIR/#~/$HOME}"
 MENU_DIR="$HOME/RetroPie/retropiemenu"
 AUTOSTART="/opt/retropie/configs/all/autostart.sh"
 PYGAME_PKG="python3-pygame"
-PSUTIL_PKG="python3-psutil"
+PSUTIL_PKG="omxplayer python-pygame mpg123 imagemagick python-urllib3 libpng12-0 fbi python-pip python3-pip python3-psutil"
 cd $HOME
 
 infobox=""
@@ -30,6 +30,9 @@ infobox="${infobox}This also lets you turn off certain options for BGM.py such a
 infobox="${infobox}Rounded Corners on Overlays, an option to turn the dashes, or hyphens, with a space on both sides\n"
 infobox="${infobox}\" - \"\n"
 infobox="${infobox}and separate the song title to a separate new lines.\n"
+infobox="${infobox}\n"
+infobox="${infobox}For now it works with 1080 resolution only for the overlay, if you are using a lower resolution I suggest setting the\n"
+infobox="${infobox}Overlay Postion to Top-Left so you can see it until can set it up for lower resolutions."
 infobox="${infobox}\n\n"
 dialog --backtitle "RetroPie Background Music Overlay Install Script v2.00" \
 --title "RetroPie Background Music Overlay Install Script v2.00" \
@@ -110,7 +113,7 @@ Unable to install python-pygame, please update your system (\"sudo apt-get upgra
 	"
 	exit
 fi
-sudo apt-get install -y omxplayer python-pygame mpg123 imagemagick python-urllib3 libpng12-0 fbi python-pip python3-pip # to generate overlays
+sudo apt-get install -y $PSUTIL_PKG # to generate overlays
 sudo pip install requests gdown
 cd ~
 ##### Disable ODROID BGM script if it exists
@@ -129,7 +132,6 @@ if [[ $currentuser == "root" ]]; then
 fi
 ##### Download the files needed and install the script + utilities
 git clone https://github.com/ALLRiPPED/retropie_music_overlay.git
-git checkout tags/rpbgmov2.0
 cd $HOME/retropie_music_overlay
 if [[ $currentuser == "pi" ]]; then #Use pngview if using Raspberry Pi
 	sudo chmod +x pngview
