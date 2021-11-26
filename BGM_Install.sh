@@ -34,13 +34,13 @@ infobox="${infobox}\n"
 infobox="${infobox}For now it works with 1080 resolution only for the overlay, if you are using a lower resolution I suggest setting the\n"
 infobox="${infobox}Overlay Postion to Top-Left so you can see it until can set it up for lower resolutions."
 infobox="${infobox}\n\n"
-dialog --backtitle "RetroPie Background Music Overlay Install Script v2.00" \
---title "RetroPie Background Music Overlay Install Script v2.00" \
+dialog --backtitle "RetroPie Background Music Overlay Install Script v2.01" \
+--title "RetroPie Background Music Overlay Install Script v2.01" \
 --msgbox "${infobox}" 35 110
 main_menu() {
     local choice
     while true; do
-        choice=$(dialog --colors --backtitle "RetroPie Background Music Overlay Install Script v2.00" --title " MAIN MENU " \
+        choice=$(dialog --colors --backtitle "RetroPie Background Music Overlay Install Script v2.01" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "Choose An Option Below" 25 85 20 \
             01 "Minimal Install RPBGM Overlay No Music" \
