@@ -37,7 +37,7 @@ and shows up like this
 but there it is folks have fun
 
 ## Preview
-[![](https://i.imgur.com/2JqG2ZF.png)](https://youtu.be/5VVGCeC3-yw "Demo Preview")
+[![](https://i.imgur.com/WK4khHF.png)](https://youtu.be/5VVGCeC3-yw "Demo Preview")
 ## To install, This will Also Install Splash and Exit Screens
      wget -qO- https://git.io/JKum9 | bash
 
