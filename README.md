@@ -10,6 +10,7 @@ then
 
      git clone https://github.com/ALLRiPPED/retropie_music_overlay.git
      cd retropie_music_overlay
+     git checkout tags/rpbgmov2.0
      sudo chmod +x Quick_BGM_Install.sh
      ./Quick_BGM_Install.sh
 and it will do the following:<br>
