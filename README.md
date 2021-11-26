@@ -1,4 +1,4 @@
-## RetroPie Background Music Overlay v2.0
+## RetroPie Background Music Overlay v2.01
 This has all the files needed to install the background music script with added overlays!<br>
 If you would like to manually install this script:
 
@@ -10,7 +10,7 @@ then
 
      git clone https://github.com/ALLRiPPED/retropie_music_overlay.git
      cd retropie_music_overlay
-     git checkout tags/rpbgmov2.0
+     git checkout tags/rpbgmov2.01
      sudo chmod +x Quick_BGM_Install.sh
      ./Quick_BGM_Install.sh
 and it will do the following:<br>
