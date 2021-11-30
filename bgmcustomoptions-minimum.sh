@@ -400,10 +400,11 @@ DISCLAIMER="${DISCLAIMER}Launch a game, the music will stop. Upon exiting out of
 DISCLAIMER="${DISCLAIMER}This also lets you turn off certain options for BGM.py such as, Enable/Disable the Overlay, Fadeout effect,\n"
 DISCLAIMER="${DISCLAIMER}Rounded Corners on Overlays, an option to turn the dashes, or hyphens, with a space on both sides\n"
 DISCLAIMER="${DISCLAIMER}\" - \"\n"
+DISCLAIMER="${DISCLAIMER}and separate the song title to a separate new lines.\n"
 DISCLAIMER="${DISCLAIMER}\n"
-DISCLAIMER="${DISCLAIMER}For now it works with 1080 resolution only for the overlay, if you are using a lower resolution I suggest setting the\n"
-DISCLAIMER="${DISCLAIMER}Overlay Postion to Top-Left so you can see it until can set it up for lower resolutions.\n"
-DISCLAIMER="${DISCLAIMER}and separate the song title to a separate newlines.\n"
+DISCLAIMER="${DISCLAIMER}Overlay disappeared when you change resolutions? Set postion to Top-Left so you can see\n"
+DISCLAIMER="${DISCLAIMER}it then set it to desired postition, compatible with all resolutions.\n"
+DISCLAIMER="${DISCLAIMER}\n"
 DISCLAIMER="${DISCLAIMER}https://github.com/ALLRiPPED/retropie_music_overlay\n"
 dialog --colors --backtitle "RetroPie BGM Overlay Control Script v2.01		BGM Status $bgms		Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos	Resolution: $resolution" \
 --title "DISCLAIMER" \

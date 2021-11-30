@@ -18,7 +18,7 @@ musicdir = "/home/pi/.rpbgmo"
 maxvolume = 0.75
 volumefadespeed = 0.02
 # If true, this will cause the script to fade the music out and -stop- the song rather than pause it.
-restart = True
+restart = False
 # if this is not blank, this is the EXACT, CaSeSeNsAtIvE filename of the song you always want to play first on boot.
 startsong = ""
 

@@ -31,8 +31,8 @@ infobox="${infobox}Rounded Corners on Overlays, an option to turn the dashes, or
 infobox="${infobox}\" - \"\n"
 infobox="${infobox}and separate the song title to a separate new lines.\n"
 infobox="${infobox}\n"
-infobox="${infobox}For now it works with 1080 resolution only for the overlay, if you are using a lower resolution I suggest setting the\n"
-infobox="${infobox}Overlay Postion to Top-Left so you can see it until can set it up for lower resolutions."
+infobox="${infobox}Overlay disappeared when you change resolutions? Set postion to Top-Left so you can see\n"
+iinfobox="${infobox}it then set it to desired postition, compatible with all resolutions.\n"\n"
 infobox="${infobox}\n\n"
 dialog --backtitle "RetroPie Background Music Overlay Install Script v2.01" \
 --title "RetroPie Background Music Overlay Install Script v2.01" \
