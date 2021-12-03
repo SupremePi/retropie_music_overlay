@@ -198,6 +198,7 @@ cp $HOME/retropie_music_overlay/exit-splash /opt/retropie/configs/all/emulations
 cp $HOME/retropie_music_overlay/exit-splash /opt/retropie/configs/all/emulationstation/scripts/shutdown/
 mv -f /opt/retropie/configs/all/autostart.sh /opt/retropie/configs/all/autostart.sh.BACKUP
 cp $HOME/retropie_music_overlay/autostart.sh /opt/retropie/configs/all/
+if ! grep -q '/opt/retropie/configs/all/emulationstation/scripts/shutdown/exit-splash' "$AUTOSTART"; then
 	sed -i -E '$a\/opt/retropie/configs/all/emulationstation/scripts/shutdown/exit-splash' $AUTOSTART
 else echo "Exit Splash Already Set!"; fi
 cd $HOME
