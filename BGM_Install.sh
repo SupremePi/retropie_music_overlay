@@ -34,9 +34,11 @@ infobox="${infobox}\n"
 infobox="${infobox}Overlay disappeared when you change resolutions? Set postion to Top-Left so you can see\n"
 infobox="${infobox}it then set it to desired postition, compatible with all resolutions.\n\n"
 infobox="${infobox}\n\n"
+
 dialog --backtitle "RetroPie Background Music Overlay Install Script v2.01" \
---title "RetroPie Background Music Overlay Install Script v2.01" \
---msgbox "${infobox}" 35 110
+	--title "RetroPie Background Music Overlay Install Script v2.01" \
+	--msgbox "${infobox}" 35 110
+
 main_menu() {
     local choice
     while true; do
