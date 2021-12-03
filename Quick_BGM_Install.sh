@@ -182,8 +182,6 @@ else
 	cat $HOME/temp > $MENU_DIR/gamelist.xml
 	rm -f $HOME/temp
 fi
-if ! grep -q '#(nohup python /home/pi/.rpbgmo/BGM.py & > /dev/null 2>&1) &' "$AUTOSTART"; then sed -i 's/\#(nohup python/(nohup python/g' $AUTOSTART; fi
-if ! grep -q '(nohup python /home/pi/.rpbgmo/BGM.py > /dev/null 2>&1) &' "$AUTOSTART"; then sed -i -E '$ i\(nohup python /home/pi/.rpbgmo/BGM.py > /dev/null 2>&1) &' $AUTOSTART
 else echo "BGM already running at boot!"; fi
 ##### Setting up Splash & Exit Screens
 cp "$HOME/retropie_music_overlay/BGM Folder Diabled.mp3"  $INSTALL_DIR
@@ -196,6 +194,8 @@ cp $HOME/retropie_music_overlay/exit-splash /opt/retropie/configs/all/emulations
 cp $HOME/retropie_music_overlay/exit-splash /opt/retropie/configs/all/emulationstation/scripts/shutdown/
 mv -f /opt/retropie/configs/all/autostart.sh /opt/retropie/configs/all/autostart.sh.BACKUP
 cp $HOME/retropie_music_overlay/autostart.sh /opt/retropie/configs/all/
+if ! grep -q '#(nohup python /home/pi/.rpbgmo/BGM.py & > /dev/null 2>&1) &' "$AUTOSTART"; then sed -i 's/\#(nohup python/(nohup python/g' $AUTOSTART; fi
+if ! grep -q '(nohup python /home/pi/.rpbgmo/BGM.py > /dev/null 2>&1) &' "$AUTOSTART"; then sed -i -E '$ i\(nohup python /home/pi/.rpbgmo/BGM.py > /dev/null 2>&1) &' $AUTOSTART
 if ! grep -q '/opt/retropie/configs/all/emulationstation/scripts/shutdown/exit-splash' "$AUTOSTART"; then
 	sed -i -E '$a\/opt/retropie/configs/all/emulationstation/scripts/shutdown/exit-splash' $AUTOSTART
 else echo "Exit Splash Already Set!"; fi
