@@ -96,7 +96,7 @@ local choice
             01 "Enable/Disable Arcade Music" \
             02 "Enable/Disable BTTF Music" \
             03 "Enable/Disable Custom Music" \
-            04 "Enable/Disable Nostalgia Trip V3 Music" \
+            04 "Enable/Disable Nostalgia Music" \
             05 "Enable/Disable Supreme Team Music" \
             06 "Enable/Disable Ultimate Vs Fighter Music" \
             07 "Enable/Disable Venom Music" \
@@ -439,7 +439,7 @@ elif grep -q 'musicdir = "/home/pi/RetroPie/roms/music/custom"' "$SCRIPT_LOC"; t
 elif grep -q 'musicdir = "/home/pi/RetroPie/roms/music/st"' "$SCRIPT_LOC"; then
 	ms="(\Z3Supreme Team\Zn)"
 elif grep -q 'musicdir = "/home/pi/RetroPie/roms/music/nt"' "$SCRIPT_LOC"; then
-	ms="(\Z3Nostalgia Trip V3\Zn)"
+	ms="(\Z3Nostalgia\Zn)"
 elif grep -q 'musicdir = "/home/pi/RetroPie/roms/music/uvf"' "$SCRIPT_LOC"; then
 	ms="(\Z3Ultimate Vs Fighter\Zn)"
 elif grep -q 'musicdir = "/home/pi/RetroPie/roms/music/venom"' "$SCRIPT_LOC"; then
@@ -507,11 +507,11 @@ DISCLAIMER="${DISCLAIMER}Launch a game, the music will stop. Upon exiting out of
 DISCLAIMER="${DISCLAIMER}This also lets you turn off certain options for BGM.py such as, Enable/Disable the Overlay, Fadeout effect,\n"
 DISCLAIMER="${DISCLAIMER}Rounded Corners on Overlays, an option to turn the dashes, or hyphens, with a space on both sides\n"
 DISCLAIMER="${DISCLAIMER}\" - \"\n"
-DISCLAIMER="${DISCLAIMER}and separate the song title to a separate new lines.\n"
 DISCLAIMER="${DISCLAIMER}\n"
-DISCLAIMER="${DISCLAIMER}Overlay disappeared when you change resolutions? Set postion to Top-Left so you can see\n"
+DISCLAIMER="${DISCLAIMER}For now it works with 1080 resolution only for the overlay, if you are using a lower resolution I suggest setting the\n"
+DISCLAIMER="${DISCLAIMER}Overlay Disappeared when you change resolutions? Set postion to Top-Left so you can see\n"
 DISCLAIMER="${DISCLAIMER}it then set it to desired postition, compatible with all resolutions.\n"
-DISCLAIMER="${DISCLAIMER}\n"
+DISCLAIMER="${DISCLAIMER}and separate the song title to a separate newlines.\n"
 DISCLAIMER="${DISCLAIMER}https://github.com/ALLRiPPED/retropie_music_overlay\n"
 dialog --colors --backtitle "RetroPie BGM Overlay Control Script v2.01		BGM Status $bgms		Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos	Resolution: $resolution" \
 --title "DISCLAIMER" \
