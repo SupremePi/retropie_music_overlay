@@ -1,4 +1,7 @@
-## RetroPie Background Music Overlay v2.01
+## RetroPie Background Music Overlay v2.05
+## To install, This will Also Install Splash and Exit Screens
+     wget -qO- https://git.io/JKum9 | bash
+
 This has all the files needed to install the background music script with added overlays!<br>
 If you would like to manually install this script:
 
@@ -10,7 +13,7 @@ then
 
      git clone https://github.com/ALLRiPPED/retropie_music_overlay.git
      cd retropie_music_overlay
-     git checkout tags/rpbgmov2.01
+     git checkout tags/rpbgmov2.05
      sudo chmod +x Quick_BGM_Install.sh
      ./Quick_BGM_Install.sh
 and it will do the following:<br>
@@ -38,9 +41,6 @@ but there it is folks have fun
 
 ## Preview
 [![](https://i.imgur.com/WK4khHF.png)](https://youtu.be/5VVGCeC3-yw "Demo Preview")
-## To install, This will Also Install Splash and Exit Screens
-     wget -qO- https://git.io/JKum9 | bash
-
 ## Future Plans
 #### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change overlay and text colors.
 #### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change the size of the overlay.
