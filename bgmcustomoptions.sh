@@ -15,7 +15,7 @@ main_menu() {
 stats_check
     local choice
     while true; do
-        choice=$(dialog --colors --backtitle "RetroPie BGM Overlay Control Script v2.05		BGM Status $bgms		Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos		Resolution: $resolution" --title " MAIN MENU " \
+        choice=$(dialog --colors --backtitle "RetroPie BGM Overlay Control Script v2.05  BGM Status $bgms  Volume: $vol  Now Playing: $ms  Overlay POS: $vpos$hpos  Resolution: $resolution" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "Choose An Option Below" 25 85 20 \
             - "------------BGM Settings-------------" \
@@ -90,7 +90,7 @@ music_select() {
 stats_check
 local choice
     while true; do
-        choice=$(dialog --colors --backtitle "Select Your Music Choice Below		BGM Status $bgms		Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos		Resolution: $resolution" --title " MAIN MENU " \
+        choice=$(dialog --colors --backtitle "Select Your Music Choice Below  BGM Status $bgms  Volume: $vol  Now Playing: $ms  Overlay POS: $vpos$hpos  Resolution: $resolution" --title " MAIN MENU " \
             --ok-label OK --cancel-label Back \
             --menu "What action would you like to perform?" 25 85 20 \
             01 "Enable/Disable Arcade Music" \
@@ -193,7 +193,7 @@ stats_check
   while [ -z $SELECTION ]; do
     [[ "${CUR_DIR}" ]] && CUR_DIR="${CUR_DIR}"/
     local cmd=(dialog --colors \
-      --backtitle "$BACKTITLE | Current Folder: $CUR_DIR	BGM Status $bgms	Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos		Resolution: $resolution" \
+      --backtitle "$BACKTITLE | Current Folder: $CUR_DIR  BGM Status $bgms  Volume: $vol  Now Playing: $ms  Overlay POS: $vpos$hpos  Resolution: $resolution" \
       --title "$TITLE" \
       --menu "Choose a music directory" 20 70 20 )
     local iterator=1
@@ -272,7 +272,7 @@ overlay_menu() {
 stats_check
 local choice
     while true; do
-        choice=$(dialog --colors --backtitle "Choose OverLay Settings Below		BGM Status $bgms		Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos	Resolution: $resolution" --title " MAIN MENU " \
+        choice=$(dialog --colors --backtitle "Choose OverLay Settings Below  BGM Status $bgms  Volume: $vol  Now Playing: $ms  Overlay POS: $vpos$hpos  Resolution: $resolution" --title " MAIN MENU " \
             --ok-label OK --cancel-label Back \
             --menu "What action would you like to perform?" 25 85 20 \
             01 "Enable/Disable Overlay $ovs" \
@@ -507,13 +507,13 @@ DISCLAIMER="${DISCLAIMER}Launch a game, the music will stop. Upon exiting out of
 DISCLAIMER="${DISCLAIMER}This also lets you turn off certain options for BGM.py such as, Enable/Disable the Overlay, Fadeout effect,\n"
 DISCLAIMER="${DISCLAIMER}Rounded Corners on Overlays, an option to turn the dashes, or hyphens, with a space on both sides\n"
 DISCLAIMER="${DISCLAIMER}\" - \"\n"
+DISCLAIMER="${DISCLAIMER}and separate the song title to a separate new lines.\n"
 DISCLAIMER="${DISCLAIMER}\n"
-DISCLAIMER="${DISCLAIMER}For now it works with 1080 resolution only for the overlay, if you are using a lower resolution I suggest setting the\n"
-DISCLAIMER="${DISCLAIMER}Overlay Disappeared when you change resolutions? Set postion to Top-Left so you can see\n"
+DISCLAIMER="${DISCLAIMER}Overlay disappeared when you change resolutions? Set postion to Top-Left so you can see\n"
 DISCLAIMER="${DISCLAIMER}it then set it to desired postition, compatible with all resolutions.\n"
-DISCLAIMER="${DISCLAIMER}and separate the song title to a separate newlines.\n"
+DISCLAIMER="${DISCLAIMER}\n"
 DISCLAIMER="${DISCLAIMER}https://github.com/ALLRiPPED/retropie_music_overlay\n"
-dialog --colors --backtitle "RetroPie BGM Overlay Control Script v2.05		BGM Status $bgms		Volume: $vol		Now Playing: $ms		Overlay POS: $vpos$hpos	Resolution: $resolution" \
+dialog --colors --backtitle "RetroPie BGM Overlay Control Script v2.05  BGM Status $bgms  Volume: $vol  Now Playing: $ms  Overlay POS: $vpos$hpos  Resolution: $resolution" \
 --title "DISCLAIMER" \
 --msgbox "${DISCLAIMER}" 35 110
 }
