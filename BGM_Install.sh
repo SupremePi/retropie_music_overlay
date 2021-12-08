@@ -4,6 +4,7 @@
 #############################################
 # Install background music + overlay
 #############################################
+ver="v2.05"
 SCRIPT_LOC="$HOME/.rpbgmo/BGM.py"
 INSTALL_DIR=$(dirname "${SCRIPT_LOC}")
 MUSIC_DIR="$HOME/RetroPie/roms/music"
@@ -35,13 +36,13 @@ infobox="${infobox}\n"
 infobox="${infobox}Overlay disappeared when you change resolutions? Set postion to Top-Left so you can see\n"
 infobox="${infobox}it then set it to desired postition, compatible with all resolutions.\n\n"
 infobox="${infobox}\n\n"
-dialog --backtitle "RetroPie Background Music Overlay Install Script v2.05" \
-	--title "RetroPie Background Music Overlay Install Script v2.05" \
+dialog --backtitle "RetroPie Background Music Overlay Install Script $ver" \
+	--title "RetroPie Background Music Overlay Install Script $ver" \
 	--msgbox "${infobox}" 35 110
 main_menu() {
     local choice
     while true; do
-        choice=$(dialog --colors --backtitle "RetroPie Background Music Overlay Install Script v2.05" --title " MAIN MENU " \
+        choice=$(dialog --colors --backtitle "RetroPie Background Music Overlay Install Script $ver" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "Choose An Option Below" 25 85 20 \
             01 "Minimal Install RPBGM Overlay No Music" \
@@ -71,7 +72,7 @@ clear
 prep_work
 if [ -f "/home/pi/RetroPie/roms/music/arcade/arcade81.mp3" ]; then 	echo "Found Music!"; else
 	gdown https://drive.google.com/uc?id=1-GLqdCNpH0i3zKRAJDOWwxfaP2gVGaC4 -O $HOME/retropie_music_overlay/bgm.zip
-	unzip -foq $HOME/retropie_music_overlay/bgm.zip -d $HOME/RetroPie
+	unzip -oq $HOME/retropie_music_overlay/bgm.zip -d $HOME/RetroPie
 fi
 setup
 rebootq
@@ -83,12 +84,12 @@ clear
 prep_work
 if [ -f "/home/pi/RetroPie/roms/music/arcade/arcade81.mp3" ]; then echo "Found Music!"; else
 	gdown https://drive.google.com/uc?id=1-GLqdCNpH0i3zKRAJDOWwxfaP2gVGaC4 -O $HOME/retropie_music_overlay/bgm.zip
-	unzip -foq $HOME/retropie_music_overlay/bgm.zip -d $HOME/RetroPie
+	unzip -oq $HOME/retropie_music_overlay/bgm.zip -d $HOME/RetroPie
 fi
 if [ -f "/home/pi/RetroPie/roms/music/custom/3 Inches Of Blood- Deadly Sinners.mp3" ]; then echo "Found Music!"; else
 	gdown https://drive.google.com/uc?id=1-BHwb4oT6GiwpRv7l3VLHuJLsRxScGNV -O $HOME/retropie_music_overlay/custombgm.zip
-	unzip -foq $HOME/retropie_music_overlay/bgm.zip -d $HOME/RetroPie
-	unzip -foq $HOME/retropie_music_overlay/custombgm.zip -d $HOME/RetroPie
+	unzip -oq $HOME/retropie_music_overlay/bgm.zip -d $HOME/RetroPie
+	unzip -oq $HOME/retropie_music_overlay/custombgm.zip -d $HOME/RetroPie
 	rm -f $MUSIC_DIR/custom/'No Music in Folder.mp3'
 fi
 setup
@@ -118,7 +119,7 @@ currentuser=$(whoami) # Check user and then stop the script if root
 if [[ $currentuser == "root" ]]; then echo "DON'T RUN THIS SCRIPT AS ROOT! USE './BGM_Install.sh' !"; exit; fi
 ##### Download the files needed and install the script + utilities
 git clone https://github.com/ALLRiPPED/retropie_music_overlay.git
-git checkout tags/rpbgmov2.05
+git checkout tags/rpbgmo$ver
 cd $HOME/retropie_music_overlay
 if [[ $currentuser == "pi" ]]; then #Use pngview if using Raspberry Pi
 	sudo chmod +x pngview
