@@ -4,6 +4,7 @@
 #############################################
 # Install background music + overlay
 #############################################
+ver="v2.06"
 SCRIPT_LOC="$HOME/.rpbgmo/BGM.py"
 INSTALL_DIR=$(dirname "${SCRIPT_LOC}")
 MUSIC_DIR="$HOME/RetroPie/roms/music"
@@ -35,13 +36,13 @@ infobox="${infobox}\n"
 infobox="${infobox}Overlay disappeared when you change resolutions? Set postion to Top-Left so you can see\n"
 infobox="${infobox}it then set it to desired postition, compatible with all resolutions.\n\n"
 infobox="${infobox}\n\n"
-dialog --backtitle "RetroPie Background Music Overlay Install Script v2.05" \
-	--title "RetroPie Background Music Overlay Install Script v2.05" \
+dialog --backtitle "RetroPie Background Music Overlay Install Script $ver" \
+	--title "RetroPie Background Music Overlay Install Script $ver" \
 	--msgbox "${infobox}" 35 110
 main_menu() {
     local choice
     while true; do
-        choice=$(dialog --colors --backtitle "RetroPie Background Music Overlay Install Script v2.05" --title " MAIN MENU " \
+        choice=$(dialog --colors --backtitle "RetroPie Background Music Overlay Install Script $ver" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "Choose An Option Below" 25 85 20 \
             01 "Minimal Install RPBGM Overlay No Music" \

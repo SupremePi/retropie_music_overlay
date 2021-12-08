@@ -1,4 +1,4 @@
-## RetroPie Background Music Overlay v2.05
+## RetroPie Background Music Overlay v2.06
 ## To install, This will Also Install Splash and Exit Screens
      wget -qO- https://git.io/JKum9 | bash
 
@@ -13,7 +13,7 @@ then
 
      git clone https://github.com/ALLRiPPED/retropie_music_overlay.git
      cd retropie_music_overlay
-     git checkout tags/rpbgmov2.05
+     git checkout tags/rpbgmov2.06
      sudo chmod +x Quick_BGM_Install.sh
      ./Quick_BGM_Install.sh
 and it will do the following:<br>

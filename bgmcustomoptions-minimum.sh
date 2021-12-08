@@ -1,12 +1,13 @@
 #!/bin/bash
 #RetroPie Background Music Overlay Control Script Version 2.05
+ver="v2.06"
 SCRIPT_LOC="/home/pi/.rpbgmo/BGM.py"
 INSTALL_DIR=$(dirname "${SCRIPT_LOC}")
 MUSIC_DIR="/home/pi/RetroPie/roms/music"
 MUSIC_DIR="${MUSIC_DIR/#~/$HOME}"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-BACKTITLE="RetroPie BGM Overlay Control Script v2.05"
-TITLE="RetroPie Background Music Overlay v2.05"
+BACKTITLE="RetroPie BGM Overlay Control Script $ver"
+TITLE="RetroPie Background Music Overlay $ver"
 AUTOSTART="/opt/retropie/configs/all/autostart.sh"
 LOG_LOC="/dev/shm/retropiemo.log"
 OLDIFS=$IFS
@@ -15,7 +16,7 @@ main_menu() {
 stats_check
     local choice
     while true; do
-        choice=$(dialog --colors --backtitle "RetroPie BGM Overlay Control Script v2.05  BGM Status $bgms  Volume: $vol  Now Playing: $ms  Overlay POS: $vpos$hpos  Resolution: $resolution" --title " MAIN MENU " \
+        choice=$(dialog --colors --backtitle "RetroPie BGM Overlay Control Script $ver  BGM Status $bgms  Volume: $vol  Now Playing: $ms  Overlay POS: $vpos$hpos  Resolution: $resolution" --title " MAIN MENU " \
             --ok-label OK --cancel-label Exit \
             --menu "Choose An Option Below" 25 85 20 \
             - "------------BGM Settings-------------" \
@@ -406,7 +407,7 @@ DISCLAIMER="${DISCLAIMER}Overlay disappeared when you change resolutions? Set po
 DISCLAIMER="${DISCLAIMER}it then set it to desired postition, compatible with all resolutions.\n"
 DISCLAIMER="${DISCLAIMER}\n"
 DISCLAIMER="${DISCLAIMER}https://github.com/ALLRiPPED/retropie_music_overlay\n"
-dialog --colors --backtitle "RetroPie BGM Overlay Control Script v2.05  BGM Status $bgms  Volume: $vol  Now Playing: $ms  Overlay POS: $vpos$hpos  Resolution: $resolution" \
+dialog --colors --backtitle "RetroPie BGM Overlay Control Script $ver  BGM Status $bgms  Volume: $vol  Now Playing: $ms  Overlay POS: $vpos$hpos  Resolution: $resolution" \
 --title "DISCLAIMER" \
 --msgbox "${DISCLAIMER}" 35 110
 }
