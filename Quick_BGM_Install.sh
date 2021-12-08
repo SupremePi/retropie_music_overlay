@@ -71,7 +71,7 @@ clear
 prep_work
 if [ -f "/home/pi/RetroPie/roms/music/arcade/arcade81.mp3" ]; then 	echo "Found Music!"; else
 	gdown https://drive.google.com/uc?id=1-GLqdCNpH0i3zKRAJDOWwxfaP2gVGaC4 -O $HOME/retropie_music_overlay/bgm.zip
-	unzip -foq $HOME/retropie_music_overlay/bgm.zip -d $HOME/RetroPie
+	unzip -oq $HOME/retropie_music_overlay/bgm.zip -d $HOME/RetroPie
 fi
 setup
 rebootq
@@ -83,12 +83,12 @@ clear
 prep_work
 if [ -f "/home/pi/RetroPie/roms/music/arcade/arcade81.mp3" ]; then echo "Found Music!"; else
 	gdown https://drive.google.com/uc?id=1-GLqdCNpH0i3zKRAJDOWwxfaP2gVGaC4 -O $HOME/retropie_music_overlay/bgm.zip
-	unzip -foq $HOME/retropie_music_overlay/bgm.zip -d $HOME/RetroPie
+	unzip -oq $HOME/retropie_music_overlay/bgm.zip -d $HOME/RetroPie
 fi
 if [ -f "/home/pi/RetroPie/roms/music/custom/3 Inches Of Blood- Deadly Sinners.mp3" ]; then echo "Found Music!"; else
 	gdown https://drive.google.com/uc?id=1-BHwb4oT6GiwpRv7l3VLHuJLsRxScGNV -O $HOME/retropie_music_overlay/custombgm.zip
-	unzip -foq $HOME/retropie_music_overlay/bgm.zip -d $HOME/RetroPie
-	unzip -foq $HOME/retropie_music_overlay/custombgm.zip -d $HOME/RetroPie
+	unzip -oq $HOME/retropie_music_overlay/bgm.zip -d $HOME/RetroPie
+	unzip -oq $HOME/retropie_music_overlay/custombgm.zip -d $HOME/RetroPie
 	rm -f $MUSIC_DIR/custom/'No Music in Folder.mp3'
 fi
 setup
