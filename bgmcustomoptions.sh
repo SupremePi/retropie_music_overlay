@@ -481,8 +481,7 @@ elif [ "${height}" -le 599 ]; then
 fi
 }
 bgm_check() {
-if [ -f "$INSTALL_DIR"/DisableMusic ]
-then
+if [ -f "$INSTALL_DIR"/DisableMusic ]; then
 	echo "Background Music Disabled!"
 else
 	pgrep -f "python "$SCRIPT_LOC |xargs sudo kill -9 > /dev/null 2>&1 &
