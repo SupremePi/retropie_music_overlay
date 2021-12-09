@@ -1,6 +1,6 @@
 #!/bin/bash
-#RetroPie Background Music Overlay Control Script Version 2.05
-ver="v2.06"
+#RetroPie Background Music Overlay Control Script
+ver="v2.10"
 SCRIPT_LOC="/home/pi/.rpbgmo/BGM.py"
 INSTALL_DIR=$(dirname "${SCRIPT_LOC}")
 MUSIC_DIR="/home/pi/RetroPie/roms/music"
