@@ -288,7 +288,6 @@ stats_check
 stats_check() {
 enable="(\Z2Enabled\Zn)"
 disable="(\Z1Disabled\Zn)"
-
 if [ -f /home/pi/.rpbgmo/DisableMusic ]; then
 	bgms=$disable
 else
@@ -374,8 +373,7 @@ elif [ "${height}" -le 599 ]; then
 fi
 }
 bgm_check() {
-if [ -f "$INSTALL_DIR"/DisableMusic ]
-then
+if [ -f "$INSTALL_DIR"/DisableMusic ]; then
 	echo "Background Music Disabled!"
 else
 	pgrep -f "python "$SCRIPT_LOC |xargs sudo kill -9 > /dev/null 2>&1 &
@@ -407,7 +405,7 @@ DISCLAIMER="${DISCLAIMER}Overlay disappeared when you change resolutions? Set po
 DISCLAIMER="${DISCLAIMER}it then set it to desired postition, compatible with all resolutions.\n"
 DISCLAIMER="${DISCLAIMER}\n"
 DISCLAIMER="${DISCLAIMER}https://github.com/ALLRiPPED/retropie_music_overlay\n"
-dialog --colors --backtitle "RetroPie BGM Overlay Control Script $ver  BGM Status $bgms  Volume: $vol  Now Playing: $ms  Overlay POS: $vpos$hpos  Resolution: $resolution" \
+dialog --colors --backtitle "RetroPie BGM Overlay Control Script $ver  BGM Status $bgms  Volume: $vol  Music: $ms  Overlay: $vpos$hpos  Resolution: $resolution" \
 --title "DISCLAIMER" \
 --msgbox "${DISCLAIMER}" 35 110
 }
