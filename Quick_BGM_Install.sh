@@ -70,7 +70,7 @@ install_bgm_1() {
 minimum=0
 clear
 prep_work
-if [ -f "/home/pi/RetroPie/roms/music/arcade/arcade81.mp3" ]; then 	echo "Found Music!"; else
+if [ -f "$MUSIC_DIR/arcade/arcade81.mp3" ]; then echo "Found Music!"; else
 	gdown https://drive.google.com/uc?id=1-GLqdCNpH0i3zKRAJDOWwxfaP2gVGaC4 -O $HOME/retropie_music_overlay/bgm.zip
 	unzip -uq $HOME/retropie_music_overlay/bgm.zip -d $HOME/RetroPie
 fi
@@ -82,11 +82,11 @@ install_bgm_2() {
 minimum=0
 clear
 prep_work
-if [ -f "/home/pi/RetroPie/roms/music/arcade/arcade81.mp3" ]; then echo "Found Music!"; else
+if [ -f "$MUSIC_DIR/arcade/arcade81.mp3" ]; then echo "Found Music!"; else
 	gdown https://drive.google.com/uc?id=1-GLqdCNpH0i3zKRAJDOWwxfaP2gVGaC4 -O $HOME/retropie_music_overlay/bgm.zip
 	unzip -uq $HOME/retropie_music_overlay/bgm.zip -d $HOME/RetroPie
 fi
-if [ -f "/home/pi/RetroPie/roms/music/custom/3 Inches Of Blood- Deadly Sinners.mp3" ]; then echo "Found Music!"; else
+if [ -f "$MUSIC_DIR/custom/3 Inches Of Blood- Deadly Sinners.mp3" ]; then echo "Found Music!"; else
 	gdown https://drive.google.com/uc?id=1-BHwb4oT6GiwpRv7l3VLHuJLsRxScGNV -O $HOME/retropie_music_overlay/custombgm.zip
 	unzip -uq $HOME/retropie_music_overlay/custombgm.zip -d $HOME/RetroPie
 	rm -f $MUSIC_DIR/custom/'No Music in Folder.mp3'
@@ -135,9 +135,6 @@ sudo chmod +x $HOME/retropie_music_overlay/autostart.sh
 sudo chown $currentuser:$currentuser $HOME/retropie_music_overlay/BGM.py
 sudo chown $currentuser:$currentuser $HOME/retropie_music_overlay/exit-splash
 sudo chown $currentuser:$currentuser $HOME/retropie_music_overlay/autostart.sh
-sudo chmod 0777 $HOME/retropie_music_overlay/BGM.py
-sudo chmod 0777 $HOME/retropie_music_overlay/exit-splash
-sudo chmod 0777 $HOME/retropie_music_overlay/autostart.sh
 if [ ! -d  "$MUSIC_DIR" ]; then mkdir $MUSIC_DIR; else echo "$MUSIC_DIR Exists!"; fi	
 if [ -f "$HOME/BGM.py" ]; then rm -f $HOME/BGM.py
 elif [ -f "$MUSIC_DIR/BGM.py" ]; then rm -f $MUSIC_DIR/BGM.py
@@ -159,12 +156,10 @@ if [ -d "$STMENU_DIR" ]; then RP_MENU=$STMENU_DIR; else RP_MENU=$MENU_DIR; fi
 if [ "$minimum" = "1" ]; then
 	sudo chmod +x $HOME/retropie_music_overlay/bgmcustomoptions-minimum.sh
 	sudo chown $currentuser:$currentuser $HOME/retropie_music_overlay/bgmcustomoptions-minimum.sh
-	sudo chmod 0777 $HOME/retropie_music_overlay/bgmcustomoptions-minimum.sh
 	cp bgmcustomoptions-minimum.sh $RP_MENU/bgmcustomoptions.sh
 else
 	sudo chmod +x $HOME/retropie_music_overlay/bgmcustomoptions.sh
 	sudo chown $currentuser:$currentuser $HOME/retropie_music_overlay/bgmcustomoptions.sh
-	sudo chmod 0777 $HOME/retropie_music_overlay/bgmcustomoptions.sh
 	cp bgmcustomoptions.sh $RP_MENU
 fi
 if [ ! -s $MENU_DIR/gamelist.xml ]; then sudo rm -f $MENU_DIR/gamelist.xml; fi

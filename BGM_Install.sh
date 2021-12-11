@@ -118,8 +118,8 @@ currentuser=$(whoami) # Check user and then stop the script if root
 if [[ $currentuser == "root" ]]; then echo "DON'T RUN THIS SCRIPT AS ROOT! USE './BGM_Install.sh' !"; exit; fi
 ##### Download the files needed and install the script + utilities
 git clone https://github.com/ALLRiPPED/retropie_music_overlay.git
-git checkout tags/rpbgmo$ver
 cd $HOME/retropie_music_overlay
+git checkout tags/rpbgmo$ver
 if [[ $currentuser == "pi" ]]; then #Use pngview if using Raspberry Pi
 	sudo chmod +x pngview
 	sudo cp pngview /usr/local/bin/
@@ -137,9 +137,6 @@ sudo chmod +x $HOME/retropie_music_overlay/autostart.sh
 sudo chown $currentuser:$currentuser $HOME/retropie_music_overlay/BGM.py
 sudo chown $currentuser:$currentuser $HOME/retropie_music_overlay/exit-splash
 sudo chown $currentuser:$currentuser $HOME/retropie_music_overlay/autostart.sh
-sudo chmod 0777 $HOME/retropie_music_overlay/BGM.py
-sudo chmod 0777 $HOME/retropie_music_overlay/exit-splash
-sudo chmod 0777 $HOME/retropie_music_overlay/autostart.sh
 if [ ! -d  "$MUSIC_DIR" ]; then mkdir $MUSIC_DIR; else echo "$MUSIC_DIR Exists!"; fi	
 if [ -f "$HOME/BGM.py" ]; then rm -f $HOME/BGM.py
 elif [ -f "$MUSIC_DIR/BGM.py" ]; then rm -f $MUSIC_DIR/BGM.py
@@ -161,12 +158,10 @@ if [ -d "$STMENU_DIR" ]; then RP_MENU=$STMENU_DIR; else RP_MENU=$MENU_DIR; fi
 if [ "$minimum" = "1" ]; then
 	sudo chmod +x $HOME/retropie_music_overlay/bgmcustomoptions-minimum.sh
 	sudo chown $currentuser:$currentuser $HOME/retropie_music_overlay/bgmcustomoptions-minimum.sh
-	sudo chmod 0777 $HOME/retropie_music_overlay/bgmcustomoptions-minimum.sh
 	cp bgmcustomoptions-minimum.sh $RP_MENU/bgmcustomoptions.sh
 else
 	sudo chmod +x $HOME/retropie_music_overlay/bgmcustomoptions.sh
 	sudo chown $currentuser:$currentuser $HOME/retropie_music_overlay/bgmcustomoptions.sh
-	sudo chmod 0777 $HOME/retropie_music_overlay/bgmcustomoptions.sh
 	cp bgmcustomoptions.sh $RP_MENU
 fi
 if [ ! -s $MENU_DIR/gamelist.xml ]; then sudo rm -f $MENU_DIR/gamelist.xml; fi
