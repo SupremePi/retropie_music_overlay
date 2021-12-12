@@ -59,7 +59,6 @@ main_menu() {
 }
 install_bgm() {
 minimum=1
-ST_STATUS=0
 clear
 prep_work
 setup
@@ -180,7 +179,7 @@ else
 	rm -f $HOME/temp
 fi
 ##### Setting up Splash & Exit Screens
-cp "$HOME/retropie_music_overlay/BGM Folder Diabled.mp3"  $INSTALL_DIR
+cp "$HOME/retropie_music_overlay/BGM Folder Diabled.mp3" $INSTALL_DIR
 cp $HOME/retropie_music_overlay/splashscreens/JarvisSplash.mp4 $HOME/RetroPie/splashscreens/
 cp $HOME/retropie_music_overlay/splashscreens/JarvisExit.mp4 $HOME/RetroPie/splashscreens/
 sudo sed -i -E "s/.*/\/home\/pi\/RetroPie\/splashscreens\/JarvisSplash.mp4/" /etc/splashscreen.list
