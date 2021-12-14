@@ -4,7 +4,7 @@
 #############################################
 # Install background music + overlay
 #############################################
-ver="v2.10"
+ver="v2.11"
 SCRIPT_LOC="$HOME/.rpbgmo/BGM.py"
 INSTALL_DIR=$(dirname "${SCRIPT_LOC}")
 MUSIC_DIR="$HOME/RetroPie/roms/music"
