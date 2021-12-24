@@ -1,6 +1,6 @@
 ## RetroPie Background Music Overlay v2.11
 ## To install, This will Also Install Splash and Exit Screens
-     wget -qO- https://git.io/JKum9 | bash
+     curl -sSL https://git.io/JKum9 | bash
 
 This has all the files needed to install the background music script with added overlays!<br>
 If you would like to manually install this script:
