@@ -1,4 +1,4 @@
-## RetroPie Background Music Overlay v2.11
+## RetroPie Background Music Overlay v2.20
 ## To install, This will Also Install Splash and Exit Screens
      curl -sSL https://git.io/JKum9 | bash
 
@@ -24,7 +24,7 @@ Add a menu items in the retropie section to enable/disable the music and set vol
 Picture here:<br>
 <img src="https://i.imgur.com/TcohoFg.png" alt="Preview" width="400" target="_blank"/><br>
 ## More Information
-This is apart of a background music script I have been working on, does something similar to Kio Diekin's theme and music script, but mine only deals in music, and of course the splash screens installation.<br>
+This is apart of a background music script I have been working on, does something similar to Kio Diekin's theme and music script, but this one only deals in music, [TAMPO](https://github.com/ALLRiPPED/tampo) does themes, music, and more.<br>
 This is open source and free for anyone to use, just drop me a little credit is all I ask.<br>
 the script has a one line install, so no need to clone a repo (it does all that for you), it has one of two ways to install, with my own custom music included and without so you can add your own, the first one included is Arcade Music ambient background noises from the arcades plus some arcade based music, second we have Back to the Future, this was taken from MBM's Pleasure Paradise Back To The Future build, third is Nostalgia Trip V3, from Damaso's NTv3 build, fourth is Supreme Team, this music is found on a base image of Supreme Ultra V1, fifth is Ultimate Vs Fighter music from David Ball's UVF build, and last, but definitely not least we have Kiodiekin's music from Venom ( I think I got it from the 327gb build).<br>
 Now if you so choose to install my custom music what you will get is the music Soundtrack from the game Brutal Legends, starring Jack Black.<br>
@@ -42,11 +42,10 @@ but there it is folks have fun
 ## Preview
 [![](https://i.imgur.com/WK4khHF.png)](https://youtu.be/5VVGCeC3-yw "Demo Preview")
 ## Future Plans
-#### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change overlay and text colors.
-#### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to the control script to change the size of the overlay.
-#### Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to the control script to change the placement of the overlay (top, bottom, right, left).~~ 
-#### Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to the control script to change the music directory to a custom location.~~
-#### Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to the control script to change how long to hide the overlay in seconds.~~
+#### Not Done. <img src="https://i.imgur.com/Jp2FKHX.png" alt="Not Done" style="float: left; margin-right: 10px;" /> Adding the ability to change overlay and text colors.
+#### Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to change the placement of the overlay (top, bottom, right, left).~~ 
+#### Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to change the music directory to a custom location.~~
+#### Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to change how long to hide the overlay in seconds.~~
 #### Done. <img src="https://i.imgur.com/HtSxEyc.png" alt="Done" style="float: left; margin-right: 10px;" /> ~~Adding the ability to turn the exit splash on or off.~~
 
 ## Color Section

@@ -1,6 +1,6 @@
 #!/bin/bash
 #RetroPie Background Music Overlay Control Script
-ver="v2.11"
+ver="v2.20"
 SCRIPT_LOC="/home/pi/.rpbgmo/BGM.py"
 INSTALL_DIR=$(dirname "${SCRIPT_LOC}")
 MUSIC_DIR="/home/pi/RetroPie/roms/music"
@@ -29,8 +29,7 @@ stats_check
             - "-----------Overlay Settings----------" \
             07 "Overlay Settings" \
             - "----------------Other----------------" \
-            08 "Enable/Disable Exit Splash $exs" \
-            09 "View RetroPie BGM Overlay Disclamer" \
+            08 "View RetroPie BGM Overlay Disclamer" \
             2>&1 > /dev/tty)
         case "$choice" in
             01) enable_music  ;;
@@ -40,8 +39,7 @@ stats_check
             05) disable_music_dir ;;
             06) music_startdelay  ;;
             07) overlay_menu  ;;
-            08) exit_splash  ;;
-            09) disclaim  ;;
+            08) disclaim  ;;
             -) none  ;;
             +) nono  ;;
             *) break  ;;
@@ -166,14 +164,6 @@ else
 	return
 fi
 bgm_check
-stats_check
-}
-exit_splash() {
-if [ -f /home/pi/RetroPie/splashscreens/JarvisExitOff.mp4 ]; then
-	sudo mv -f /home/pi/RetroPie/splashscreens/JarvisExitOff.mp4 /home/pi/RetroPie/splashscreens/JarvisExit.mp4
-else
-	sudo mv -f /home/pi/RetroPie/splashscreens/JarvisExit.mp4 /home/pi/RetroPie/splashscreens/JarvisExitOff.mp4
-fi
 stats_check
 }
 overlay_menu() {
@@ -344,11 +334,6 @@ else
 fi
 vol=$(grep "maxvolume =" "$SCRIPT_LOC"|awk '{print $3}' | awk '{print $1 * 100}')
 vol="(\Z3$vol%\Zn)"
-if [ -f /home/pi/RetroPie/splashscreens/JarvisExitOff.mp4 ]; then
-	exs=$disable
-else
-	exs=$enable
-fi
 width=$(fbset -fb /dev/fb0 | grep '\".*\"' | grep -m 1 -o '[0-9][0-9][0-9]\+x' | tr -d 'x')
 height=$(fbset -fb /dev/fb0 | grep '\".*\"' | grep -m 1 -o 'x[0-9][0-9][0-9]\+' | tr -d 'x')
 if [ "${width}" -ge 3800 ] && [ "${height}" -ge 2100 ]; then
@@ -390,16 +375,13 @@ DISCLAIMER="${DISCLAIMER}\n"
 DISCLAIMER="${DISCLAIMER}RetroPie Background Music Overlay Control Script\n\n"
 DISCLAIMER="${DISCLAIMER}The background music python script has been installed on this system.\n"
 DISCLAIMER="${DISCLAIMER}This script will play MP3 & OGG files during menu navigation in either Emulation Station or Attract mode.\n"
-DISCLAIMER="${DISCLAIMER}A Few special new folders have been created in the /home/pi/RetroPie/roms/music directory called \"arcade\"\n"
-DISCLAIMER="${DISCLAIMER}(Arcade), \"bttf\" (Back To The Future), \"st\" (Supremem Team), \"uvf\" (Ultimate Vs Fighter), \"venom\" (Venom),\n"
-DISCLAIMER="${DISCLAIMER}and this last one \"custom\" (Custom) is for placing your own MP3 files into.\n"
 DISCLAIMER="${DISCLAIMER}Also included in this script is the ability to select between the different music folders you can disable them all\n"
 DISCLAIMER="${DISCLAIMER}or enable them, but only one at a time, the music will then automatically start playing.\n"
 DISCLAIMER="${DISCLAIMER}Launch a game, the music will stop. Upon exiting out of the game the music will begin playing again.\n"
 DISCLAIMER="${DISCLAIMER}This also lets you turn off certain options for BGM.py such as, Enable/Disable the Overlay, Fadeout effect,\n"
 DISCLAIMER="${DISCLAIMER}Rounded Corners on Overlays, an option to turn the dashes, or hyphens, with a space on both sides\n"
 DISCLAIMER="${DISCLAIMER}\" - \"\n"
-DISCLAIMER="${DISCLAIMER}and separate the song title to a separate new lines.\n"
+DISCLAIMER="${DISCLAIMER}and separate the song title to separate new line(s).\n"
 DISCLAIMER="${DISCLAIMER}\n"
 DISCLAIMER="${DISCLAIMER}Overlay disappeared when you change resolutions? Set postion to Top-Left so you can see\n"
 DISCLAIMER="${DISCLAIMER}it then set it to desired postition, compatible with all resolutions.\n"
