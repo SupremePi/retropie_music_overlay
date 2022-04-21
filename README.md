@@ -5,7 +5,7 @@
 This has all the files needed to install the background music script with added overlays!<br>
 If you would like to manually install this script:
 
-     sudo apt-get install omxplayer python-pygame mpg123 imagemagick python-urllib3 libpng12-0 fbi python-pip python3-pip
+     sudo apt-get install omxplayer python3-pygame python-pygame mpg123 imagemagick python-urllib3 libpng12-0 fbi python-pip python3-pip
 &
 
      pip install requests gdown
@@ -13,7 +13,7 @@ then
 
      git clone https://github.com/ALLRiPPED/retropie_music_overlay.git
      cd retropie_music_overlay
-     git checkout tags/rpbgmov2.11
+     git checkout tags/rpbgmov2.20
      sudo chmod +x Quick_BGM_Install.sh
      ./Quick_BGM_Install.sh
 and it will do the following:<br>
