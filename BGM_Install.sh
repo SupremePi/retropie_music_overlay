@@ -1,6 +1,6 @@
 #!/bin/bash
 # BGM_Install.sh
-# Updated script by thepitster https://github.com/ALLRiPPED/ 
+# Updated script by thepitster https://github.com/SupremePi/ 
 #############################################
 # Install background music + overlay
 #############################################
@@ -115,7 +115,7 @@ if [ -d "$HOME/retropie_music_overlay" ]; then
 fi
 currentuser=$(whoami)
 if [[ $currentuser == "root" ]]; then echo "DON'T RUN THIS SCRIPT AS ROOT! USE './BGM_Install.sh' !"; exit; fi
-git clone https://github.com/ALLRiPPED/retropie_music_overlay.git
+git clone https://github.com/SupremePi/retropie_music_overlay.git
 cd $HOME/retropie_music_overlay
 git checkout tags/supreme_bgm$ver
 if [[ $currentuser == "pi" ]]; then
@@ -148,17 +148,17 @@ cp -f /opt/retropie/configs/all/autostart.sh /opt/retropie/configs/all/autostart
 cp -f /opt/retropie/configs/all/autostart.sh /opt/retropie/configs/all/runcommand-onstart.sh.SUPREME
 cp -f /opt/retropie/configs/all/autostart.sh /opt/retropie/configs/all/runcommand-onend.sh.SUPREME
 
-if [ -f "/etc/sbu/sbu.sh" ]; then RP_MENU=$STMENU_DIR; else RP_MENU=$MENU_DIR; fi
-if [ -f "$MENU_DIR/bgmcustomoptions.sh" ]; then sudo rm -f $MENU_DIR/bgmcustomoptions.sh; fi
-if [ -f "$STMENU_DIR/bgmcustomoptions.sh" ]; then sudo rm -f $STMENU_DIR/bgmcustomoptions.sh; fi
+if [ -d "STMENU_DIR" ]; then RP_MENU=$STMENU_DIR; else RP_MENU=$MENU_DIR; fi
+if [ -f "$MENU_DIR/bgmcustomoptions.sh" ]; then sudo rm -f $MENU_DIR/backgroundmusic.sh; fi
+if [ -f "$STMENU_DIR/bgmcustomoptions.sh" ]; then sudo rm -f $STMENU_DIR/backgroundmusic.sh; fi
 if [ "$minimum" = "1" ]; then
 	sudo chmod +x $HOME/retropie_music_overlay/bgmcustomoptions-minimum.sh
 	sudo chown $currentuser:$currentuser $HOME/retropie_music_overlay/bgmcustomoptions-minimum.sh
-	cp bgmcustomoptions-minimum.sh $RP_MENU/bgmcustomoptions.sh
+	cp bgmcustomoptions-minimum.sh $RP_MENU/backgroundmusic.sh
 else
 	sudo chmod +x $HOME/retropie_music_overlay/bgmcustomoptions.sh
 	sudo chown $currentuser:$currentuser $HOME/retropie_music_overlay/bgmcustomoptions.sh
-	cp bgmcustomoptions.sh $RP_MENU
+	cp bgmcustomoptions.sh $RP_MENU/backgroundmusic.sh
 fi
 if [ ! -s $MENU_DIR/gamelist.xml ]; then sudo rm -f $MENU_DIR/gamelist.xml; fi
 if [ ! -f "$MENU_DIR/gamelist.xml" ]; then cp /opt/retropie/configs/all/emulationstation/gamelists/retropie/gamelist.xml $MENU_DIR/gamelist.xml; fi
