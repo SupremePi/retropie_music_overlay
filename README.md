@@ -1,19 +1,19 @@
-## RetroPie Background Music Overlay v2.20
+## RetroPie Background Music Overlay v2.21
 ## To install, This will Also Install Splash and Exit Screens
-     curl -sSL https://git.io/JKum9 | bash
+     curl -sSL https://raw.githubusercontent.com/SupremePi/retropie_music_overlay/master/BGM_Install.sh | bash
 
 This has all the files needed to install the background music script with added overlays!<br>
 If you would like to manually install this script:
 
-     sudo apt-get install omxplayer python3-pygame python-pygame mpg123 imagemagick python-urllib3 libpng12-0 fbi python-pip python3-pip
+     sudo apt-get install mpv python3-pygame python-pygame mpg123 imagemagick python-urllib3 libpng12-0 fbi python-pip python3-pip
 &
 
      pip install requests gdown
 then
 
-     git clone https://github.com/ALLRiPPED/retropie_music_overlay.git
+     git clone https://github.com/SupremePi/retropie_music_overlay.git
      cd retropie_music_overlay
-     git checkout tags/rpbgmov2.20
+     git checkout tags/rpbgmov2.21
      sudo chmod +x Quick_BGM_Install.sh
      ./Quick_BGM_Install.sh
 and it will do the following:<br>

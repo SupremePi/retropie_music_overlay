@@ -15,7 +15,7 @@ AUTOSTART="/opt/retropie/configs/all/autostart.sh"
 RUNONSTART="/opt/retropie/configs/all/runcommand-onstart.sh"
 RUNONEND="/opt/retropie/configs/all/runcommand-onend.sh"
 PYGAME_PKG="python3-pygame"
-PSUTIL_PKG="omxplayer python-pygame mpg123 imagemagick python-urllib3 libpng12-0 fbi python-pip python3-pip python3-psutil"
+PSUTIL_PKG="mpv python-pygame mpg123 imagemagick python-urllib3 libpng12-0 fbi python-pip python3-pip python3-psutil"
 cd $HOME
 
 infobox=""
@@ -174,7 +174,7 @@ else
 	rm -f $HOME/temp
 fi
 cp "$HOME/retropie_music_overlay/BGM Folder Diabled.mp3" $INSTALL_DIR
-sed -i '/^while pgrep omxplayer/d' $AUTOSTART
+sed -i '/^while pgrep mpv/d' $AUTOSTART
 sed -i '/^(sleep 10; mpg123/d' $AUTOSTART
 CONTENT2="(nohup python /home/pi/.rpbgmo/BGM.py > /dev/null 2>&1) &"
 C2=$(echo $CONTENT2 | sed 's/\//\\\//g')
