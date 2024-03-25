@@ -1,7 +1,7 @@
 #!/bin/bash
 #RetroPie Background Music Overlay Control Script
 ver="v2.20"
-SCRIPT_LOC="/home/pi/.rpbgmo/BGM.py"
+SCRIPT_LOC="/home/pi/.supreme_bgm/BGM.py"
 INSTALL_DIR=$(dirname "${SCRIPT_LOC}")
 MUSIC_DIR="/home/pi/RetroPie/roms/music"
 MUSIC_DIR="${MUSIC_DIR/#~/$HOME}"
@@ -146,7 +146,7 @@ stats_check
 disable_music_dir() {
 CUR_PLY=$(grep "musicdir =" "$SCRIPT_LOC"|awk '{print $3}')
 export CUR_PLY
-DEF_DIR='"/home/pi/.rpbgmo"'
+DEF_DIR='"/home/pi/.supreme_bgm"'
 export DEF_DIR
 sed -i -E "s|musicdir = ${CUR_PLY}|musicdir = ${DEF_DIR}|g" $SCRIPT_LOC
 bgm_check
@@ -278,7 +278,7 @@ stats_check
 stats_check() {
 enable="(\Z2Enabled\Zn)"
 disable="(\Z1Disabled\Zn)"
-if [ -f /home/pi/.rpbgmo/DisableMusic ]; then
+if [ -f /home/pi/.supreme_bgm/DisableMusic ]; then
 	bgms=$disable
 else
 	bgms=$enable
@@ -325,7 +325,7 @@ if [ $CUR_VPOS = "0" ]; then
 else
 	vpos="(\Z3Bottom\Zn)"
 fi
-if grep -q 'musicdir = "/home/pi/.rpbgmo"' "$SCRIPT_LOC"; then
+if grep -q 'musicdir = "/home/pi/.supreme_bgm"' "$SCRIPT_LOC"; then
 	ms=$disable
 else
 	CUR_PLY=$(grep "musicdir =" "$SCRIPT_LOC"|awk '{print $3}')
