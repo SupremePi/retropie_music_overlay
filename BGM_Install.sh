@@ -5,7 +5,7 @@
 # Install background music + overlay
 #############################################
 ver="v2.21"
-SCRIPT_LOC="$HOME/.rpbgmo/BGM.py"
+SCRIPT_LOC="$HOME/.supreme_bgm/BGM.py"
 INSTALL_DIR=$(dirname "${SCRIPT_LOC}")
 MUSIC_DIR="$HOME/RetroPie/roms/music"
 MUSIC_DIR="${MUSIC_DIR/#~/$HOME}"
@@ -117,7 +117,7 @@ currentuser=$(whoami)
 if [[ $currentuser == "root" ]]; then echo "DON'T RUN THIS SCRIPT AS ROOT! USE './BGM_Install.sh' !"; exit; fi
 git clone https://github.com/ALLRiPPED/retropie_music_overlay.git
 cd $HOME/retropie_music_overlay
-git checkout tags/rpbgmo$ver
+git checkout tags/supreme_bgm$ver
 if [[ $currentuser == "pi" ]]; then
 	sudo chmod +x pngview
 	sudo cp pngview /usr/local/bin/
@@ -144,9 +144,9 @@ sudo mkdir -p /usr/share/fonts/opentype
 sudo cp $HOME/retropie_music_overlay/Pixel.otf /usr/share/fonts/opentype/
 sudo cp $HOME/retropie_music_overlay/GROBOLD.ttf /usr/share/fonts/truetype/
 cp -f $HOME/retropie_music_overlay/backgroundmusic.png $MENU_DIR/icons/
-cp -f /opt/retropie/configs/all/autostart.sh /opt/retropie/configs/all/autostart.sh.RPBGMO
-cp -f /opt/retropie/configs/all/autostart.sh /opt/retropie/configs/all/runcommand-onstart.sh.RPBGMO
-cp -f /opt/retropie/configs/all/autostart.sh /opt/retropie/configs/all/runcommand-onend.sh.RPBGMO
+cp -f /opt/retropie/configs/all/autostart.sh /opt/retropie/configs/all/autostart.sh.SUPREME
+cp -f /opt/retropie/configs/all/autostart.sh /opt/retropie/configs/all/runcommand-onstart.sh.SUPREME
+cp -f /opt/retropie/configs/all/autostart.sh /opt/retropie/configs/all/runcommand-onend.sh.SUPREME
 
 if [ -f "/etc/sbu/sbu.sh" ]; then RP_MENU=$STMENU_DIR; else RP_MENU=$MENU_DIR; fi
 if [ -f "$MENU_DIR/bgmcustomoptions.sh" ]; then sudo rm -f $MENU_DIR/bgmcustomoptions.sh; fi
@@ -175,12 +175,12 @@ else
 	cat $HOME/temp > $MENU_DIR/gamelist.xml
 	rm -f $HOME/temp
 fi
-cp "$HOME/retropie_music_overlay/BGM Folder Diabled.mp3" $INSTALL_DIR
+cp "$HOME/retropie_music_overlay/BGM Folder Disabled.mp3" $INSTALL_DIR
 sed -i '/^while pgrep mpv/d' $AUTOSTART
 sed -i '/^(sleep 10; mpg123/d' $AUTOSTART
-CONTENT2="(nohup python /home/pi/.rpbgmo/BGM.py > /dev/null 2>&1) &"
+CONTENT2="(nohup python /home/pi/.supreme_bgm/BGM.py > /dev/null 2>&1) &"
 C2=$(echo $CONTENT2 | sed 's/\//\\\//g')
-if grep -q "(nohup python /home/pi/.rpbgmo/BGM.py > /dev/null 2>&1) &" "$AUTOSTART"; then echo "autostart.sh entry confirmed"
+if grep -q "(nohup python /home/pi/.supreme_bgm/BGM.py > /dev/null 2>&1) &" "$AUTOSTART"; then echo "autostart.sh entry confirmed"
 else
 	sed "/emulationstation/ s/.*/${C2}\n&/" $AUTOSTART > $HOME/temp.sh
 	cat $HOME/temp.sh > $AUTOSTART
@@ -196,7 +196,7 @@ if [ -d "$STMENU_DIR" ]; then echo "Retropie > Audiotools > Background Music Opt
 echo "BGM has been set up to run automatically when the device boots!
 
 "
-echo "Thanks for trying out my RPBGMO build"
+echo "Thanks for trying out my supreme_bgm build"
 }
 
 rebootq() {
